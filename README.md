@@ -5,7 +5,7 @@ Above project is mobile app build using ( React Native and EXPO )
 - nothing is functional inside. 
 
 Steps to Start Project in your system after cloning.
-1 . npm install
-2. npmx expo start
+- npm install
+- npmx expo start
 
 I have also build the Backend in Nodejs which will be found in gihub repo with name Billion_Doller_app_Backend
