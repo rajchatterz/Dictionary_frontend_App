@@ -1,12 +1,22 @@
 import { Lable } from 'react-native';
+import  React , {useState ,useEffect, useContext} from "react";
+
 import { View,Progress, ScrollView, Badge, Icon, IconButton, Box, Button, FlatList, Heading, Divider, Avatar, HStack, VStack, Text, Spacer, Center, NativeBaseProvider } from "native-base";
 import { Feather } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { GlobalStyles } from '../constants/style';
+import  { AuthContext } from '../store/auth-context';
+
 
 function AllExpenses() {
+  const authCtx = useContext(AuthContext);
+
+  const logout_function = async() => {
+    console.log("logging you out..")
+    await authCtx.logout()
+  }
 
   return (
    
@@ -242,7 +252,11 @@ function AllExpenses() {
 
 
 
+<Button style={{ Width:90 , marginBottom:"2%"}} variant="subtle" colorScheme="secondary"  mt="2"  isLoadingText="Logging you out !"  size="sm" _text={{ fontSize: "sm" }} onPress={logout_function} >
 
+ Logout from your account :(
+
+ </Button>
 
       </VStack>
       </ScrollView>

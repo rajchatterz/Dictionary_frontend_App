@@ -5,7 +5,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 
-const RecentExpenses = () => {
+const HomeScreen = () => {
   return (
     <NativeBaseProvider>
       <View backgroundColor="#eef2ff" h="100%" p="2">
@@ -105,5 +105,5 @@ const RecentExpenses = () => {
   );
 }
 
-export default RecentExpenses;
+// export default HomeScreen;
 

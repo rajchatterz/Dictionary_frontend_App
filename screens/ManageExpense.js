@@ -1,7 +1,7 @@
 import { Text } from 'react-native';
 
-function ManageExpense() {
-  return <Text>ManageExpense Screen</Text>;
+function Cloud() {
+  return <Text>Cloud Screen</Text>;
 }
 
-export default ManageExpense;
+export default Cloud;
