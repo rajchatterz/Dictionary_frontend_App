@@ -4,6 +4,7 @@ import {
   View,
   SafeAreaView,
   TextInput,
+  TouchableHighlight,
   ScrollView,
   Pressable,
 } from "react-native";
@@ -18,13 +19,21 @@ import QuickFood from "../components/QuickFood";
 import { Ionicons } from "@expo/vector-icons";
 import hotels from "../data/hotels";
 import MenuItem from "../components/MenuItem";
+import QuestionPaper from "../components/QuestionPapers"
 
 const HomeScreen = () => {
   const data = hotels;
   return (
  
+<View>
 
-    
+
+    <View style={{backgroundColor:"red"}}>
+          <Text style={{color:"white" , fontWeight: 'bold' , textAlign:"center"}}> Offline ! </Text>
+    </View>
+    <View style={{backgroundColor:"green"}}>
+          <Text style={{color:"white" , fontWeight: 'bold' , textAlign:"center"}}> Back Online  </Text>
+    </View>
     
     <ScrollView style={{ marginTop: 10 }}>
 
@@ -38,66 +47,15 @@ const HomeScreen = () => {
       {/* Quick Food Component */}
       <QuickFood />
 
+      {/* QuestionPapers Component */}
+      <QuestionPaper />
+
       {/* Filter buttons */}
       
-      <View style={{flexDirection:"row",alignItems:"center",justifyContent:"space-around"}}>
-        <Pressable
-          style={{
-            marginHorizontal: 10,
-            flexDirection: "row",
-            alignItems: "center",
-            borderWidth: 1,
-            borderColor: "#D0D0D0",
-            padding: 10,
-            borderRadius: 20,
-            width:120,
-            justifyContent: "center",
-          }}
-        >
-          <Text style={{marginRight:6 , color:"#4338ca" , fontWeight:"800"}}>Filter</Text>
-          <Ionicons name="filter" size={20} color="#4338ca" />
-        </Pressable>
-
-        <Pressable
-          style={{
-            marginHorizontal: 10,
-            flexDirection: "row",
-            alignItems: "center",
-            borderWidth: 1,
-            borderColor: "#D0D0D0",
-            padding: 10,
-            borderRadius: 20,
-            justifyContent: "center",
-            width:120
-          }}
-        >
-          <Text style={{color:"#4338ca" , fontWeight:"800"}}>Sort By Price</Text>
-         
-        </Pressable>
-
-        <Pressable
-          style={{
-            marginHorizontal: 10,
-            flexDirection: "row",
-            alignItems: "center",
-            borderWidth: 2,
-            borderColor: "#D0D0D0",
-            padding: 10,
-            borderRadius: 20,
-            
-            
-            justifyContent: "center",
-          }}
-        >
-          <Text style={{color:"#4338ca" , fontWeight:"800"}}>Post your work +</Text>
-         
-        </Pressable>
-      </View>
-      {data.map((item,index) => (
-        <MenuItem key={index} item={item}/>
-      ))}
+     
+    
     </ScrollView>
- 
+    </View>
   );
 };
 

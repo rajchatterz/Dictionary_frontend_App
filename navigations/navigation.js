@@ -1,7 +1,7 @@
 import React from 'react';
 import { createContext, useEffect, useState, useContext } from 'react';
-import { Button } from 'react-native'
-import {View} from 'react-native';
+import { Button , Text } from 'react-native'
+import { View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
 
@@ -45,14 +45,16 @@ function AuthStack() {
     return (
         <Stack.Navigator
             screenOptions={{
+                animation: 'slide_from_right', //<-- this is what will do the trick
+                presentation: 'card',
                 headerStyle: { backgroundColor: 'white' },
                 headerTintColor: 'white',
                 contentStyle: { backgroundColor: 'white' },
             }}
         >
             <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
-            <Stack.Screen name="OTP" component={OTPPage} options={{ headerShown: false }}/>
-            <Stack.Screen name="Signup" component={SignupScreen} options={{ headerShown: false }}/>
+            <Stack.Screen name="OTP" component={OTPPage} options={{ headerShown: false }} />
+            <Stack.Screen name="Signup" component={SignupScreen} options={{ headerShown: false }} />
         </Stack.Navigator>
     );
 }
@@ -60,15 +62,15 @@ function AuthStack() {
 function NotificationsStack() {
     return (
         <Stack.Navigator>
-            <Stack.Screen name="Notification" component={Notification}  options={{
-            title: 'Notification',
-            headerTitleStyle: {
-              color: '#fff',
-            },
-            headerStyle: {
-              backgroundColor: GlobalStyles.colors.primary800,
-            },
-          }}/>
+            <Stack.Screen name="Notification" component={Notification} options={{
+                title: 'Notification',
+                headerTitleStyle: {
+                    color: '#fff',
+                },
+                headerStyle: {
+                    backgroundColor: GlobalStyles.colors.primary800,
+                },
+            }} />
         </Stack.Navigator>
     )
 }
@@ -77,21 +79,22 @@ function HelpStack() {
     return (
         <Stack.Navigator>
             <Stack.Screen name="Help" component={Help} options={{
-            title: 'Help',
-            headerTitleStyle: {
-              color: '#fff',
-            },
-            headerStyle: {
-              backgroundColor: GlobalStyles.colors.primary800,
-            },
-          }} />
+                title: 'Help',
+                headerTitleStyle: {
+                    color: '#fff',
+                },
+                headerStyle: {
+                    backgroundColor: GlobalStyles.colors.primary800,
+                },
+            }} />
         </Stack.Navigator>
     )
 }
 //Authenticated stack
 function BottomTabNavigationfun() {
     const navigation = useNavigation();
-   
+    const college = "COEP Technological University"
+
     return (
         <BottomTabs.Navigator screenOptions={{
             headerStyle: { backgroundColor: GlobalStyles.colors.primary800 },
@@ -104,12 +107,24 @@ function BottomTabNavigationfun() {
                 component={HomeScreen}
                 options={{
                     title: 'Home',
+                    headerTitle:"",
                     tabBarLable: "Feed",
+                    headerLeft: () => (
+                        <>
+                            <View >
+                               
+                                <Text style={{fontSize:18 , marginLeft:15 , color:"white" , fontWeight: 'bold'}}>College</Text>
+                                <View style={{ flexDirection: "row"  }}>
+                                <Ionicons onPress={() => console.log("Location")} style={{ marginLeft: 15}} name="location-outline" size={14} color="white" /> 
+                                <Text  numberOfLines={1} ellipsizeMode='tail' style={{color:"white" , fontSize:12}}>{college.slice(0, 30)}</Text>
+                                </View> 
+                           </View></>
+                    ),
                     headerRight: () => (
                         <>
-                         <View style={{flexDirection:"row"}}>
-                        <Ionicons onPress={() => navigation.navigate('Help')} style={{ marginRight: 10 }} name="help-circle" size={26} color="white" /> 
-                         <Ionicons onPress={() => navigation.navigate('Notification')} style={{ marginRight: 10 }} name="notifications" size={24} color="white" /></View></>
+                            <View style={{ flexDirection: "row"  }}>
+                                <Ionicons onPress={() => navigation.navigate('Help')} style={{ marginRight: 15 }} name="help-circle" size={26} color="white" />
+                                <Ionicons onPress={() => navigation.navigate('Notification')} style={{ marginRight: 15 }} name="notifications" size={26} color="white" /></View></>
                     ),
                     tabBarIcon: ({ color, size }) => (
                         <FontAwesome name="home" size={size} color={color} />
@@ -157,14 +172,20 @@ function BottomTabNavigationfun() {
 
 function AuthenticatedStack() {
     return (
-        <>
-            <Stack.Navigator  >
+        <> 
+        
+            <Stack.Navigator
+                screenOptions={{
+                    animation: 'slide_from_right', //<-- this is what will do the trick
+                    presentation: 'card',
+                    
+                }} >
                 <Stack.Screen
                     name="ExpensesOverview"
                     component={BottomTabNavigationfun}
                     options={{ headerShown: false }}
                 />
-                <Stack.Screen name="Notification" component={NotificationsStack} options={{ headerShown: false  }} />
+                <Stack.Screen name="Notification" component={NotificationsStack} options={{ headerShown: false }} />
                 <Stack.Screen name="Help" component={HelpStack} options={{ headerShown: false }} />
             </Stack.Navigator>
         </>

@@ -10,18 +10,18 @@ import React from "react";
 import quickfood from "../data/quickfood";
 import { MaterialIcons } from "@expo/vector-icons";
 
-const QuickFood = () => {
+const QuestionPaper = () => {
   const data = quickfood;
   return (
     <View style={{ marginTop: 10 , marginLeft:5 }}>
-      <Text style={{ fontSize: 16, fontWeight: "500",marginLeft: 10 }}>Latest assignments</Text>
+      <Text style={{ fontSize: 16, fontWeight: "500" , marginLeft: 10 }}>Latest question papers</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {data.map((item, index) => (
           <Pressable style={{ margin: 10 }} key={index}>
             <ImageBackground
               imageStyle={{ borderRadius: 6 }}
               style={{ aspectRatio: 5 / 6, height: 170 }}
-              source={{ uri: item.image }}
+              source={{ uri: "https://res.cloudinary.com/education4ol/image/upload/v1678994349/NoBacklogs%20icons/White_Green_Modern_Marketing_Proposal_Cover_Page_2_edd0jb.png" }}
             >
               <Text
                 style={{
@@ -52,6 +52,6 @@ const QuickFood = () => {
   );
 };
 
-export default QuickFood;
+export default QuestionPaper;
 
 const styles = StyleSheet.create({});
