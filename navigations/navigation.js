@@ -1,6 +1,7 @@
 import React from 'react';
 import { createContext, useEffect, useState, useContext } from 'react';
 import { Button } from 'react-native'
+import {View} from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
 
@@ -16,6 +17,7 @@ import Cloud from '../screens/Cloud';
 import HomeScreen from '../screens/HomeScreen';
 import AllExpenses from '../screens/AllExpenses';
 import Notification from '../screens/Notification';
+import Help from '../screens/Help';
 import People from '../screens/People';
 
 import AuthContextProvider, { AuthContext } from '../store/auth-context';
@@ -55,9 +57,41 @@ function AuthStack() {
     );
 }
 
+function NotificationsStack() {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="Notification" component={Notification}  options={{
+            title: 'Notification',
+            headerTitleStyle: {
+              color: '#fff',
+            },
+            headerStyle: {
+              backgroundColor: GlobalStyles.colors.primary800,
+            },
+          }}/>
+        </Stack.Navigator>
+    )
+}
+
+function HelpStack() {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="Help" component={Help} options={{
+            title: 'Help',
+            headerTitleStyle: {
+              color: '#fff',
+            },
+            headerStyle: {
+              backgroundColor: GlobalStyles.colors.primary800,
+            },
+          }} />
+        </Stack.Navigator>
+    )
+}
 //Authenticated stack
 function BottomTabNavigationfun() {
     const navigation = useNavigation();
+   
     return (
         <BottomTabs.Navigator screenOptions={{
             headerStyle: { backgroundColor: GlobalStyles.colors.primary800 },
@@ -72,7 +106,10 @@ function BottomTabNavigationfun() {
                     title: 'Home',
                     tabBarLable: "Feed",
                     headerRight: () => (
-                        <Ionicons onPress={() => navigation.navigate('Notification')} style={{ marginRight: 10 }} name="notifications" size={24} color="white" />
+                        <>
+                         <View style={{flexDirection:"row"}}>
+                        <Ionicons onPress={() => navigation.navigate('Help')} style={{ marginRight: 10 }} name="help-circle" size={26} color="white" /> 
+                         <Ionicons onPress={() => navigation.navigate('Notification')} style={{ marginRight: 10 }} name="notifications" size={24} color="white" /></View></>
                     ),
                     tabBarIcon: ({ color, size }) => (
                         <FontAwesome name="home" size={size} color={color} />
@@ -116,24 +153,19 @@ function BottomTabNavigationfun() {
     );
 }
 
-function notificationsStack() {
-    return (
-        <Stack.Navigator>
-            <Stack.Screen name="Notification" component={Notification} />
-        </Stack.Navigator>
-    )
-}
+
 
 function AuthenticatedStack() {
     return (
         <>
-            <Stack.Navigator>
+            <Stack.Navigator  >
                 <Stack.Screen
                     name="ExpensesOverview"
                     component={BottomTabNavigationfun}
                     options={{ headerShown: false }}
                 />
-                <Stack.Screen name="Notification" component={notificationsStack} options={{ headerShown: false }} />
+                <Stack.Screen name="Notification" component={NotificationsStack} options={{ headerShown: false  }} />
+                <Stack.Screen name="Help" component={HelpStack} options={{ headerShown: false }} />
             </Stack.Navigator>
         </>
     );
