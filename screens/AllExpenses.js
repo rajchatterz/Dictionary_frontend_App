@@ -1,6 +1,6 @@
 import { Lable } from 'react-native';
 import React, { useState, useEffect, useContext } from "react";
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { View, Text, Progress, ScrollView, Badge, Icon, IconButton, Box, Button, FlatList, Heading, Divider, Avatar, HStack, VStack, Spacer, Center, NativeBaseProvider } from "native-base";
 import { Feather } from '@expo/vector-icons';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
@@ -395,11 +395,51 @@ function AllExpenses() {
                      
                     </HStack>
                   </Box>
-                  <Box px="2" pb="4">
+                  <Box px="2" pb="2" >
                     <VStack >
-                     <Button onPress={() => navigation.navigate('About')} style={{marginBottom:10}} >About US</Button>
-                     <Button onPress={() => navigation.navigate('Feedback')} style={{marginBottom:10}}>Feedback</Button>
-                     <Button style={{marginBottom:10}}>Logout</Button>
+                    <View style={styles.container}>
+     <TouchableOpacity
+         style={styles.card}
+          onPress={() => navigation.navigate('About')}
+        >
+
+          <View style={{flexDirection: 'row', alignItems: 'center' }}>
+           <Ionicons name="information-circle-outline" size={24} color="#FFF" />
+         <Text style={styles.title}>{"  "}About</Text>
+
+          <View style={{ flex: 1, alignItems: 'flex-end'}}>
+          <Ionicons name="chevron-forward-outline" size={24} color="#FFF" />
+          </View>
+           </View>
+        </TouchableOpacity>
+
+         <TouchableOpacity
+           style={styles.card}
+           onPress={() => navigation.navigate('Feedback')}
+        >
+            <View style={{flexDirection: 'row', alignItems: 'center' }}>
+          <Ionicons name="create-outline" size={24} color="#FFF" />
+          <Text style={styles.title}>{"  "}Send Feedback</Text>
+          <View style={{ flex: 1, alignItems: 'flex-end'}}>
+       <Ionicons name="chevron-forward-outline" size={24} color="#FFF" />
+          </View>
+         </View>
+        </TouchableOpacity>
+       <TouchableOpacity
+         style={styles.card}
+         onPress={logout_function}
+
+      >
+            <View style={{flexDirection: 'row', alignItems: 'center' }}>
+           <Ionicons name="log-out-outline" size={24} color="#FFF" />
+          <Text style={styles.title}>{"  "}Logout</Text>
+          <View style={{ flex: 1, alignItems: 'flex-end'}}>
+         <Ionicons name="chevron-forward-outline" size={24} color="#FFF"  />
+          </View>
+          </View>
+       </TouchableOpacity>
+   </View>
+                   
                     </VStack>
 
                   </Box>
@@ -408,7 +448,7 @@ function AllExpenses() {
                 </VStack>
 
               </Box>
-
+         
 
             </VStack>
           </ScrollView>
@@ -436,10 +476,9 @@ function AllExpenses() {
 const styles = StyleSheet.create({
 
   container: {
-    paddingLeft: 20,
-    paddingRight: 20,
-    paddingTop: 10,
 
+    paddingTop: 10,
+width:'100%'
 
   },
   parent: {
@@ -453,9 +492,10 @@ const styles = StyleSheet.create({
     height: '60%',
   },
   card: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor:'#00aca6',
     borderRadius: 5,
     marginBottom: 5,
+    width:'100%',
     padding: 18,
     shadowColor: '#000',
     shadowOffset: { width: 0 },
@@ -481,7 +521,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 15,
-    color: '#000',
+    color: '#FFF',
   },
 
 });

@@ -18,6 +18,9 @@ import AllExpenses from '../screens/AllExpenses';
 import Notification from '../screens/Notification';
 import Help from '../screens/Help';
 import People from '../screens/People';
+import AboutUs from '../screens/Profile/AboutUs';
+
+import UserFeedback from '../screens/Profile/UserFeedback';
 
 import AuthContextProvider, { AuthContext } from '../store/auth-context';
 
@@ -93,7 +96,7 @@ function HelpStack() {
 function AboutStack() {
     return (
         <Stack.Navigator>
-            <Stack.Screen name="About" component={Help} options={{
+            <Stack.Screen name="About" component={AboutUs} options={{
                 title: 'About',
                 headerTitleStyle: {
                     color: '#fff',
@@ -109,8 +112,8 @@ function AboutStack() {
 function FeedbackStack() {
     return (
         <Stack.Navigator>
-            <Stack.Screen name="About" component={Help} options={{
-                title: 'About',
+            <Stack.Screen name="Feedback" component={UserFeedback} options={{
+                title: 'Feedback',
                 headerTitleStyle: {
                     color: '#fff',
                 },
