@@ -4,6 +4,7 @@ import {
   View,
   SafeAreaView,
   TextInput,
+  TouchableOpacity,
   TouchableHighlight,
   ScrollView,
   Pressable,
@@ -24,7 +25,7 @@ import QuestionPaper from "../components/QuestionPapers"
 const HomeScreen = () => {
   const data = hotels;
   return (
- 
+    
 <View>
 
 
@@ -56,6 +57,7 @@ const HomeScreen = () => {
     
     </ScrollView>
     </View>
+    
   );
 };
 

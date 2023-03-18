@@ -5,10 +5,12 @@ import {
   ScrollView,
   Pressable,
   ImageBackground,
+  TouchableOpacity,
 } from "react-native";
 import React from "react";
 import quickfood from "../data/quickfood";
 import { MaterialIcons } from "@expo/vector-icons";
+
 
 const QuestionPaper = () => {
   const data = quickfood;
@@ -17,7 +19,11 @@ const QuestionPaper = () => {
       <Text style={{ fontSize: 16, fontWeight: "500" , marginLeft: 10 }}>Latest question papers</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {data.map((item, index) => (
-          <Pressable style={{ margin: 10 }} key={index}>
+          <Pressable  android_ripple={{ color: '#ccc' }}
+          style={({ pressed }) => (pressed ? styles.buttonPressed : null)} >
+         <View style={{ margin: 10 }} key={index} >
+
+        
             <ImageBackground
               imageStyle={{ borderRadius: 6 }}
               style={{ aspectRatio: 5 / 6, height: 170 }}
@@ -36,7 +42,9 @@ const QuestionPaper = () => {
                 {item.offer} 
               </Text>
             </ImageBackground>
-            <Text style={{ marginTop: 10, fontSize: 16, fontWeight: "500" }}>
+            </View>
+        
+            <Text style={{ marginTop: 10, fontSize: 16, fontWeight: "500",  marginLeft: 10 }}>
               {item.name}
             </Text>
             <View style={{flexDirection:"row",alignItems:"center",marginTop:3}}>
@@ -54,4 +62,8 @@ const QuestionPaper = () => {
 
 export default QuestionPaper;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  buttonPressed: {
+    opacity: 0.5,
+  },
+});

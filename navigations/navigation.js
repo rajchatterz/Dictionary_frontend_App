@@ -1,7 +1,6 @@
 import React from 'react';
 import { createContext, useEffect, useState, useContext } from 'react';
-import { Button , Text } from 'react-native'
-import { View } from 'react-native';
+import { Button, View, Text, TouchableOpacity , Pressable  } from 'react-native'
 import { StatusBar } from 'expo-status-bar';
 
 
@@ -90,12 +89,45 @@ function HelpStack() {
         </Stack.Navigator>
     )
 }
+
+function AboutStack() {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="About" component={Help} options={{
+                title: 'About',
+                headerTitleStyle: {
+                    color: '#fff',
+                },
+                headerStyle: {
+                    backgroundColor: GlobalStyles.colors.primary800,
+                },
+            }} />
+        </Stack.Navigator>
+    )
+}
+
+function FeedbackStack() {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="About" component={Help} options={{
+                title: 'About',
+                headerTitleStyle: {
+                    color: '#fff',
+                },
+                headerStyle: {
+                    backgroundColor: GlobalStyles.colors.primary800,
+                },
+            }} />
+        </Stack.Navigator>
+    )
+}
 //Authenticated stack
 function BottomTabNavigationfun() {
     const navigation = useNavigation();
     const college = "COEP Technological University"
 
     return (
+        
         <BottomTabs.Navigator screenOptions={{
             headerStyle: { backgroundColor: GlobalStyles.colors.primary800 },
             headerTintColor: 'white',
@@ -107,24 +139,35 @@ function BottomTabNavigationfun() {
                 component={HomeScreen}
                 options={{
                     title: 'Home',
-                    headerTitle:"",
+                    headerTitle: "",
                     tabBarLable: "Feed",
                     headerLeft: () => (
                         <>
-                            <View >
-                               
-                                <Text style={{fontSize:18 , marginLeft:15 , color:"white" , fontWeight: 'bold'}}>College</Text>
-                                <View style={{ flexDirection: "row"  }}>
-                                <Ionicons onPress={() => console.log("Location")} style={{ marginLeft: 15}} name="location-outline" size={14} color="white" /> 
-                                <Text  numberOfLines={1} ellipsizeMode='tail' style={{color:"white" , fontSize:12}}>{college.slice(0, 30)}</Text>
-                                </View> 
-                           </View></>
+                            <TouchableOpacity onPress={() => { }}>
+                                <View >
+
+                                    <Text style={{ fontSize: 18, marginLeft: 15, color: "white", fontWeight: 'bold' }}>College</Text>
+                                    <View style={{ flexDirection: "row" }}>
+                                        <Ionicons onPress={() => console.log("Location")} style={{ marginLeft: 15 }} name="location-outline" size={14} color="white" />
+                                        <Text numberOfLines={1} ellipsizeMode='tail' style={{ color: "white", fontSize: 12 }}>{college.slice(0, 30)}</Text>
+                                    </View>
+                                </View>
+                            </TouchableOpacity>
+                        </>
                     ),
                     headerRight: () => (
                         <>
-                            <View style={{ flexDirection: "row"  }}>
-                                <Ionicons onPress={() => navigation.navigate('Help')} style={{ marginRight: 15 }} name="help-circle" size={26} color="white" />
-                                <Ionicons onPress={() => navigation.navigate('Notification')} style={{ marginRight: 15 }} name="notifications" size={26} color="white" /></View></>
+                            
+                                <View style={{ flexDirection: "row" }}>
+                               
+                                   <Ionicons onPress={() => navigation.navigate('Help')} style={{ marginRight: 15 }} name="help-circle" size={26} color="white" />
+                                  
+                                   <Ionicons onPress={() => navigation.navigate('Notification')} style={{ marginRight: 15 }} name="notifications" size={26} color="white" />
+                                    
+                                </View>
+                           
+
+                        </>
                     ),
                     tabBarIcon: ({ color, size }) => (
                         <FontAwesome name="home" size={size} color={color} />
@@ -132,7 +175,7 @@ function BottomTabNavigationfun() {
                 }}
             />
 
-            <BottomTabs.Screen name="Hub" component={Cloud}
+            < BottomTabs.Screen name="Hub" component={Cloud}
                 options={{
                     title: 'Cloud',
                     tabBarLable: "Cloud",
@@ -143,7 +186,7 @@ function BottomTabNavigationfun() {
                 }}
             />
 
-            <BottomTabs.Screen name="People" component={People}
+            < BottomTabs.Screen name="People" component={People}
                 options={{
                     title: 'Helpers',
                     tabBarLable: "Helper",
@@ -153,18 +196,21 @@ function BottomTabNavigationfun() {
                 }}
             />
 
-            <BottomTabs.Screen name="AllExpenses" component={AllExpenses}
+            < BottomTabs.Screen name="AllExpenses" component={AllExpenses}
                 options={{
                     title: 'Profile',
                     tabBarLable: "Profile",
                     tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="face-man-profile" size={size} color={color} />
+                    
+                     <MaterialCommunityIcons name="face-man-profile" size={size} color={color} />
+
+                       
                     ),
 
                 }}
             />
 
-        </BottomTabs.Navigator>
+        </BottomTabs.Navigator >
     );
 }
 
@@ -172,13 +218,13 @@ function BottomTabNavigationfun() {
 
 function AuthenticatedStack() {
     return (
-        <> 
-        
+        <>
+
             <Stack.Navigator
                 screenOptions={{
                     animation: 'slide_from_right', //<-- this is what will do the trick
                     presentation: 'card',
-                    
+
                 }} >
                 <Stack.Screen
                     name="ExpensesOverview"
@@ -187,6 +233,8 @@ function AuthenticatedStack() {
                 />
                 <Stack.Screen name="Notification" component={NotificationsStack} options={{ headerShown: false }} />
                 <Stack.Screen name="Help" component={HelpStack} options={{ headerShown: false }} />
+                <Stack.Screen name="About" component={AboutStack} options={{ headerShown: false }} />
+                <Stack.Screen name="Feedback" component={FeedbackStack} options={{ headerShown: false }} />
             </Stack.Navigator>
         </>
     );
@@ -199,8 +247,10 @@ function Navigation() {
 
     return (
         <NavigationContainer>
+
             {!authCtx.isAuthenticated && <AuthenticatedStack />}
             {authCtx.isAuthenticated && <AuthenticatedStack />}
+
         </NavigationContainer>
     );
 }

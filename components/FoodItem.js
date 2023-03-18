@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Pressable } from "react-native";
+import { StyleSheet, Text, View, Pressable ,TouchableHighlight } from "react-native";
 import React ,{useState} from "react";
 import { AntDesign } from "@expo/vector-icons";
 import MenuComponent from "./MenuComponent";
@@ -19,7 +19,7 @@ const FoodItem = ({ item }) => {
     <View>
       {data.map((item, i) => (
         <>
-          <Pressable
+          <TouchableHighlight
           onPress={() => handleItemSelect(item.name)}
             style={{
               margin: 10,
@@ -33,7 +33,7 @@ const FoodItem = ({ item }) => {
               {item.name} ({item.items.length})
             </Text>
             <AntDesign name="down" size={24} color="black" />
-          </Pressable>
+          </TouchableHighlight>
 
 
         {selected.includes(item.name) ? (

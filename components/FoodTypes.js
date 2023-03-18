@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View ,ScrollView,Image} from 'react-native'
+import { StyleSheet, Text, View ,ScrollView,Image  ,Pressable } from 'react-native'
 import React from 'react'
 
 const FoodTypes = () => {
@@ -43,10 +43,15 @@ const FoodTypes = () => {
       <ScrollView horizontal  showsHorizontalScrollIndicator={false}>
       <View style={{flexDirection: "row", flexWrap: "wrap" , maxWidth:"100%",marginTop:10, }}>
   {types.map((item, index) => (
+    
     <View style={{margin: 6, width: "21%" , alignItems:"center"}} key={index}>
+      <Pressable android_ripple={{color:"#ccc" , radius: 28 , }} >
       <Image source={{uri: item.image}} style={{  width: 50, height: 50, borderRadius: 30 , transform: [{scale: 1.1}]}} />
+      </Pressable>
       <Text style={{marginTop: 6, textAlign: "center"}}>{item.name}</Text>
+      
     </View>
+    
   ))}
 </View>
       </ScrollView>
