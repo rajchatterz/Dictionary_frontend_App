@@ -31,23 +31,21 @@ const ExampleOTP = () => {
       handleDismissKeyboard
       
       setisLoading(true)
-      navigation.navigate('Signup');
-    // const contact = "7798121777"
-    const phone= AsyncStorage.getItem('contact');
-     console.log('phone',phone);
+      
+     const contact= await AsyncStorage.getItem('contact');
+     console.log('phone', contact);
       const data = await verify_otp( contact , OTP)
 
       
       if(data.code == 200){
-        //navigation.navigate('signup');
+        
         setisLoading(false)
-        await authCtx.authenticate(data.token.access.token)
-        navigation.navigate('Signup');
         console.log(data);
+        navigation.navigate('Signup');
       }
       else if(data.code == 201){
         setisLoading(false)
-        await authCtx.authenticate(token)
+        await authCtx.authenticate(data.token.access.token)
         navigation.navigate('home');
       }else
       {

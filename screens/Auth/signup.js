@@ -1,10 +1,18 @@
 import React, { useState, useContext } from "react";
 import { useNavigation } from '@react-navigation/native';
+import { Keyboard, TouchableWithoutFeedback } from 'react-native';
+
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
-import { View, Radio,KeyboardAvoidingView , ScrollView, Box, Text, Image, Heading, VStack, FormControl, Input, Link, Button, HStack, Center, NativeBaseProvider } from "native-base";
+import { View, Radio, KeyboardAvoidingView, ScrollView, Box, Text, Image, Heading, VStack, FormControl, Input, Link, Button, HStack, Center, NativeBaseProvider } from "native-base";
 
 
-const Example = () => {
+
+
+
+
+
+const ExampleSignup = () => {
+  console.log("on SignUp Page")
   const navigation = useNavigation();
   const [contact, setContact] = useState('');
   const [value, setValue] = React.useState("male");
@@ -33,63 +41,52 @@ const Example = () => {
       console.error(error);
     }
   };
-  return (<Center w="100%" >
 
-    <Box safeArea p="5" w="100%" maxW="100%" roundedBottom='xl' bg={["#3730a3"]}>
-      <Heading size="lg" fontWeight="700" color="white" _dark={{
-        color: "warmGray.50"
-      }}>
-        Signup , Buddy !
-      </Heading>
-      <Heading mt="1" _dark={{
-        color: "warmGray.200"
-      }} color="#818cf8" fontWeight="medium" size="xs">
-        Signup to continue!
-      </Heading>
-    </Box>
-    <Box safeArea p="2" py="2" px="2" w="95%" maxW="95%">
-      <VStack space={3} mt="5">
-        <FormControl mb="5">
-          <FormControl.Label>Name*</FormControl.Label>
-          <Input />
-
-        </FormControl>
-
-        <FormControl mb="5">
-          <FormControl.Label>Email*</FormControl.Label>
-          <Input />
-          <FormControl.HelperText>
-
-          </FormControl.HelperText>
-        </FormControl>
-
-        <FormControl mb="5">
-          <FormControl.Label>Gender*</FormControl.Label>
-          <Radio.Group name="myRadioGroup" accessibilityLabel="favorite number" value={value}
-            onChange={nextValue => {
-              setValue(nextValue);
-            }} >
-            <HStack space={3}>
-              <Radio value="male" my={1}>
-                Male
-              </Radio>
-              <Radio value="female" my={1}>
-                Female
-              </Radio>
-              <Radio value="other" my={1}>
-                Other
-              </Radio>
-            </HStack>
-
-          </Radio.Group>
-          <FormControl.HelperText>
-            Choose your gender.
-          </FormControl.HelperText>
-        </FormControl>
+  return (
+    <>
+ <Box safeArea p="5" w="100%" maxW="100%" roundedBottom='xl' bg={["#3730a3"]}>
+          <Heading size="lg" fontWeight="700" color="white" _dark={{
+            color: "warmGray.50"
+          }}>
+            Signup , Buddy !
+          </Heading>
+          <Heading mt="1" _dark={{
+            color: "warmGray.200"
+          }} color="#818cf8" fontWeight="medium" size="xs">
+            Signup to continue!
+          </Heading>
+        </Box>
+    
+    <TouchableWithoutFeedback>
+     
+      <Center w="100%" >
+        
 
 
+        <Box safeArea p="2" py="2" px="2" w="95%" maxW="95%">
+          <VStack space={3} mt="5">
+            <FormControl mb="5">
+              <FormControl.Label>Name*</FormControl.Label>
+              <Input />
 
-        <FormControl mb="5">
+            </FormControl>
+
+            <FormControl mb="5">
+              <FormControl.Label>Email*</FormControl.Label>
+              <Input />
+              
+            </FormControl>
+
+
+            <FormControl mb="5">
+              <FormControl.Label>College / University*</FormControl.Label>
+
+                <Input />
+            
+            </FormControl>
+
+
+       <FormControl mb="5">
           <FormControl.Label>City*</FormControl.Label>
           <GooglePlacesAutocomplete
             placeholder=""
@@ -112,65 +109,36 @@ const Example = () => {
             nearbyPlacesAPI="GooglePlacesSearch"
             debounce={200}
           />
+          </FormControl>
 
 
-        </FormControl>
-
-        <FormControl mb="5">
-          <FormControl.Label>College / University*</FormControl.Label>
-          
-            <View style={{ flex: 1 }}>
-            <Input />
-            </View>
-        
-         
-
-        </FormControl>
 
 
-        <Button mt="2" colorScheme="indigo" size="lg" _text={{ fontSize: "lg" }} onPress={handleSubmit}>
-          Continue with Signup !
-        </Button>
-        <HStack mt="6" justifyContent="center">
-          <Text fontSize="sm" _dark={{
-            color: "warmGray.200"
-          }}>
-            Build with Love for Gen-Z
-          </Text>
+            <Button mt="2" colorScheme="indigo" size="lg" _text={{ fontSize: "lg" }} onPress={handleSubmit}>
+              Continue with Signup !
+            </Button>
+          </VStack>
+        </Box>
+      </Center>
+    </TouchableWithoutFeedback>
+    </>);
 
-        </HStack>
-      </VStack>
-    </Box>
-  </Center>
-  );
 };
 
 
 
 // export default LoginPage;
 
-export default LoginPage => {
+export default OTPPage => {
   return (
     <NativeBaseProvider >
-      <ScrollView>
-        <Center >
-          <Example />
-        </Center>
-      </ScrollView>
-
-
-
-
-
-
+      
+      <Center >
+        <ExampleSignup />
+      </Center>
     </NativeBaseProvider>
-
-
   );
 };
-
-
-
 
 
 
