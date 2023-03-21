@@ -251,7 +251,7 @@ function Navigation() {
     return (
         <NavigationContainer>
 
-            {!authCtx.isAuthenticated && <AuthenticatedStack />}
+            {!authCtx.isAuthenticated && <AuthStack/>}
             {authCtx.isAuthenticated && <AuthenticatedStack />}
 
         </NavigationContainer>

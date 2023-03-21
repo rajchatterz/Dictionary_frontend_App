@@ -1,16 +1,18 @@
-import  React , {useState} from "react";
+import  React , {useState, useContext} from "react";
 import { useNavigation } from '@react-navigation/native';
 import { Keyboard , TouchableWithoutFeedback } from 'react-native';
 import { View, Box, Text, Image, Heading, VStack, FormControl, Input, Link, Button, HStack, Center, NativeBaseProvider } from "native-base";
 import {send_otp} from '../../utils/auth'
+import  { AuthContext } from '../../store/auth-context';
 import { useEffect } from "react";
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Example = () => {
   const navigation = useNavigation();
   const [contact , setContact] = useState('');
   const [isLoading , setisLoading] = useState(false)
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const authCtx = useContext(AuthContext);
 
   const handleDismissKeyboard = () => {
     Keyboard.dismiss();
@@ -29,17 +31,24 @@ const Example = () => {
   
   const handleSubmit = async () => {
     try {
-      navigation.navigate('OTP');
+     
       handleDismissKeyboard
       
       setisLoading(false)
       
       //calling the function which call the api for sending otp
-      //const data = await send_otp(contact)
+      const data = await send_otp(contact)
      
     
       if(data.statusCode == 200){
+        console.log('login-contact',contact)
+
+       await authCtx.authenticateContact(contact);
+       const phone= AsyncStorage.getItem('contact');
+       console.log('after-login',phone);
+      
         navigation.navigate('OTP');
+        
         console.log(data);
       }else{
         console.log(data.message)

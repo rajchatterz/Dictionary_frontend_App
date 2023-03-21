@@ -4,6 +4,7 @@ import { Keyboard , TouchableWithoutFeedback } from 'react-native';
 import {View, Box, Text, Image, Heading, VStack, FormControl, Input, Link, Button, HStack, Center, NativeBaseProvider } from "native-base";
 import  { AuthContext } from '../../store/auth-context';
 import {verify_otp} from '../../utils/auth'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ExampleOTP = () => {
   const navigation = useNavigation();
@@ -20,16 +21,20 @@ const ExampleOTP = () => {
 
   useEffect(() => {
     setisLoading(false)
+    
   }, []);
   
   const handleSubmit = async () => {
     try {
+      console.log("Sreenidhi");
       // Make a POST request to the API with the contact
       handleDismissKeyboard
       
       setisLoading(true)
       navigation.navigate('Signup');
-      const contact = "7798121777"
+    // const contact = "7798121777"
+    const phone= AsyncStorage.getItem('contact');
+     console.log('phone',phone);
       const data = await verify_otp( contact , OTP)
 
       

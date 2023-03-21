@@ -17,7 +17,7 @@ async function authenticate_otp(contact,otp) {
     const url = `https://backlogappbackend-production.up.railway.app/v1/auth/otp/verify`;
 
     const response = await axios.post(url, {
-      contact:"7798121777",
+      contact:contact,
       otp:otp
     });
     console.log(response.data)
