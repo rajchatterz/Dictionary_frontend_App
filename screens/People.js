@@ -1,7 +1,40 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Image, FlatList } from 'react-native'
 
-export default Comments = () => {
+
+
+
+const Rating = ({ value }) => {
+  let color;
+  if (value < 2) {
+    color = 'red';
+  } else if (value >= 2 && value <= 3) {
+    color = '#FFD300';
+  } else {
+    color = 'green';
+  }
+  
+  const styles = StyleSheet.create({
+   
+    text: {
+      fontSize:12,
+      color: color,
+      fontWeight: 'bold',
+    },
+  });
+
+  return (
+    
+      <Text style={styles.text}>{value}/5</Text>
+   
+  );
+};
+
+export default Comments = ({}) => {
+
+  
+
+
   const data = [
     {
       id: 1,
@@ -9,6 +42,9 @@ export default Comments = () => {
       name: 'Frank Odalthh',
       comment:
         'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.',
+        rating:1,
+        expertise:'Physics',
+        location:'Delhi',
     },
     {
       id: 2,
@@ -16,6 +52,9 @@ export default Comments = () => {
       name: 'John DoeLink',
       comment:
         'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.',
+        rating:3,
+        expertise:'Mathematics',
+        location:'Kolkata',
     },
     {
       id: 3,
@@ -23,6 +62,10 @@ export default Comments = () => {
       name: 'March SoulLaComa',
       comment:
         'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.',
+        rating:3.5,
+        expertise:'Biology',
+        location:'Delhi',
+
     },
     {
       id: 4,
@@ -30,6 +73,9 @@ export default Comments = () => {
       name: 'Finn DoRemiFaso',
       comment:
         'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.',
+        rating:2.5,
+        expertise:'Physics',
+        location:'Delhi',
     },
     {
       id: 5,
@@ -37,6 +83,10 @@ export default Comments = () => {
       name: 'Maria More More',
       comment:
         'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.',
+        rating:5,
+        expertise:'Mathematics',
+        location:'Kolkata',
+
     },
     {
       id: 6,
@@ -44,6 +94,9 @@ export default Comments = () => {
       name: 'Clark June Boom!',
       comment:
         'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.',
+        rating:4.5,
+        expertise:'Physics',
+        location:'Delhi',
     },
     {
       id: 7,
@@ -51,6 +104,9 @@ export default Comments = () => {
       name: 'The googler',
       comment:
         'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.',
+        rating:3.4,
+        expertise:'Physics',
+        location:'Delhi',
     },
   ]
 
@@ -78,8 +134,10 @@ export default Comments = () => {
             <View style={styles.content}>
               <View style={styles.contentHeader}>
                 <Text style={styles.name}>{Notification.name}</Text>
-                <Text style={styles.star}>4.5/5</Text>
+                <Rating value={Notification.rating} />
               </View>
+              <Text rkType="primary3 mediumLine">Expertise - {Notification.expertise}</Text>
+              <Text rkType="primary3 mediumLine">Location - {Notification.location}</Text>
               <Text rkType="primary3 mediumLine">{Notification.comment}</Text>
             </View>
           </View>
@@ -119,7 +177,7 @@ const styles = StyleSheet.create({
     width: 45,
     height: 45,
     borderRadius: 22,
-    marginLeft: 20,
+    marginLeft: 10,
   },
   star: {
     fontSize: 11,
