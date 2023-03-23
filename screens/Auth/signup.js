@@ -4,8 +4,9 @@ import { Keyboard, TouchableWithoutFeedback } from 'react-native';
 
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { View, Radio, KeyboardAvoidingView, ScrollView, Box, Text, Image, Heading, VStack, FormControl, Input, Link, Button, HStack, Center, NativeBaseProvider } from "native-base";
-
-
+import {base_url} from '../../utils/constants'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import  { AuthContext } from '../../store/auth-context';
 
 
 
@@ -14,24 +15,62 @@ import { View, Radio, KeyboardAvoidingView, ScrollView, Box, Text, Image, Headin
 const ExampleSignup = () => {
   console.log("on SignUp Page")
   const navigation = useNavigation();
-  const [contact, setContact] = useState('');
-  const [value, setValue] = React.useState("male");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [college, setCollege] = useState('');
+  const [city, setCity] = useState('');
+  
+  const authCtx = useContext(AuthContext);
+ 
+  const handleName = (name) => {
+    setName(name);
+  };
+
+  const handleEmail = (email) => {
+    setEmail(email);
+  };
+
+  const handleCollege = (college) => {
+    setCollege(college);
+  };
+
+ 
+    const handlePlaceSelection = (data, details) => {
+        const cityName = details.terms[0].value; 
+        setCity(cityName);
+       
+      
+    };
+  
+
+
   const handleSubmit = async () => {
+
+    console.log(name,email,college,city);
     try {
       // Make a POST request to the API with the contact
-      const response = await fetch('https://backlogappbackend-production.up.railway.app/v1/auth/otp/send', {
+      const contact= await AsyncStorage.getItem('contact');
+      console.log(contact);
+     const response = await fetch(base_url+'/v1/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          contact
+          contact:contact,
+         password:contact+"@abc123",
+         name:name,
+         email:email,
+         city:city,
+         college:college
+
         })
       });
 
       const data = await response.json();
-      if (data.statusCode == 200) {
-        navigation.navigate('OTP');
+      if (data.statusCode == 201) {
+        await authCtx.authenticate(data.token.access.token)
+        navigation.navigate('home');
         console.log(data);
       } else {
         console.log(data.message)
@@ -39,7 +78,8 @@ const ExampleSignup = () => {
 
     } catch (error) {
       console.error(error);
-    }
+    } 
+  
   };
 
   return (
@@ -67,13 +107,15 @@ const ExampleSignup = () => {
           <VStack space={3} mt="5">
             <FormControl mb="5">
               <FormControl.Label>Name*</FormControl.Label>
-              <Input />
+              <Input  onChangeText={handleName}
+        value={name} />
 
             </FormControl>
 
             <FormControl mb="5">
               <FormControl.Label>Email*</FormControl.Label>
-              <Input />
+              <Input onChangeText={handleEmail}
+        value={email} />
               
             </FormControl>
 
@@ -81,7 +123,8 @@ const ExampleSignup = () => {
             <FormControl mb="5">
               <FormControl.Label>College / University*</FormControl.Label>
 
-                <Input />
+                <Input onChangeText={handleCollege}
+        value={college} />
             
             </FormControl>
 
@@ -89,6 +132,7 @@ const ExampleSignup = () => {
        <FormControl mb="5">
           <FormControl.Label>City*</FormControl.Label>
           <GooglePlacesAutocomplete
+           onPress={handlePlaceSelection}
             placeholder=""
             styles={{
               container: {

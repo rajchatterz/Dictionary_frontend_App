@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Image, FlatList } from 'react-native'
-
-
+import { Badge } from 'react-bootstrap';
+import { Ionicons } from '@expo/vector-icons';
 
 
 const Rating = ({ value }) => {
@@ -40,8 +40,6 @@ export default Comments = ({}) => {
       id: 1,
       image: 'https://bootdey.com/img/Content/avatar/avatar1.png',
       name: 'Frank Odalthh',
-      comment:
-        'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.',
         rating:1,
         expertise:'Physics',
         location:'Delhi',
@@ -50,8 +48,6 @@ export default Comments = ({}) => {
       id: 2,
       image: 'https://bootdey.com/img/Content/avatar/avatar6.png',
       name: 'John DoeLink',
-      comment:
-        'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.',
         rating:3,
         expertise:'Mathematics',
         location:'Kolkata',
@@ -60,8 +56,6 @@ export default Comments = ({}) => {
       id: 3,
       image: 'https://bootdey.com/img/Content/avatar/avatar7.png',
       name: 'March SoulLaComa',
-      comment:
-        'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.',
         rating:3.5,
         expertise:'Biology',
         location:'Delhi',
@@ -71,8 +65,6 @@ export default Comments = ({}) => {
       id: 4,
       image: 'https://bootdey.com/img/Content/avatar/avatar2.png',
       name: 'Finn DoRemiFaso',
-      comment:
-        'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.',
         rating:2.5,
         expertise:'Physics',
         location:'Delhi',
@@ -81,8 +73,6 @@ export default Comments = ({}) => {
       id: 5,
       image: 'https://bootdey.com/img/Content/avatar/avatar3.png',
       name: 'Maria More More',
-      comment:
-        'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.',
         rating:5,
         expertise:'Mathematics',
         location:'Kolkata',
@@ -92,8 +82,6 @@ export default Comments = ({}) => {
       id: 6,
       image: 'https://bootdey.com/img/Content/avatar/avatar4.png',
       name: 'Clark June Boom!',
-      comment:
-        'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.',
         rating:4.5,
         expertise:'Physics',
         location:'Delhi',
@@ -102,8 +90,6 @@ export default Comments = ({}) => {
       id: 7,
       image: 'https://bootdey.com/img/Content/avatar/avatar5.png',
       name: 'The googler',
-      comment:
-        'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.',
         rating:3.4,
         expertise:'Physics',
         location:'Delhi',
@@ -136,9 +122,14 @@ export default Comments = ({}) => {
                 <Text style={styles.name}>{Notification.name}</Text>
                 <Rating value={Notification.rating} />
               </View>
-              <Text rkType="primary3 mediumLine">Expertise - {Notification.expertise}</Text>
-              <Text rkType="primary3 mediumLine">Location - {Notification.location}</Text>
-              <Text rkType="primary3 mediumLine">{Notification.comment}</Text>
+              
+              
+              <View style={styles.badge}>
+              <Text rkType="primary3 mediumLine">{Notification.expertise}</Text>
+                
+                 </View>
+              <Text rkType="primary3 mediumLine"><Ionicons  name="location-outline" size={14} color="orange" />  {Notification.location}</Text>
+             
             </View>
           </View>
           </TouchableOpacity>
@@ -152,6 +143,17 @@ const styles = StyleSheet.create({
   root: {
     backgroundColor: '#ffffff',
     marginTop: 10,
+  },
+  badge: {
+    backgroundColor: '#c7d2fe',
+    borderRadius: 20,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    alignSelf: 'flex-start',
+    justifyContent: 'flex-start',
+    marginBottom:5,
+   
+   
   },
   container: {
     paddingLeft: 19,
