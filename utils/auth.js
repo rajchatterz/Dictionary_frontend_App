@@ -1,8 +1,8 @@
 import axios from 'axios';
-
+import {base_url} from '../utils/constants'
 
 async function authenticate_contact(contact) {
-  const url = `https://backlogappbackend-production.up.railway.app/v1/auth/otp/send`;
+  const url = base_url+`/v1/auth/otp/send`;
 
   const response = await axios.post(url, {
     contact:contact
@@ -14,7 +14,7 @@ async function authenticate_contact(contact) {
 
 async function authenticate_otp(contact,otp) {
   try {
-    const url = `https://backlogappbackend-production.up.railway.app/v1/auth/otp/verify`;
+    const url = base_url+`/v1/auth/otp/verify`;
 
     const response = await axios.post(url, {
       contact:contact,
