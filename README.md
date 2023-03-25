@@ -1,4 +1,4 @@
-# Billion_Doller_APP_FrontEnd
+# Laundry App frontend
 
 Above project is mobile app build using ( React Native and EXPO ) 
 - Its build using Frontend Library called native base. Link : https://nativebase.io/
