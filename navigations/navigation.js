@@ -14,12 +14,12 @@ import AppLoading from 'expo-app-loading';
 import { GlobalStyles } from '../constants/style';
 import Cloud from '../screens/Cloud';
 import HomeScreen from '../screens/HomeScreen';
-import AllExpenses from '../screens/AllExpenses';
+
 import Notification from '../screens/Notification';
 import Help from '../screens/Help';
-import People from '../screens/People';
+import Order from '../screens/OrderScreen';
 import AboutUs from '../screens/Profile/AboutUs';
-
+import Profile from '../screens/ProfileScreen'
 import UserFeedback from '../screens/Profile/UserFeedback';
 
 import AuthContextProvider, { AuthContext } from '../store/auth-context';
@@ -131,81 +131,72 @@ function BottomTabNavigationfun() {
 
     return (
         
-        <BottomTabs.Navigator screenOptions={{
+        <BottomTabs.Navigator  screenOptions={{
             headerStyle: { backgroundColor: GlobalStyles.colors.primary800 },
             headerTintColor: 'white',
             tabBarActiveTintColor: GlobalStyles.colors.primary700,
-        }} >
+            tabBarStyle: { position: 'absolute' , paddingBottom:"2%" , paddingTop:"1%" ,height:"7%" },
+            
+            tabBarIndicatorStyle: {
+                backgroundColor: GlobalStyles.colors.primary700,
+                height: 2,
+              },
+            tabBarLabelStyle: { fontSize: 13 },
+            tabBarIconStyle: { color: 'blue' },
+            
+        }}
+         >
 
             <BottomTabs.Screen
                 name="HomeScreen"
                 component={HomeScreen}
-                options={{
-                    title: 'Home',
-                    headerTitle: "",
-                    tabBarLable: "Feed",
-                    headerLeft: () => (
-                        <>
-                            <TouchableOpacity onPress={() => { }}>
-                                <View >
-
-                                    <Text style={{ fontSize: 18, marginLeft: 15, color: "white", fontWeight: 'bold' }}>College</Text>
-                                    <View style={{ flexDirection: "row" }}>
-                                        <Ionicons onPress={() => console.log("Location")} style={{ marginLeft: 15 }} name="location-outline" size={14} color="white" />
-                                        <Text numberOfLines={1} ellipsizeMode='tail' style={{ color: "white", fontSize: 12 }}>{college.slice(0, 30)}</Text>
-                                    </View>
-                                </View>
-                            </TouchableOpacity>
-                        </>
-                    ),
-                    headerRight: () => (
-                        <>
-                            
-                                <View style={{ flexDirection: "row" }}>
-                               
-                                   <Ionicons onPress={() => navigation.navigate('Help')} style={{ marginRight: 15 }} name="help-circle" size={26} color="white" />
-                                  
-                                   <Ionicons onPress={() => navigation.navigate('Notification')} style={{ marginRight: 15 }} name="notifications" size={26} color="white" />
-                                    
-                                </View>
-                           
-
-                        </>
-                    ),
-                    tabBarIcon: ({ color, size }) => (
-                        <FontAwesome name="home" size={size} color={color} />
-                    ),
-                }}
+                
             />
 
             < BottomTabs.Screen name="Hub" component={Cloud}
                 options={{
-                    title: 'Cloud',
-                    tabBarLable: "Cloud",
-                    tabBarIcon: ({ color, size }) => (
-                        <FontAwesome name="cloud-download" size={size} color={color} />
+                    title: 'Price List',
+                    tabBarLable: "Price List",
+                    tabBarLabelStyle : {
+                        fontSize:12,
+                        fontWeight:"600"
+                    },
+                    tabBarHideOnKeyboard : true,
+                    tabBarIcon: ({focused,  color, size }) => (
+                      
+                        <Ionicons  name = {focused ? 'pricetags' : 'pricetags-outline'}  size={size} color={color} />
 
                     ),
                 }}
             />
 
-            < BottomTabs.Screen name="People" component={People}
+            < BottomTabs.Screen name="Order" component={Order}
                 options={{
-                    title: 'Helpers',
-                    tabBarLable: "Helper",
-                    tabBarIcon: ({ color, size }) => (
-                        <FontAwesome5 name="people-arrows" size={size} color={color} />
+                    title: 'Order',
+                    tabBarLable: "Order",
+                    tabBarLabelStyle : {
+                        fontSize:12,
+                        fontWeight:"600"
+                    },
+                    tabBarHideOnKeyboard : true,
+                    tabBarIcon: ({focused ,  color, size }) => (
+<MaterialCommunityIcons name= { focused ? "truck-delivery":"truck-check-outline"} size={size + 2} color={color} />
                     ),
                 }}
             />
 
-            < BottomTabs.Screen name="AllExpenses" component={AllExpenses}
+            < BottomTabs.Screen name="Profile" component={Profile}
                 options={{
                     title: 'Profile',
                     tabBarLable: "Profile",
-                    tabBarIcon: ({ color, size }) => (
+                    tabBarLabelStyle : {
+                        fontSize:12,
+                        fontWeight:"600"
+                    },
+                    tabBarHideOnKeyboard : true,
+                    tabBarIcon: ({focused ,  color, size }) => (
                     
-                     <MaterialCommunityIcons name="face-man-profile" size={size} color={color} />
+                     <FontAwesome name={focused ? "user" : 'user-o'} size={size} color={color} />
 
                        
                     ),
@@ -251,7 +242,7 @@ function Navigation() {
     return (
         <NavigationContainer>
 
-            {!authCtx.isAuthenticated && <AuthenticatedStack />}
+            {!authCtx.isAuthenticated && <AuthStack />}
             {authCtx.isAuthenticated && <AuthenticatedStack />}
 
         </NavigationContainer>

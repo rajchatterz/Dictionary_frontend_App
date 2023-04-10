@@ -4,8 +4,8 @@ import { SliderBox } from "react-native-image-slider-box";
 
 const Carousel = () => {
   const images = [
-    "https://img.freepik.com/premium-psd/creative-open-admission-poster-template_23-2148233174.jpg",
-    "https://img.freepik.com/premium-photo/happy-teen-girl-use-computer-video-call-listen-webinar-headphones-online-education-school-girl-portrait-with-laptop-horizontal-poster-banner-header-with-copy-space_545934-33607.jpg",
+    "https://t4.ftcdn.net/jpg/02/76/56/55/360_F_276565541_TbJYGVmnsQtP4bIJF9A0NwsMnPWMutvD.jpg",
+    "https://kisiifinest.co.ke/wp-content/uploads/2022/11/List-of-Best-Laundry-Services-in-Kisii-Town.jpg",
     "https://img.freepik.com/premium-photo/happy-smart-kid-typing-laptop-during-school-online-lesson-modern-education-school-girl-portrait-with-laptop-horizontal-poster-banner-header-with-copy-space_545934-33047.jpg",
   ];
 

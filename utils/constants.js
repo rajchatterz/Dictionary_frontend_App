@@ -1,1 +1,1 @@
-export const base_url="https://backlogappbackend-production.up.railway.app"
+export const base_url="https://laundryapp-production.up.railway.app"
