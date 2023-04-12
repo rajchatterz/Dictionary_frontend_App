@@ -33,7 +33,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 const HomeScreen = ({ navigation }) => {
   Geocoder.init("AIzaSyBuxI-ect9yK8dLwiwT2bLsIpPfq2j8Ar0");
   const data = hotels;
-  const [location, setLocation] = useState("Loadind...");
+  const [location, setLocation] = useState("Loading...");
   const [errorMsg, setErrorMsg] = useState(null);
 
 
