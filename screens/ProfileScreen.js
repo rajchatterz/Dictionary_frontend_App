@@ -1,7 +1,7 @@
 import { Lable } from 'react-native';
 import React, { useState, useEffect, useContext } from "react";
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { View, Text, Progress, ScrollView, Badge, Icon, IconButton, Box, Button, FlatList, Heading, Divider, Avatar, HStack, VStack, Spacer, Center, NativeBaseProvider } from "native-base";
+import { View, Text, Progress, ScrollView, Badge, Icon, IconButton, Box, Button, FlatList, Heading, Divider, Avatar, HStack, VStack, Spacer,  Switch ,Center, NativeBaseProvider } from "native-base";
 import { Feather } from '@expo/vector-icons';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -10,12 +10,79 @@ import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { GlobalStyles } from '../constants/style';
 import { AuthContext } from '../store/auth-context';
-
+import BottomScreenDrawer from '../components/Notification_bottomdrawer';
 
 
 function ProfileScreen() {
   const authCtx = useContext(AuthContext);
   const navigation = useNavigation();
+  const apiData = {
+    numerator: 3, 
+    denominator: 5 
+  };
+  
+  const percentage = (apiData.numerator / apiData.denominator) * 100;
+
+ 
+  const [isToggleOn1, setIsToggleOn1] = useState(false);
+  const [isToggleOn2, setIsToggleOn2] = useState(false);
+  const [isToggleOn3, setIsToggleOn3] = useState(false);
+  
+  const handleToggleChange1 = () => {
+    setIsToggleOn1(!isToggleOn1); 
+  };
+
+  const handleToggleChange2 = () => {
+    setIsToggleOn2(!isToggleOn2); 
+  };
+
+  const handleToggleChange3 = () => {
+    setIsToggleOn3(!isToggleOn3); 
+  };
+  const contentSection1 = (
+    <Box>
+      <Text style={{marginBottom:10,marginTop:5}}>Switch on / off toggle to receive whatsapp notifications</Text>
+      <HStack justifyContent="center">
+        <Switch size="lg" isChecked={isToggleOn1} onToggle={handleToggleChange1} />
+      </HStack>
+    </Box>
+  );
+
+  const contentSection2 = (
+    <Box>
+      <Text style={{marginBottom:10,marginTop:5}}>Switch on / off toggle to receive email notifications</Text>
+      <HStack justifyContent="center">
+        <Switch size="lg" isChecked={isToggleOn2} onToggle={handleToggleChange2} />
+      </HStack>
+    </Box>
+  );
+
+  const contentSection3 = (
+    <Box>
+      <Text style={{marginBottom:10,marginTop:5}}>Switch on / off toggle to receive push notifications</Text>
+      <HStack justifyContent="center">
+        <Switch size="lg" isChecked={isToggleOn3} onToggle={handleToggleChange3} />
+      </HStack>
+    </Box>
+  );
+
+
+  const [isBottomDrawerVisible1, setIsBottomDrawerVisible1] = React.useState(false);
+  const [isBottomDrawerVisible2, setIsBottomDrawerVisible2] = React.useState(false);
+  const [isBottomDrawerVisible3, setIsBottomDrawerVisible3] = React.useState(false);
+  
+  const handleCloseBottomDrawer1 = () => {
+    setIsBottomDrawerVisible1(false);
+  }
+
+  const handleCloseBottomDrawer2 = () => {
+    setIsBottomDrawerVisible2(false);
+  }
+
+  const handleCloseBottomDrawer3 = () => {
+    setIsBottomDrawerVisible3(false);
+  }
+
 
   const logout_function = async () => {
     console.log("logging you out..")
@@ -115,14 +182,7 @@ function ProfileScreen() {
   //   );
   // };
 
-  // const SendFeedback = () => {
-  //   return (
-  //     <View style={styles.container}>
-  //       <Text style={styles.title}>Screen 2</Text>
-  //     </View>
-  //   );
-  // };
-
+ 
 
 
   return (
@@ -146,9 +206,9 @@ function ProfileScreen() {
               <Heading pt="2" size="lg" style={{ color: "grey" }}>Audumber Chaudhari</Heading>
 
               <HStack>
-                <Box w="80%" pt="2"><Progress size="lg" colorScheme="emerald" bg={GlobalStyles.colors.primary200} mb={4} value={75} mx={4} />
+                <Box w="80%" pt="2"><Progress size="lg" colorScheme="emerald" bg={GlobalStyles.colors.primary200} mb={4} value={percentage} mx={4} />
                 </Box>
-                <Text fontSize="lg" color="green">75%</Text>
+                <Text fontSize="lg" color="green">{percentage}%</Text>
 
               </HStack>
 
@@ -291,15 +351,18 @@ function ProfileScreen() {
                       <View style={styles.container}>
                         <TouchableOpacity
                           style={styles.card}
-                          onPress={() => navigation.navigate('About')}
+                          onPress={() => setIsBottomDrawerVisible1(true)} 
                         >
 
                           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Ionicons name="logo-whatsapp" size={24} color="green" />
                             <Text style={styles.title}>{"  "}Whatsapp</Text>
+                            <BottomScreenDrawer isVisible={isBottomDrawerVisible1} content={contentSection1} onClose={handleCloseBottomDrawer1}/>
+                           
 
                             <View style={{ flex: 1, alignItems: 'flex-end' }}>
-                              <Text style={{ paddingBottom: "1%", color: GlobalStyles.colors.thridFond }}>{"  "}ON</Text>
+                            <Text style={{ paddingBottom: "1%", color: GlobalStyles.colors.thridFond }}>{isToggleOn1 ? "  ON" : "  OFF"}</Text>
+                          
                             </View>
                             <View style={{ flex: 0, alignItems: 'flex-end' }}>
                               <Ionicons name="chevron-forward-outline" size={24} color={GlobalStyles.colors.thridFond} />
@@ -313,18 +376,24 @@ function ProfileScreen() {
                         }} />
                         <TouchableOpacity
                           style={styles.card}
-                          onPress={() => navigation.navigate('Feedback')}
+                          onPress={() => setIsBottomDrawerVisible2(true)} 
                         >
                           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                         
                             <Ionicons name="mail-unread-outline" size={24} color={GlobalStyles.colors.thridFond} />
-                            <Text style={styles.title}>{"  "}Email</Text>
+                            <Text  style={styles.title}>{"  "}Email</Text>
+                            <BottomScreenDrawer isVisible={isBottomDrawerVisible2} content={contentSection2} onClose={handleCloseBottomDrawer2}/>
+                           
                             <View style={{ flex: 1, alignItems: 'flex-end' }}>
-                              <Text style={{ paddingBottom: "1%", color: GlobalStyles.colors.thridFond }}>{"  "}ON</Text>
+                            <Text style={{ paddingBottom: "1%", color: GlobalStyles.colors.thridFond }}>{isToggleOn2 ? "  ON" : "  OFF"}</Text>
+                          
                             </View>
+                          
                             <View style={{ flex: 0, alignItems: 'flex-end' }}>
                               <Ionicons name="chevron-forward-outline" size={24} color={GlobalStyles.colors.thridFond} />
                             </View>
-
+                           
+                           
                           </View>
                         </TouchableOpacity>
                         <Divider style={{ marginStart: "10%", width: '95%' }} my="1" _light={{
@@ -335,20 +404,22 @@ function ProfileScreen() {
 
                         <TouchableOpacity
                           style={styles.card}
-                          onPress={() => navigation.navigate('Feedback')}
+                          onPress={() => setIsBottomDrawerVisible3(true)} 
                         >
                           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Ionicons name="megaphone-outline" size={24} color={GlobalStyles.colors.thridFond} />
                             <Text style={styles.title}>{"  "}Push Notifications</Text>
+                            <BottomScreenDrawer isVisible={isBottomDrawerVisible3} content={contentSection3} onClose={handleCloseBottomDrawer3}/>
+                           
                             <View style={{ flex: 1, alignItems: 'flex-end' }}>
-                              <Text style={{ paddingBottom: "1%", color: GlobalStyles.colors.thridFond }}>{"  "}ON</Text>
+                            <Text style={{ paddingBottom: "1%", color: GlobalStyles.colors.thridFond }}>{isToggleOn3 ? "  ON" : "  OFF"}</Text>
                             </View>
                             <View style={{ flex: 0, alignItems: 'flex-end' }}>
                               <Ionicons name="chevron-forward-outline" size={24} color={GlobalStyles.colors.thridFond} />
                             </View>
                           </View>
                         </TouchableOpacity>
-
+                     
 
                       </View>
 
@@ -471,6 +542,9 @@ function ProfileScreen() {
 
 
             </VStack>
+
+           
+
           </ScrollView>
 
 
