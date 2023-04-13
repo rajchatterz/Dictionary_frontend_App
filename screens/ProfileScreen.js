@@ -1,7 +1,7 @@
 import { Lable } from 'react-native';
 import React, { useState, useEffect, useContext } from "react";
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { View, Text, Progress, ScrollView, Badge, Icon, IconButton, Box, Button, FlatList, Heading, Divider, Avatar, HStack, VStack, Spacer,  Switch ,Center, NativeBaseProvider } from "native-base";
+import { View, Text, Progress, ScrollView, Badge, Icon, IconButton, Box, Button, FlatList, Heading, Divider, Avatar, HStack, VStack, Spacer, Switch, Center, NativeBaseProvider } from "native-base";
 import { Feather } from '@expo/vector-icons';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -17,37 +17,37 @@ function ProfileScreen() {
   const authCtx = useContext(AuthContext);
   const navigation = useNavigation();
   const apiData = {
-    numerator: 3, 
-    denominator: 5 
+    numerator: 3,
+    denominator: 5
   };
-  
+
   const percentage = (apiData.numerator / apiData.denominator) * 100;
 
- 
+
   const [isToggleOn1, setIsToggleOn1] = useState(false);
   const [isToggleOn2, setIsToggleOn2] = useState(false);
   const [isToggleOn3, setIsToggleOn3] = useState(false);
-  
+
   const handleToggleChange1 = () => {
-    setIsToggleOn1(!isToggleOn1); 
+    setIsToggleOn1(!isToggleOn1);
   };
 
   const handleToggleChange2 = () => {
-    setIsToggleOn2(!isToggleOn2); 
+    setIsToggleOn2(!isToggleOn2);
   };
 
   const handleToggleChange3 = () => {
-    setIsToggleOn3(!isToggleOn3); 
+    setIsToggleOn3(!isToggleOn3);
   };
 
-  
+
   const [isBottomDrawerVisible1, setIsBottomDrawerVisible1] = React.useState(false);
   const [isBottomDrawerVisible2, setIsBottomDrawerVisible2] = React.useState(false);
   const [isBottomDrawerVisible3, setIsBottomDrawerVisible3] = React.useState(false);
-  
+
   const handleCloseBottomDrawer1 = () => {
     setIsBottomDrawerVisible1(false);
-   
+
   }
 
   const handleCloseBottomDrawer2 = () => {
@@ -58,78 +58,47 @@ function ProfileScreen() {
     setIsBottomDrawerVisible3(false);
   }
 
-  const contentSection1 = (
-    <Box>
-    <Text style={{marginBottom:20,fontSize: 18, fontWeight: 'bold',textAlign:'center'}}>Whatsapp</Text>
-    <HStack alignItems="flex-start">
-        <Ionicons name="notifications-outline" size={20} color="black" style={{marginRight: 7}} />
-    <Text style={{marginBottom:15,textAlign: 'left',alignContent:'flex-start'}}>Select ON to recieve notifications instantly</Text>
-    </HStack>
-    <HStack alignItems="flex-start">
-        <Ionicons name="notifications-outline" size={20} color="black" style={{marginRight: 7}} />
-    <Text style={{marginBottom:15,textAlign: 'left',alignContent:'flex-start'}}>Enabling notifications provides real-time updates and convenient access to important information on your mobile device. </Text>
-    </HStack>
-    <HStack alignItems="flex-start">
-        <Ionicons name="notifications-outline" size={20} color="black" style={{marginRight: 7}} />
-    <Text style={{marginBottom:20,textAlign: 'left',alignContent:'flex-start'}}>Notifications offer timely reminders and personalized updates for a better user experience.</Text>
-    </HStack>
-    <HStack justifyContent="center">
-    <TouchableOpacity onPress={handleToggleChange1} style={{ marginTop: 20, width: '92%', height: 50, backgroundColor: '#3730a3', borderRadius:4, justifyContent: 'center', alignItems: 'center' }}>
-  <Text style={{ color: 'white' }}>Switch on / off notifications</Text>
-</TouchableOpacity>
-    </HStack>
-  </Box>
+  const contentSectionON = (
+    <Box style={{margin:"1%"}}>
+      <HStack alignItems="flex-start">
+        <Ionicons name="notifications-outline" size={20} color="black" style={{ marginRight: 7 }} />
+        <Text style={{ marginBottom: 15, textAlign: 'left', alignContent: 'flex-start' }}>If you turn off notifications, you might miss important updates, news, or events related to the app or service</Text>
+      </HStack>
+      <HStack alignItems="flex-start">
+        <Ionicons name="notifications-outline" size={20} color="black" style={{ marginRight: 7 }} />
+        <Text style={{ marginBottom: 15, textAlign: 'left', alignContent: 'flex-start' }}> Notifications can help keep you engaged with app, as they provide a constant reminder.</Text>
+      </HStack>
+      <HStack alignItems="flex-start">
+        <Ionicons name="notifications-outline" size={20} color="black" style={{ marginRight: 7 }} />
+        <Text style={{ marginBottom: 20, textAlign: 'left', alignContent: 'flex-start' }}>Notifications offer timely reminders and personalized updates for a better user experience.</Text>
+      </HStack>
+
+    </Box>
   );
 
-  const contentSection2 = (
-    <Box>
-    <Text style={{marginBottom:20,fontSize: 18, fontWeight: 'bold',textAlign:'center'}}>Email</Text>
-    <HStack alignItems="flex-start">
-        <Ionicons name="notifications-outline" size={20} color="black" style={{marginRight: 7}} />
-    <Text style={{marginBottom:15,textAlign: 'left',alignContent:'flex-start'}}>Select ON to recieve notifications instantly</Text>
-    </HStack>
-    <HStack alignItems="flex-start">
-        <Ionicons name="notifications-outline" size={20} color="black" style={{marginRight: 7}} />
-    <Text style={{marginBottom:15,textAlign: 'left',alignContent:'flex-start'}}>Enabling notifications provides real-time updates and convenient access to important information on your mobile device. </Text>
-    </HStack>
-    <HStack alignItems="flex-start">
-        <Ionicons name="notifications-outline" size={20} color="black" style={{marginRight: 7}} />
-    <Text style={{marginBottom:20,textAlign: 'left',alignContent:'flex-start'}}>Notifications offer timely reminders and personalized updates for a better user experience.</Text>
-    </HStack>
-    <HStack justifyContent="center">
-    <TouchableOpacity onPress={handleToggleChange2} style={{ marginTop: 20, width: '92%', height: 50, backgroundColor: '#3730a3', borderRadius:4, justifyContent: 'center', alignItems: 'center' }}>
-  <Text style={{ color: 'white' }}>Switch on / off notifications</Text>
-</TouchableOpacity>
-    </HStack>
-  </Box>
-  );
+  const contentSectionOFF = (
+    <Box style={{margin:"1%"}}>
+      <HStack alignItems="flex-start">
+        <Ionicons name="notifications-outline" size={20} color="black" style={{ marginRight: 7 }} />
+        <Text style={{ marginBottom: 15, textAlign: 'left', alignContent: 'flex-start' }}>Select ON to recieve notifications instantly</Text>
+      </HStack>
+      <HStack alignItems="flex-start">
+        <Ionicons name="notifications-outline" size={20} color="black" style={{ marginRight: 7 }} />
+        <Text style={{ marginBottom: 15, textAlign: 'left', alignContent: 'flex-start' }}>Enabling notifications provides real-time updates and convenient access to important information on your mobile device. </Text>
+      </HStack>
+      <HStack alignItems="flex-start">
+        <Ionicons name="notifications-outline" size={20} color="black" style={{ marginRight: 7 }} />
+        <Text style={{ marginBottom: 20, textAlign: 'left', alignContent: 'flex-start' }}>Notifications offer timely reminders and personalized updates for a better user experience.</Text>
+      </HStack>
 
-  const contentSection3 = (
-    <Box>
-    <Text style={{marginBottom:20,fontSize: 18, fontWeight: 'bold',textAlign:'center'}}>Push notifications</Text>
-    <HStack alignItems="flex-start">
-        <Ionicons name="notifications-outline" size={20} color="black" style={{marginRight: 7}} />
-    <Text style={{marginBottom:15,textAlign: 'left',alignContent:'flex-start'}}>Select ON to recieve notifications instantly</Text>
-    </HStack>
-    <HStack alignItems="flex-start">
-        <Ionicons name="notifications-outline" size={20} color="black" style={{marginRight: 7}} />
-    <Text style={{marginBottom:15,textAlign: 'left',alignContent:'flex-start'}}>Enabling notifications provides real-time updates and convenient access to important information on your mobile device. </Text>
-    </HStack>
-    <HStack alignItems="flex-start">
-        <Ionicons name="notifications-outline" size={20} color="black" style={{marginRight: 7}} />
-    <Text style={{marginBottom:20,textAlign: 'left',alignContent:'flex-start'}}>Notifications offer timely reminders and personalized updates for a better user experience.</Text>
-    </HStack>
-    <HStack justifyContent="center">
-    <TouchableOpacity  onPress={() => { handleToggleChange3(); handleCloseBottomDrawer3();}}  style={{ marginTop: 20, width: '92%', height: 50, backgroundColor: '#3730a3', borderRadius:4, justifyContent: 'center', alignItems: 'center' }}>
-  <Text style={{ color: 'white' }}>Switch on / off notifications</Text>
-</TouchableOpacity>
-    </HStack>
-  </Box>
+    </Box>
   );
 
 
 
-  
+
+
+
   const logout_function = async () => {
     console.log("logging you out..")
     await authCtx.logout()
@@ -171,7 +140,7 @@ function ProfileScreen() {
                   <Text style={styles.title}>{"  "}App Version</Text>
 
                   <View style={{ flex: 1, alignItems: 'flex-end' }}>
-                  <Badge  colorScheme="info"  borderRadius="15" >V1.1.23</Badge>
+                    <Badge colorScheme="info" borderRadius="15" >V1.1.23</Badge>
 
                   </View>
                   <View style={{ flex: 0, alignItems: 'flex-end' }}>
@@ -304,18 +273,18 @@ function ProfileScreen() {
                       <View style={styles.container}>
                         <TouchableOpacity
                           style={styles.card}
-                          onPress={() => setIsBottomDrawerVisible1(true)} 
+                          onPress={() => setIsBottomDrawerVisible1(true)}
                         >
 
                           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Ionicons name="logo-whatsapp" size={24} color="green" />
                             <Text style={styles.title}>{"  "}Whatsapp</Text>
-                            <BottomScreenDrawer isVisible={isBottomDrawerVisible1} content={contentSection1} onClose={handleCloseBottomDrawer1}/>
-                           
+                            <BottomScreenDrawer isVisible={isBottomDrawerVisible1} content={isToggleOn1 ? contentSectionON : contentSectionOFF} onClose={handleCloseBottomDrawer1} handleClick={handleToggleChange1} buttonText={isToggleOn1 ? "Switch OFF Notifications" : "Switch ON Notifications"} heading={"Whatsapp Notifications!"} />
+
 
                             <View style={{ flex: 1, alignItems: 'flex-end' }}>
-                            <Text style={{ paddingBottom: "1%", color: GlobalStyles.colors.thridFond }}>{isToggleOn1 ? "  ON" : "  OFF"}</Text>
-                          
+                              <Text style={{ paddingBottom: "1%", color: GlobalStyles.colors.thridFond }}>{isToggleOn1 ? "  ON" : "  OFF"}</Text>
+
                             </View>
                             <View style={{ flex: 0, alignItems: 'flex-end' }}>
                               <Ionicons name="chevron-forward-outline" size={24} color={GlobalStyles.colors.thridFond} />
@@ -329,24 +298,24 @@ function ProfileScreen() {
                         }} />
                         <TouchableOpacity
                           style={styles.card}
-                          onPress={() => setIsBottomDrawerVisible2(true)} 
+                          onPress={() => setIsBottomDrawerVisible2(true)}
                         >
                           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                         
+
                             <Ionicons name="mail-unread-outline" size={24} color={GlobalStyles.colors.thridFond} />
-                            <Text  style={styles.title}>{"  "}Email</Text>
-                            <BottomScreenDrawer isVisible={isBottomDrawerVisible2} content={contentSection2} onClose={handleCloseBottomDrawer2}/>
-                           
+                            <Text style={styles.title}>{"  "}Email</Text>
+                            <BottomScreenDrawer isVisible={isBottomDrawerVisible2} content={isToggleOn2 ? contentSectionOFF : contentSectionON} onClose={handleCloseBottomDrawer2} buttonText={isToggleOn2 ? "Switch OFF Notifications" : "Switch ON Notifications"} handleClick={handleToggleChange2} heading={"Email Notifications!"}/>
+
                             <View style={{ flex: 1, alignItems: 'flex-end' }}>
-                            <Text style={{ paddingBottom: "1%", color: GlobalStyles.colors.thridFond }}>{isToggleOn2 ? "  ON" : "  OFF"}</Text>
-                          
+                              <Text style={{ paddingBottom: "1%", color: GlobalStyles.colors.thridFond }}>{isToggleOn2 ? "  ON" : "  OFF"}</Text>
+
                             </View>
-                          
+
                             <View style={{ flex: 0, alignItems: 'flex-end' }}>
                               <Ionicons name="chevron-forward-outline" size={24} color={GlobalStyles.colors.thridFond} />
                             </View>
-                           
-                           
+
+
                           </View>
                         </TouchableOpacity>
                         <Divider style={{ marginStart: "10%", width: '95%' }} my="1" _light={{
@@ -357,22 +326,22 @@ function ProfileScreen() {
 
                         <TouchableOpacity
                           style={styles.card}
-                          onPress={() => setIsBottomDrawerVisible3(true)} 
+                          onPress={() => setIsBottomDrawerVisible3(true)}
                         >
                           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Ionicons name="megaphone-outline" size={24} color={GlobalStyles.colors.thridFond} />
                             <Text style={styles.title}>{"  "}Push Notifications</Text>
-                            <BottomScreenDrawer isVisible={isBottomDrawerVisible3} content={contentSection3} onClose={handleCloseBottomDrawer3}/>
-                           
+                            <BottomScreenDrawer isVisible={isBottomDrawerVisible3} content={isToggleOn3 ? contentSectionOFF : contentSectionON} onClose={handleCloseBottomDrawer3} buttonText={isToggleOn3 ? "Switch OFF Notifications" : "Switch ON Notifications"} handleClick={handleToggleChange3}  heading={"Push Notifications!"}/>
+
                             <View style={{ flex: 1, alignItems: 'flex-end' }}>
-                            <Text style={{ paddingBottom: "1%", color: GlobalStyles.colors.thridFond }}>{isToggleOn3 ? "  ON" : "  OFF"}</Text>
+                              <Text style={{ paddingBottom: "1%", color: GlobalStyles.colors.thridFond }}>{isToggleOn3 ? "  ON" : "  OFF"}</Text>
                             </View>
                             <View style={{ flex: 0, alignItems: 'flex-end' }}>
                               <Ionicons name="chevron-forward-outline" size={24} color={GlobalStyles.colors.thridFond} />
                             </View>
                           </View>
                         </TouchableOpacity>
-                     
+
 
                       </View>
 
@@ -496,7 +465,7 @@ function ProfileScreen() {
 
             </VStack>
 
-           
+
 
           </ScrollView>
 
