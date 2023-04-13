@@ -35,7 +35,7 @@ export default class TrackOrder extends React.Component {
 
     ];
 
-    const pastOrders = orders.filter(order => order.active === false);
+const pastOrders = orders.filter(order => order.active === false);
 const nowOrders = orders.filter(order => order.active === true);
 
     

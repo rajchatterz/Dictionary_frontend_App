@@ -26,7 +26,7 @@ const BottomScreenDrawer = ({ isVisible, content, onClose }) => {
 
       <Modal animationType="none" transparent={true} visible={isBottomSheetOpen} onRequestClose={handleCloseBottomSheet}>
         <View style={styles.modalContainer}>
-          <View style={[styles.bottomSheet, { height: windowHeight * 0.2 }]}>
+          <View style={[styles.bottomSheet, { height: windowHeight * 0.45}]}>
           <View style={{ flex: 0, width: '100%', justifyContent: 'flex-end', flexDirection: 'row' }}>
               <TouchableOpacity onPress={handleCloseBottomSheet}>
                 <View style={{ padding: 0 }}>
@@ -37,6 +37,7 @@ const BottomScreenDrawer = ({ isVisible, content, onClose }) => {
             <View style={{ flex: 1 }}>
               {/* Render content based on prop value */}
               {content}
+              
             </View>
            
           </View>
