@@ -21,6 +21,7 @@ import Order from '../screens/OrderScreen';
 import AboutUs from '../screens/Profile/AboutUs';
 import Profile from '../screens/ProfileScreen'
 import UserFeedback from '../screens/Profile/UserFeedback';
+import ReportDamage from '../screens/Profile/ReportDamage';
 
 import AuthContextProvider, { AuthContext } from '../store/auth-context';
 
@@ -114,6 +115,23 @@ function FeedbackStack() {
         <Stack.Navigator>
             <Stack.Screen name="Feedback" component={UserFeedback} options={{
                 title: 'Feedback',
+                headerTitleStyle: {
+                    color: '#fff',
+                },
+                headerStyle: {
+                    backgroundColor: GlobalStyles.colors.primary800,
+                },
+            }} />
+        </Stack.Navigator>
+    )
+
+}
+
+function ReportDamageStack() {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="Report Damage" component={ReportDamage} options={{
+                title: 'Report Damage',
                 headerTitleStyle: {
                     color: '#fff',
                 },
@@ -229,6 +247,7 @@ function AuthenticatedStack() {
                 <Stack.Screen name="Help" component={HelpStack} options={{ headerShown: false }} />
                 <Stack.Screen name="About" component={AboutStack} options={{ headerShown: false }} />
                 <Stack.Screen name="Feedback" component={FeedbackStack} options={{ headerShown: false }} />
+                <Stack.Screen name="Report Damage" component={ReportDamageStack} options={{ headerShown: false }} />
             </Stack.Navigator>
         </>
     );
