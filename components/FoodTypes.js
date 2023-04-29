@@ -1,11 +1,20 @@
 import { StyleSheet, Text, View, ScrollView, Image, Pressable, Dimensions } from 'react-native'
 import React from 'react'
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+
 
 const numColumns = 3;
 const screenWidth = Dimensions.get('window').width;
 const imageWidth = screenWidth / numColumns;
 
+
 const FoodTypes = () => {
+
+  const navigation = useNavigation();
+
+  const handlePress = () => {
+    navigation.navigate('Service');
+  };
 
 
   const types = [
@@ -53,7 +62,7 @@ const FoodTypes = () => {
             {types.map((item, index) => (
 
               <View style={{ margin: 6, width: "21%", alignItems: "center" }} key={index}>
-                <Pressable android_ripple={{ color: "#ccc", radius: 28, }} >
+                <Pressable android_ripple={{ color: "#ccc", radius: 28, }} onPress={handlePress} >
                   <Image source={{ uri: item.image }} style={{ width: 50, height: 50, borderRadius: 5, transform: [{ scale: 1.1 }] }} />
                 </Pressable>
                 <Text style={{ marginTop: 6, textAlign: "center" }}>{item.name}</Text>
