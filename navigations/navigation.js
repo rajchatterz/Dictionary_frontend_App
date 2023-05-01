@@ -21,6 +21,8 @@ import Order from '../screens/OrderScreen';
 import AboutUs from '../screens/Profile/AboutUs';
 import Profile from '../screens/ProfileScreen'
 import UserFeedback from '../screens/Profile/UserFeedback';
+import ReportDamage from '../screens/Profile/ReportDamage';
+import Stepper from '../screens/service_order';
 
 import AuthContextProvider, { AuthContext } from '../store/auth-context';
 
@@ -123,6 +125,41 @@ function FeedbackStack() {
             }} />
         </Stack.Navigator>
     )
+
+}
+
+function ReportDamageStack() {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="Report Damage" component={ReportDamage} options={{
+                title: 'Report Damage',
+                headerTitleStyle: {
+                    color: '#fff',
+                },
+                headerStyle: {
+                    backgroundColor: GlobalStyles.colors.primary800,
+                },
+            }} />
+        </Stack.Navigator>
+    )
+}
+
+function ServiceStack(){
+    return (
+        <Stack.Navigator>
+    < Stack.Screen name="Service" component={Stepper}
+                options={{
+                    title: 'Service',
+                    headerTitleStyle: {
+                        color: '#fff',
+                    },
+                    headerStyle: {
+                        backgroundColor: GlobalStyles.colors.primary800,
+                    },
+                   
+                }} />
+             </Stack.Navigator>
+    )
 }
 //Authenticated stack
 function BottomTabNavigationfun() {
@@ -185,6 +222,9 @@ function BottomTabNavigationfun() {
                 }}
             />
 
+
+
+
             < BottomTabs.Screen name="Profile" component={Profile}
                 options={{
                     title: 'Profile',
@@ -229,6 +269,8 @@ function AuthenticatedStack() {
                 <Stack.Screen name="Help" component={HelpStack} options={{ headerShown: false }} />
                 <Stack.Screen name="About" component={AboutStack} options={{ headerShown: false }} />
                 <Stack.Screen name="Feedback" component={FeedbackStack} options={{ headerShown: false }} />
+                <Stack.Screen name="Report Damage" component={ReportDamageStack} options={{ headerShown: false }} />
+                <Stack.Screen name="Service" component={ServiceStack} options={{ headerShown: false }} />
             </Stack.Navigator>
         </>
     );

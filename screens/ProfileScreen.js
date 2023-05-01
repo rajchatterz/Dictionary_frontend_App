@@ -421,7 +421,7 @@ function ProfileScreen() {
 
                         <TouchableOpacity
                           style={styles.card}
-                          onPress={() => navigation.navigate('Feedback')}
+                          onPress={() => navigation.navigate('Report Damage')}
                         >
                           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Ionicons name="alert-circle-outline" size={24} color={GlobalStyles.colors.thridFond} />
