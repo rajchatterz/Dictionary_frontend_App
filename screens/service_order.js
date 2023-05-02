@@ -4,7 +4,6 @@ import CheckBox from 'expo-checkbox'
 import Pickup from "./pickup_datetime";
 import { Image } from 'react-native';
 import image from '../assets/delivery.png';
-import AddressForm from "./address_form";
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 
 const Stepper = () => {
@@ -185,13 +184,13 @@ const Stepper = () => {
         style={{ height: 50,width:350, borderColor: 'gray', borderWidth: 1 , marginTop:20,marginBottom:20,padding:10,borderRadius:5}}
         onChangeText={handleAddressLine1Change}
         value={addressLine1}
-        placeholder="Address Line 1"
+        placeholder="Flat Number / Society name"
       />
       <TextInput
         style={{ height: 50, borderColor: 'gray', borderWidth: 1 ,marginBottom:20 ,padding:10,borderRadius:5}}
         onChangeText={handleAddressLine2Change}
         value={addressLine2}
-        placeholder="Address Line 2"
+        placeholder="Nearby"
       />
       <TextInput
         style={{ height: 50, borderColor: 'gray', borderWidth: 1,marginBottom:20 ,padding:10,borderRadius:5}}
