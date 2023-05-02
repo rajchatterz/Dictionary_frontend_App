@@ -10,11 +10,10 @@ export default class TrackOrder extends React.Component {
         companyname: 'Package from Warrior Royals', name:'Shoes',   status: 'Order delivered', active:true,  date: 'Amazon order on Jun 10  , 2020 at 09:30', orderId: '123456', description: 'Size : 10', image: 'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_112,h_112,c_fill/uckbx3rr87jhakb81mbs', price: 19.99,
         data: [
 
-          { statustitle: 'Order Placed', isCurrent: true, titletime: "Fri , 5th Jul '20", subtext: 'Your order has been placed.', subtitletime: "Fri , 5th Jun '20 - 5:03pm" },
-          { statustitle: 'Order Confirmed', isCurrent: true, titletime: "Fri , 5th Jul '20", subtext: 'Your order has been confirmed.', subtitletime: "Fri , 5th Jun '20 - 5:10pm" },
-          { statustitle: 'Order Packed', isCurrent: true, titletime: "Fri , 8th Jul '20", subtext: 'Your order has been packed.', subtitletime: "Mon , 8th Jun '20 - 8:20am", },
-          { statustitle: 'Order Dispatched', isCurrent: true, titletime: "Fri , 9th Jul '20", subtext: 'Your order has been dispatched.', subtitletime: "Tue , 9th Jun '20 - 10:00pm" },
-          { statustitle: 'Order Delivered', isCurrent: false, titletime: "Fri , 10th Jul '20", subtext: 'Your order is yet to be delivered.', subtitletime: "" },
+          { statustitle: 'Order Placed', isCurrent: true, titletime: "Fri , 5th Jul '20", subtext: 'Your clothes have been picked.', subtitletime: "Fri , 5th Jun '20 - 5:03pm" },
+          { statustitle: 'Order Confirmed', isCurrent: true, titletime: "Fri , 5th Jul '20", subtext: 'Your clothes are being washed and ironed.', subtitletime: "" },
+          { statustitle: 'Order Packed', isCurrent: true, titletime: "Fri , 8th Jul '20", subtext: 'Your clothes has been packed.', subtitletime: "", },
+          { statustitle: 'Order Dispatched', isCurrent: false, titletime: "Fri , 9th Jul '20", subtext: 'Your clothes have been delivered.', subtitletime: "" },
         ],
       },
 
