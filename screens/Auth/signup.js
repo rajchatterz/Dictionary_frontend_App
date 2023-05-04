@@ -18,7 +18,6 @@ const ExampleSignup = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [college, setCollege] = useState('');
-  const [city, setCity] = useState('');
   
   const authCtx = useContext(AuthContext);
  
@@ -34,19 +33,12 @@ const ExampleSignup = () => {
     setCollege(college);
   };
 
- 
-    const handlePlaceSelection = (data, details) => {
-        const cityName = details.terms[0].value; 
-        setCity(cityName);
-       
-      
-    };
-  
+
 
 
   const handleSubmit = async () => {
 
-    console.log(name,email,college,city);
+    console.log(name,email);
     try {
       // Make a POST request to the API with the contact
       const contact= await AsyncStorage.getItem('contact');
@@ -57,12 +49,10 @@ const ExampleSignup = () => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          contact:contact,
+         contact:contact,
          password:contact+"@abc123",
          name:name,
-         email:email,
-         city:city,
-         college:college
+         email:contact+"@gmail.com",
 
         })
       });
@@ -112,48 +102,6 @@ const ExampleSignup = () => {
 
             </FormControl>
 
-            <FormControl mb="5">
-              <FormControl.Label>Email*</FormControl.Label>
-              <Input onChangeText={handleEmail}
-        value={email} />
-              
-            </FormControl>
-
-
-            <FormControl mb="5">
-              <FormControl.Label>College / University*</FormControl.Label>
-
-                <Input onChangeText={handleCollege}
-        value={college} />
-            
-            </FormControl>
-
-
-       <FormControl mb="5">
-          <FormControl.Label>City*</FormControl.Label>
-          <GooglePlacesAutocomplete
-           onPress={handlePlaceSelection}
-            placeholder=""
-            styles={{
-              container: {
-                flex: 0,
-              },
-              textInputContainer: {
-                borderColor: 'gray',
-                borderWidth: 0.5,
-              },
-              textInput: {
-                fontSize: 18,
-              },
-            }}
-            query={{
-              key: 'AIzaSyBuxI-ect9yK8dLwiwT2bLsIpPfq2j8Ar0',
-              language: "en",
-            }}
-            nearbyPlacesAPI="GooglePlacesSearch"
-            debounce={200}
-          />
-          </FormControl>
 
 
 

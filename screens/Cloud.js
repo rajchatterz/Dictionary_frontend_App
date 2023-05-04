@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, FlatList, TextInput } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
+import { color } from 'react-native-elements/dist/helpers';
 const ITEM_LIST = [
   { name: 'Belt', price: '59' },
   { name: 'Blazer / Coat - Long', price: '399' },
@@ -24,12 +26,12 @@ const ItemList = () => {
   const [items, setItems] = useState(ITEM_LIST);
    const [searchQuery, setSearchQuery] = useState('');
 
-
+ 
   const renderItem = ({ item, index }) => (
     <View style={styles.item}>
-      <Text style={styles.itemNumber}>{index + 1}</Text>
+      <Text style={styles.itemNumber}>{index + 1}.</Text>
       <Text style={styles.itemName}>{item.name}</Text>
-      <Text style={styles.itemPrice}>{item.price}</Text>
+      <Text style={styles.itemPrice}>₹ {item.price}</Text>
     </View>
   );
 
@@ -42,25 +44,21 @@ const ItemList = () => {
 
   return (
     <View style={styles.container}>
-     <Text style={styles.title}>Price List</Text>
       <TextInput
             style={styles.searchBar}
             onChangeText={setSearchQuery}
             value={searchQuery}
-            placeholder="Search items"
+            placeholder=" Search items "
             placeholderTextColor="#999"
           />
-      <View style={styles.heading}>
-        <Text style={styles.headingText}>No.  Items</Text>
-        <Text style={[styles.headingText, styles.headingPrice]}>Price</Text>
-      </View>
+          
+      <Text style={styles.note}>Note*: The prices listed are dependent on your location </Text>
       <FlatList
         data={items}
         renderItem={renderItem}
         keyExtractor={(item) => item.name}
-        contentContainerStyle={{ paddingBottom: 80 }}
+        contentContainerStyle={{ paddingBottom: 80,paddingHorizontal:5 }}
       />
-      <Text>        </Text>
     </View>
   );
 };
@@ -68,7 +66,7 @@ const ItemList = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 22,
+    paddingTop: 10,
   },
   title: {
   fontWeight: 'bold',
@@ -80,13 +78,13 @@ const styles = StyleSheet.create({
 searchBar: {
     backgroundColor: '#fff',
     borderRadius: 5,
-    height:40,
+    height:42,
     margin:8,
     padding: 5,
     fontSize: 16,
     borderWidth: 1,
-    borderColor: '#ccc',
-    marginBottom:20,
+    borderColor: "#c7d2fe",
+    marginBottom:5,
   },
   heading: {
     flexDirection: 'row',
@@ -128,6 +126,12 @@ searchBar: {
     flex: 0.3,
     color:'#312e81',
   },
+  note:{
+    fontSize:10,
+    paddingLeft:10,
+    marginBottom:10,
+  
+  }
 });
 
 export default ItemList;
