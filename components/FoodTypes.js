@@ -11,12 +11,6 @@ const imageWidth = screenWidth / numColumns;
 const FoodTypes = () => {
 
   const navigation = useNavigation();
-
-  const handlePress = () => {
-    navigation.navigate('Service');
-  };
-
-
   const types = [
     {
       id: "0",
@@ -62,7 +56,7 @@ const FoodTypes = () => {
             {types.map((item, index) => (
 
               <View style={{ margin: 6, width: "21%", alignItems: "center" }} key={index}>
-                <Pressable android_ripple={{ color: "#ccc", radius: 28, }} onPress={handlePress} >
+                <Pressable android_ripple={{ color: "#ccc", radius: 28, }} onPress={() => navigation.navigate('Service', { serviceName:item.name})}>
                   <Image source={{ uri: item.image }} style={{ width: 50, height: 50, borderRadius: 5, transform: [{ scale: 1.1 }] }} />
                 </Pressable>
                 <Text style={{ marginTop: 6, textAlign: "center" }}>{item.name}</Text>

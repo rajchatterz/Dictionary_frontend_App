@@ -60,6 +60,13 @@ return (
  
   </View>
 </View>
+<View
+style={{
+borderBottomColor: 'grey',
+borderBottomWidth: 0.5,
+marginBottom:20
+}}
+/>
       <MapProgress key={order.id} data={[...order.data]} />
       </View>
     ))}
@@ -141,7 +148,7 @@ flex: 1,
 dateText: {
 fontSize: 13,
 marginBottom: 5,
-color:'grey'
+
 },
 statusText: {
 fontSize: 14,
@@ -190,10 +197,9 @@ color: '#888'
 },
 header: {
 flexDirection: 'row',
-backgroundColor: '#f0f0f0',
 padding: 10,
 borderRadius:5,
-marginBottom:20,
+
 },
 headerTitle: {
 fontWeight: 'bold',

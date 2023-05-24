@@ -3,20 +3,46 @@ import { StyleSheet, Text, View, TouchableOpacity ,TextInput,Button} from "react
 import CheckBox from 'expo-checkbox'
 import Pickup from "./pickup_datetime";
 import { Image } from 'react-native';
-import image from '../assets/delivery.png';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import image from '../../assets/delivery.png';
+import { NavigationContainer, useNavigation,useRoute } from '@react-navigation/native';
 
 const Stepper = () => {
+
+  const route = useRoute();
+  const serviceDetails = {
+    "Washing and Fold": {
+      title: "Washing and Fold",
+      subtitle: "1 day",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut euismod, quam at eleifend scelerisque, lectus eros blandit leo, non luctus quam nibh eu felis. Proin accumsan leo quis nisl tristique, sed congue nisi finibus. Praesent suscipit tincidunt eleifend. ",
+    },
+    "Washing": {
+      title: "Washing",
+      subtitle: "2-3 days",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut euismod, quam at eleifend scelerisque, lectus eros blandit leo, non luctus quam nibh eu felis. Proin accumsan leo quis nisl tristique, sed congue nisi finibus. Praesent suscipit tincidunt eleifend. ",
+    },
+    
+  };
+ // function getServiceDetails(serviceName) {
+   // return serviceDetails[serviceName];
+  //}
+  
+  const { serviceName } = "Washing";
+  //const { title, subtitle, description } = getServiceDetails(serviceName);
+  console.log(serviceName);
+
+
+  const navigation = useNavigation();
   const [step, setStep] = useState(1);
   const [confirmed, setConfirmed] = useState(false);
- 
-  const navigation = useNavigation();
-
   const [addressLine1, setAddressLine1] = useState('');
   const [addressLine2, setAddressLine2] = useState('');
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
   const [zipCode, setZipCode] = useState('');
+  const [addressLine1Error, setAddressLine1Error] = useState('');
+const [cityError, setCityError] = useState('');
+const [stateError, setStateError] = useState('');
+const [zipCodeError, setZipCodeError] = useState('');
 
   const handleAddressLine1Change = (text) => {
     setAddressLine1(text);
@@ -39,10 +65,41 @@ const Stepper = () => {
   };
 
   const handleSubmit = () => {
-    const address = `${addressLine1}, ${addressLine2}, ${city}, ${state} ${zipCode}`;
-    console.log('Submitted address:', address);
+    if (addressLine1 === '') {
+      setAddressLine1Error('Please enter your address');
+      console.log('error');
+    } else {
+      setAddressLine1Error('');
+     
+    }
 
+    
+  if (city=== '') {
+    setCityError('Please enter your city');
+  } else {
+    setCityError('');
+  }
+
+  if (state=== '') {
+    setStateError('Please enter your state');
+  } else {
+    setStateError('');
+  }
+
+  if (zipCode=== '') {
+    setZipCodeError('Please enter your zip code');
+  } else {
+    setZipCodeError('');
+  }
+
+  if (addressLine1!=''&& city!='' && state!='' && zipCode!='' ) {
+    onNext();
+    console.log('Form submitted');
+  }
+  
+   
   };
+ 
 
   const onNext = () => {
     if (step === 4) {
@@ -57,7 +114,7 @@ const Stepper = () => {
   }
 
   const handleButtonPress = () => {
-   onNext();
+   
     handleSubmit();
   
   };
@@ -129,31 +186,21 @@ const Stepper = () => {
         {step === 1 && (
           <><View style={styles.box}>
             <View style={styles.dry}>
-              <Text style={styles.title}>Dry Cleaning</Text>
-              <Text style={styles.subtitle}>3-5 days</Text>
+              <Text style={styles.title}>Drying</Text>
+              <Text style={styles.subtitle}>1</Text>
             </View>
-            <Text style={styles.price}>29/PC onwards</Text>
 
             <View style={styles.bulletPoints}>
+            
               <View style={styles.bulletPoint}>
-                <View style={styles.bullet} />
-                <Text style={styles.bulletPointText}>Formal Wear , Ornament</Text>
-              </View>
-              <View style={styles.bulletPoint}>
-                <View style={styles.bullet} />
-                <Text style={styles.bulletPointText}>Blanket , Quilts , Curtains</Text>
+                <Text style={styles.bulletPointText}>At our company, we offer top-quality dry cleaning services for delicate and sensitive fabrics. Our experienced professionals use advanced techniques and eco-friendly solvents to remove dirt and stains, leaving your clothes looking fresh and new. We also provide washing and ironing services to ensure that your everyday clothes are clean, crisp, and ready to wear. Let us take care of your laundry needs, so you can focus on the more important things in life.</Text>
                 <View style={styles.checkboxContainer}>
                   <CheckBox
-                    disabled={false}
+                    disabled={true}
                     style={{ height: 30, width: 30 }}
                     value={toggleCheckBox}
                     onValueChange={(newValue) => { setToggleCheckBox(newValue); console.log(newValue); } } />
                 </View>
-              </View>
-
-              <View style={styles.bulletPoint}>
-                <View style={styles.bullet} />
-                <Text style={styles.bulletPointText}>Bags , Shoes , Soft Toys</Text>
               </View>
             </View>
           </View><TouchableOpacity
@@ -181,11 +228,14 @@ const Stepper = () => {
           <View>
        <Text style={styles.confirmationText}>Please enter your address </Text>
       <TextInput
-        style={{ height: 50,width:350, borderColor: 'gray', borderWidth: 1 , marginTop:20,marginBottom:20,padding:10,borderRadius:5}}
+        style={{ height: 50,width:350, borderColor: 'gray', borderWidth: 1 , marginTop:20,marginBottom:10,padding:10,borderRadius:5}}
         onChangeText={handleAddressLine1Change}
         value={addressLine1}
         placeholder="Flat Number / Society name"
       />
+      {addressLine1Error ? (
+  <Text style={styles.errorText}>{addressLine1Error}</Text>
+) : null}
       <TextInput
         style={{ height: 50, borderColor: 'gray', borderWidth: 1 ,marginBottom:20 ,padding:10,borderRadius:5}}
         onChangeText={handleAddressLine2Change}
@@ -193,24 +243,32 @@ const Stepper = () => {
         placeholder="Nearby"
       />
       <TextInput
-        style={{ height: 50, borderColor: 'gray', borderWidth: 1,marginBottom:20 ,padding:10,borderRadius:5}}
+        style={{ height: 50, borderColor: 'gray', borderWidth: 1,marginBottom:10 ,padding:10,borderRadius:5}}
         onChangeText={handleCityChange}
         value={city}
         placeholder="City"
       />
+      {cityError ? (
+  <Text style={styles.errorText}>{cityError}</Text>
+) : null}
       <TextInput
-        style={{ height: 50, borderColor: 'gray', borderWidth: 1,marginBottom:20 ,padding:10,borderRadius:5}}
+        style={{ height: 50, borderColor: 'gray', borderWidth: 1,marginBottom:10 ,padding:10,borderRadius:5}}
         onChangeText={handleStateChange}
         value={state}
         placeholder="State"
       />
+      {stateError ? (
+  <Text style={styles.errorText}>{stateError}</Text>
+) : null}
       <TextInput
-        style={{ height: 50, borderColor: 'gray', borderWidth: 1,marginBottom:20 ,padding:10,borderRadius:5}}
+        style={{ height: 50, borderColor: 'gray', borderWidth: 1,marginBottom:10 ,padding:10,borderRadius:5}}
         onChangeText={handleZipCodeChange}
         value={zipCode}
         placeholder="Zip Code"
       />
-    
+    {zipCodeError ? (
+  <Text style={styles.errorText}>{zipCodeError}</Text>
+) : null}
           <TouchableOpacity
     style={styles.button}
     onPress={handleButtonPress}
@@ -245,6 +303,10 @@ const Stepper = () => {
 const styles = StyleSheet.create({
   confirmation: {
     paddingHorizontal: 30,
+  },
+  errorText: {
+    color: 'red',
+    marginBottom: 10,
   },
   confirmationText: {
     fontSize: 17,

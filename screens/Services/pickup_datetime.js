@@ -5,7 +5,9 @@ import { useNavigation } from '@react-navigation/native';
 import Stepper from './service_order';
 
 const Pickup = ({}) => {
-  const [chosenDate, setChosenDate] = useState(new Date());
+  const tomorrow = new Date();
+tomorrow.setDate(tomorrow.getDate() + 1);
+  const [chosenDate, setChosenDate] = useState(tomorrow);
   const [chosenTime, setChosenTime] = useState(0);
 
 
@@ -22,8 +24,6 @@ const Pickup = ({}) => {
   };
 
   const timeSlots = [
-    '9 AM - 10 AM',
-    '10 AM - 11 AM',
     '11 AM - 1 PM',
     '1 PM - 3 PM',
     '3 PM - 5 PM',

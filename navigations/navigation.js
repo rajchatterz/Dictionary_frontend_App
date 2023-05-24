@@ -22,7 +22,7 @@ import AboutUs from '../screens/Profile/AboutUs';
 import Profile from '../screens/ProfileScreen'
 import UserFeedback from '../screens/Profile/UserFeedback';
 import ReportDamage from '../screens/Profile/ReportDamage';
-import Stepper from '../screens/service_order';
+import Stepper from '../screens/Services/service_order';
 
 import AuthContextProvider, { AuthContext } from '../store/auth-context';
 
