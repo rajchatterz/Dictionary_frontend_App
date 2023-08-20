@@ -1,6 +1,6 @@
 import React from 'react';
 import { createContext, useEffect, useState, useContext } from 'react';
-import { Button, View, Text, TouchableOpacity , Pressable  } from 'react-native'
+import { Button, View, Text, TouchableOpacity, Pressable } from 'react-native'
 import { StatusBar } from 'expo-status-bar';
 
 
@@ -144,10 +144,10 @@ function ReportDamageStack() {
     )
 }
 
-function ServiceStack(){
+function ServiceStack() {
     return (
         <Stack.Navigator>
-    < Stack.Screen name="Service" component={Stepper}
+            < Stack.Screen name="Service" component={Stepper}
                 options={{
                     title: 'Service',
                     headerTitleStyle: {
@@ -156,52 +156,79 @@ function ServiceStack(){
                     headerStyle: {
                         backgroundColor: GlobalStyles.colors.primary800,
                     },
-                   
+
                 }} />
-             </Stack.Navigator>
+        </Stack.Navigator>
     )
 }
 //Authenticated stack
+
+
 function BottomTabNavigationfun() {
     const navigation = useNavigation();
     const college = "COEP Technological University"
 
+
     return (
-        
-        <BottomTabs.Navigator  screenOptions={{
+
+        <BottomTabs.Navigator screenOptions={{
             headerStyle: { backgroundColor: GlobalStyles.colors.primary800 },
             headerTintColor: 'white',
             tabBarActiveTintColor: GlobalStyles.colors.primary700,
-            tabBarStyle: { position: 'absolute' , paddingBottom:"2%" , paddingTop:"1%" ,height:"7%" },
-            
+            tabBarStyle: {
+                position: 'absolute',
+                bottom: 20, // Adjust this value to your preferred distance from the bottom
+                paddingBottom: "5%",
+                paddingTop: "0.5%",
+                height: "9%",
+                bottom: 0, // Align it to the bottom
+                left: 0,
+                right: 0,
+                // Add shadow styles here
+                ...Platform.select({
+                    ios: {
+                        shadowColor: 'rgba(0, 0, 0, 0.24)',
+                        shadowOffset: {
+                            width: 0,
+                            height: -2,
+                        },
+                        shadowOpacity: 0.8,
+                        shadowRadius: 4,
+                    },
+                    android: {
+                        elevation: 8,
+                    },
+                }),
+            },
+
             tabBarIndicatorStyle: {
                 backgroundColor: GlobalStyles.colors.primary700,
                 height: 2,
-              },
+            },
             tabBarLabelStyle: { fontSize: 13 },
             tabBarIconStyle: { color: 'blue' },
-            
+
         }}
-         >
+        >
 
             <BottomTabs.Screen
                 name="HomeScreen"
                 component={HomeScreen}
-                
+
             />
 
             < BottomTabs.Screen name="Hub" component={Cloud}
                 options={{
                     title: 'Price List',
                     tabBarLable: "Price List",
-                    tabBarLabelStyle : {
-                        fontSize:12,
-                        fontWeight:"600"
+                    tabBarLabelStyle: {
+                        fontSize: 12,
+                        fontWeight: "600"
                     },
-                    tabBarHideOnKeyboard : true,
-                    tabBarIcon: ({focused,  color, size }) => (
-                      
-                        <Ionicons  name = {focused ? 'pricetags' : 'pricetags-outline'}  size={size} color={color} />
+                    tabBarHideOnKeyboard: true,
+                    tabBarIcon: ({ focused, color, size }) => (
+
+                        <Ionicons name={focused ? 'pricetags' : 'pricetags-outline'} size={size} color={color} />
 
                     ),
                 }}
@@ -211,13 +238,13 @@ function BottomTabNavigationfun() {
                 options={{
                     title: 'Order',
                     tabBarLable: "Order",
-                    tabBarLabelStyle : {
-                        fontSize:12,
-                        fontWeight:"600"
+                    tabBarLabelStyle: {
+                        fontSize: 12,
+                        fontWeight: "600"
                     },
-                    tabBarHideOnKeyboard : true,
-                    tabBarIcon: ({focused ,  color, size }) => (
-<MaterialCommunityIcons name= { focused ? "truck-delivery":"truck-check-outline"} size={size + 2} color={color} />
+                    tabBarHideOnKeyboard: true,
+                    tabBarIcon: ({ focused, color, size }) => (
+                        <MaterialCommunityIcons name={focused ? "truck-delivery" : "truck-check-outline"} size={size + 2} color={color} />
                     ),
                 }}
             />
@@ -229,16 +256,16 @@ function BottomTabNavigationfun() {
                 options={{
                     title: 'Profile',
                     tabBarLable: "Profile",
-                    tabBarLabelStyle : {
-                        fontSize:12,
-                        fontWeight:"600"
+                    tabBarLabelStyle: {
+                        fontSize: 12,
+                        fontWeight: "600"
                     },
-                    tabBarHideOnKeyboard : true,
-                    tabBarIcon: ({focused ,  color, size }) => (
-                    
-                     <FontAwesome name={focused ? "user" : 'user-o'} size={size} color={color} />
+                    tabBarHideOnKeyboard: true,
+                    tabBarIcon: ({ focused, color, size }) => (
 
-                       
+                        <FontAwesome name={focused ? "user" : 'user-o'} size={size} color={color} />
+
+
                     ),
 
                 }}

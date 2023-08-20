@@ -24,9 +24,26 @@ function ProfileScreen() {
   const percentage = (apiData.numerator / apiData.denominator) * 100;
 
 
-  const [isToggleOn1, setIsToggleOn1] = useState(false);
-  const [isToggleOn2, setIsToggleOn2] = useState(false);
-  const [isToggleOn3, setIsToggleOn3] = useState(false);
+  //user info from server
+  const userInfo = [
+    { icon: "phone-portrait-outline", label: "Phone", value: "+91 7798121777", badge: "Verified" },
+    { icon: "mail-open-outline", label: "Email", value: "rohitkale@gmail.com" },
+    { icon: "location-outline", label: "Location", value: "Pune, Maharashtra" },
+    { icon: "calendar-outline", label: "Date of Birth", value: "28/03/1995" },
+    { icon: "person-outline", label: "Gender", value: "Male" }
+   ];
+
+  notificationInfo = [
+    { icon: "logo-whatsapp", label: "Whatsapp Notifications", value: true }, // Replace with actual value from server
+    { icon: "mail-unread-outline", label: "Email Notifications", value: true }, // Replace with actual value from server
+    { icon: "megaphone-outline", label: "Push Notifications", value: true }, // Replace with actual value from server
+  
+
+  ]
+
+  const [isToggleOn1, setIsToggleOn1] = useState(notificationInfo[0].value);
+  const [isToggleOn2, setIsToggleOn2] = useState(notificationInfo[1].value);
+  const [isToggleOn3, setIsToggleOn3] = useState(notificationInfo[2].value);
 
   const handleToggleChange1 = () => {
     setIsToggleOn1(!isToggleOn1);
@@ -59,7 +76,7 @@ function ProfileScreen() {
   }
 
   const contentSectionON = (
-    <Box style={{margin:"1%"}}>
+    <Box style={{ margin: "1%" }}>
       <HStack alignItems="flex-start">
         <Ionicons name="notifications-outline" size={20} color="black" style={{ marginRight: 7 }} />
         <Text style={{ marginBottom: 15, textAlign: 'left', alignContent: 'flex-start' }}>If you turn off notifications, you might miss important updates, news, or events related to the app or service</Text>
@@ -77,7 +94,7 @@ function ProfileScreen() {
   );
 
   const contentSectionOFF = (
-    <Box style={{margin:"1%"}}>
+    <Box style={{ margin: "1%" }}>
       <HStack alignItems="flex-start">
         <Ionicons name="notifications-outline" size={20} color="black" style={{ marginRight: 7 }} />
         <Text style={{ marginBottom: 15, textAlign: 'left', alignContent: 'flex-start' }}>Select ON to recieve notifications instantly</Text>
@@ -103,6 +120,9 @@ function ProfileScreen() {
     console.log("logging you out..")
     await authCtx.logout()
   }
+
+  
+
 
 
   const Stack = createStackNavigator();
@@ -202,39 +222,13 @@ function ProfileScreen() {
 
                     <VStack>
                       <View style={styles.container}>
-
-                        <View style={{ flexDirection: 'row', alignItems: 'center', padding: "2%" }}>
-                          <Ionicons name="phone-portrait-outline" size={24} color={GlobalStyles.colors.thridFond} />
-                          <Text style={styles.title}>{"  "}+91 7798121777</Text>
-                          <Badge style={{ marginStart: "2%" }} colorScheme="success" alignSelf="center" borderRadius="15" variant="solid">Verified</Badge>
-
-                        </View>
-
-                        <View style={{ flexDirection: 'row', alignItems: 'center', padding: "2%" }}>
-                          <Ionicons name="mail-open-outline" size={24} color={GlobalStyles.colors.thridFond} />
-                          <Text style={styles.title}>{"  "}rohitkale@gmail.com</Text>
-
-                        </View>
-
-
-                        <View style={{ flexDirection: 'row', alignItems: 'center', padding: "2%" }}>
-                          <Ionicons name="location-outline" size={24} color={GlobalStyles.colors.thridFond} />
-                          <Text style={styles.title}>{"  "}Pune , Maharashtra</Text>
-
-                        </View>
-
-                        <View style={{ flexDirection: 'row', alignItems: 'center', padding: "2%" }}>
-                          <Ionicons name="calendar-outline" size={24} color={GlobalStyles.colors.thridFond} />
-                          <Text style={styles.title}>{"  "}28/03/1995</Text>
-
-                        </View>
-
-                        <View style={{ flexDirection: 'row', alignItems: 'center', padding: "2%" }}>
-                          <Ionicons name="person-outline" size={24} color={GlobalStyles.colors.thridFond} />
-                          <Text style={styles.title}>{"  "}Male</Text>
-
-                        </View>
-
+                        {userInfo.map((item, index) => (
+                          <View key={index} style={{ flexDirection: 'row', alignItems: 'center', padding: "2%" }}>
+                            <Ionicons name={item.icon} size={24} color={GlobalStyles.colors.thridFond} />
+                            <Text style={styles.title}>{"  "}{item.value}</Text>
+                            {item.badge && <Badge style={{ marginStart: "2%" }} colorScheme="success" alignSelf="center" borderRadius="15" variant="solid">{item.badge}</Badge>}
+                          </View>
+                        ))}
                       </View>
                     </VStack>
 
@@ -304,7 +298,7 @@ function ProfileScreen() {
 
                             <Ionicons name="mail-unread-outline" size={24} color={GlobalStyles.colors.thridFond} />
                             <Text style={styles.title}>{"  "}Email</Text>
-                            <BottomScreenDrawer isVisible={isBottomDrawerVisible2} content={isToggleOn2 ? contentSectionOFF : contentSectionON} onClose={handleCloseBottomDrawer2} buttonText={isToggleOn2 ? "Switch OFF Notifications" : "Switch ON Notifications"} handleClick={handleToggleChange2} heading={"Email Notifications!"}/>
+                            <BottomScreenDrawer isVisible={isBottomDrawerVisible2} content={isToggleOn2 ? contentSectionOFF : contentSectionON} onClose={handleCloseBottomDrawer2} buttonText={isToggleOn2 ? "Switch OFF Notifications" : "Switch ON Notifications"} handleClick={handleToggleChange2} heading={"Email Notifications!"} />
 
                             <View style={{ flex: 1, alignItems: 'flex-end' }}>
                               <Text style={{ paddingBottom: "1%", color: GlobalStyles.colors.thridFond }}>{isToggleOn2 ? "  ON" : "  OFF"}</Text>
@@ -331,7 +325,7 @@ function ProfileScreen() {
                           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Ionicons name="megaphone-outline" size={24} color={GlobalStyles.colors.thridFond} />
                             <Text style={styles.title}>{"  "}Push Notifications</Text>
-                            <BottomScreenDrawer isVisible={isBottomDrawerVisible3} content={isToggleOn3 ? contentSectionOFF : contentSectionON} onClose={handleCloseBottomDrawer3} buttonText={isToggleOn3 ? "Switch OFF Notifications" : "Switch ON Notifications"} handleClick={handleToggleChange3}  heading={"Push Notifications!"}/>
+                            <BottomScreenDrawer isVisible={isBottomDrawerVisible3} content={isToggleOn3 ? contentSectionOFF : contentSectionON} onClose={handleCloseBottomDrawer3} buttonText={isToggleOn3 ? "Switch OFF Notifications" : "Switch ON Notifications"} handleClick={handleToggleChange3} heading={"Push Notifications!"} />
 
                             <View style={{ flex: 1, alignItems: 'flex-end' }}>
                               <Text style={{ paddingBottom: "1%", color: GlobalStyles.colors.thridFond }}>{isToggleOn3 ? "  ON" : "  OFF"}</Text>
