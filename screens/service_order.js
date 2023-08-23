@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity ,TextInput,Button} from "react-native";
 import CheckBox from 'expo-checkbox'
-import Pickup from "./pickup_datetime";
+import Pickup from "./SearchResultScreen";
 import { Image } from 'react-native';
 import image from '../assets/delivery.png';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';

@@ -39,6 +39,8 @@
     "react-native-image-slider-box": "^2.0.7",
     "react-native-linear-gradient": "^2.6.2",
     "react-native-paper": "^4.12.1",
+    "react-native-swipe": "^1.0.0",
+    "react-native-swiper": "^1.6.0",
     "react-native-vector-icons": "^9.1.0",
     "react-native-web": "~0.18.10",
     "webpack-dev-server": "~3.11.0"

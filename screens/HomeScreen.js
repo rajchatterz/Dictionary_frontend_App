@@ -1,167 +1,309 @@
-import {
-    StyleSheet,
-    Text,
-    View,
-    Modal,
-    SafeAreaView,
-    TextInput,
-    TouchableOpacity,
-    TouchableHighlight,
-    ScrollView,
-    Dimensions,
-    Pressable,
-} from "react-native";
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, FlatList, StyleSheet , ActivityIndicator } from 'react-native';
+import { Ionicons } from '@expo/vector-icons'; // Expo's icon component
+import SlideAlert from '../components/SlideAlert';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 
-import { FontAwesome } from '@expo/vector-icons';
-
-
-import React, { useState, useEffect, useLayoutEffect } from 'react';
-//location
-import * as Location from 'expo-location';
-import { ActivityIndicator } from "react-native";
-
-import Carousel from "../components/Carousel";
-import FoodTypes from "../components/FoodTypes";
-import QuickFood from "../components/QuickFood";
-import PatnerServices from "../components/Patners_services";
-import { Ionicons } from "@expo/vector-icons";
-import hotels from "../data/hotels";
-import MenuItem from "../components/MenuItem";
-import QuestionPaper from "../components/QuestionPapers"
-import BottomSheet from "../components/Bottom_sheet_drawer"
-
-import Geocoder from 'react-native-geocoding';
-import { MaterialIcons } from '@expo/vector-icons';
-const HomeScreen = ({ navigation }) => {
-    Geocoder.init("AIzaSyBuxI-ect9yK8dLwiwT2bLsIpPfq2j8Ar0");
-    const data = hotels;
-    const [location, setLocation] = useState("Loading...");
-    const [errorMsg, setErrorMsg] = useState(null);
-
-
-    // We need to get the height of the phone and use it relatively, 
-    // This is because height of phones vary
-    const windowHeight = Dimensions.get('window').height;
-
-    // This state would determine if the drawer sheet is visible or not
-    const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
-
-    // Function to open the bottom sheet 
-    const handleOpenBottomSheet = () => {
-        setIsBottomSheetOpen(true);
-    };
-
-    // Function to close the bottom sheet
-    const handleCloseBottomSheet = () => {
-        setIsBottomSheetOpen(false);
-    };
-
-
-    //to style and configure header title and all
-    useLayoutEffect(() => {
-        const college = "COEP Technological University"
-        navigation.setOptions({
-            title: 'Home',
-            headerTitle: "",
-            tabBarLabelStyle: {
-                fontSize: 12,
-                fontWeight: "600"
-            },
-            tabBarLable: "Feed",
-            headerLeft: () => (
-                <>
-                    <TouchableOpacity onPress={() => { }}>
-                        <View >
-
-                            <Text style={{ fontSize: 18, marginLeft: 15, color: "white", fontWeight: 'bold' }}>Address</Text>
-                            <View style={{ flexDirection: "row" }}>
-                                <Ionicons onPress={() => console.log("Location")} style={{ marginLeft: 15 }} name="location-outline" size={14} color="white" />
-                                <Text numberOfLines={1} ellipsizeMode='tail' style={{ color: "white", fontSize: 12 }}>{location.slice(0, 30)}</Text>
-                            </View>
-                        </View>
-                    </TouchableOpacity>
-                </>
-            ),
-            headerRight: () => (
-                <>
-
-                    <View style={{ flexDirection: "row" }}>
-
-                        <Ionicons onPress={() => navigation.navigate('Help')} style={{ marginRight: 15 }} name="help-circle" size={26} color="white" />
-
-                        <Ionicons onPress={() => navigation.navigate('Notification')} style={{ marginRight: 15 }} name="notifications" size={26} color="white" />
-
-                    </View>
+const predefinedWordList = [
+  "Lion",
+  "Elephant",
+  "Tiger",
+  "Giraffe",
+  "Zebra",
+  "Rhinoceros",
+  "Cheetah",
+  "Hippopotamus",
+  "Gorilla",
+  "Kangaroo",
+  "Koala",
+  "Panda",
+  "Penguin",
+  "Polar Bear",
+  "Grizzly Bear",
+  "Chimpanzee",
+  "Dolphin",
+  "Whale",
+  "Shark",
+  "Octopus",
+  "Crocodile",
+  "Alligator",
+  "Snake",
+  "Lizard",
+  "Frog",
+  "Turtle",
+  "Owl",
+  "Eagle",
+  "Falcon",
+  "Hawk",
+  "Parrot",
+  "Peacock",
+  "Sparrow",
+  "Flamingo",
+  "Pigeon",
+  "Butterfly",
+  "Bee",
+  "Ant",
+  "Ladybug",
+  "Spider",
+  "Snail",
+  "Lobster",
+  "Crab",
+  "Jellyfish",
+  "Starfish",
+  "Seahorse",
+  "Clownfish",
+  "Salmon",
+];
 
 
-                </>
-            ),
-            tabBarIcon: ({ color, size }) => (
-                <MaterialIcons name="local-laundry-service" size={size} color={color} />
-            ),
-        });
-    }, [navigation, location]);
+const HomeScreen = () => {
+  const navigation = useNavigation();
+  const [searchTerm, setSearchTerm] = useState('');
+  const [wordData, setWordData] = useState(null);
+  const [suggestions, setSuggestions] = useState([]);
+  const [suggestionsVisible, setSuggestionsVisible] = useState(false); // New state for managing suggestion card visibility
+  const [loading, setLoading] = useState(false); // New state for loading indicator
+  const [slideAlertMessage, setSlideAlertMessage] = useState(''); // Add this line
 
-    useEffect(() => {
-        (async () => {
 
-            let { status } = await Location.requestForegroundPermissionsAsync();
-            if (status !== 'granted') {
-                setErrorMsg('Permission to access location was denied');
-                return;
-            }
+  const handleSearch = async() => {
+    try {
+      setLoading(true);
+      const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${searchTerm}`);
+      const data = await response.json();
 
-            let location = await Location.getCurrentPositionAsync({});
-
-            Geocoder.from(location.coords.latitude, location.coords.longitude)
-                .then((json) => {
-                    const addressComponent = json.results[0].formatted_address;
-                    console.log(addressComponent);
-                    setLocation(addressComponent)
-                })
-                .catch((error) => console.warn(error));
-
-        })();
-    }, []);
-
-    let text = 'Waiting..';
-    if (errorMsg) {
-        text = errorMsg;
-    } else if (location) {
-        text = JSON.stringify(location);
-        console.log(text)
+      if (data && Array.isArray(data) && data.length > 0) {
+        navigation.navigate('SearchResults', { searchResults: data });
+      } else {
+        // Show the slide-in and slide-up alert
+        console.log("Word not found")
+        setSlideAlertMessage('Sorry, we couldn\'t find definitions for the word you were looking for.');
+      }
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    } finally {
+      setLoading(false);
     }
 
-    return (
+  };
 
-        <View style={{ backgroundColor: "white", height: "100%" }}>
-            {location === "Loading..." ? (
-                <ActivityIndicator size="large" color="blue" style={{ flex: 1, justifyContent: "center", alignItems: "center" }} />
-            ) : (
-                <ScrollView style={{ marginTop: 10 }}>
+  const handleSuggestionSelect = (selectedSuggestion) => {
+    console.log(selectedSuggestion)
+    setSearchTerm(selectedSuggestion);
+    setSuggestions([]);
+    setSuggestionsVisible(false);
+  };
 
-                    {/* Image slider Component */}
-                    <Carousel />
+  const handleInputChange = (text) => {
+    setSearchTerm(text);
 
-                    {/* Food Item Types */}
-                    <FoodTypes />
+    if (text.length >= 2) {
+      // Filter suggestions based on the predefined word list
+      const filteredSuggestions = predefinedWordList.filter(
+        (word) => word.toLowerCase().includes(text.toLowerCase())
+      );
 
-                    {/* Quick Food Component */}
-                    <QuickFood />
+      setSuggestions(filteredSuggestions);
+      setSuggestionsVisible(true);
+    } else {
+      setSuggestions([]); // Clear suggestions if less than 2 letters
+      setSuggestionsVisible(false);
+    }
+  };
 
-                    {/* Quick Food Component */}
-                    <PatnerServices />
 
 
+  return (
+    <View style={styles.container}>
+      <View style={styles.blueBackground} />
 
-                </ScrollView>
+      <View style={styles.searchContainer}>
+        <TextInput
+          style={styles.input}
+          placeholder="Search for a word"
+          value={searchTerm}
+          onChangeText={handleInputChange}
+          onFocus={() => setSuggestionsVisible(true)} // Show suggestions on focus
+          onBlur={() => setSuggestionsVisible(false)} // Hide suggestions on blur
+        />
+        <Ionicons
+          name="search"
+          size={24}
+          color="#007AFF"
+          onPress={handleSearch}
+        />
+        
+      </View>
+
+      {/*
+  Rendering the list of suggestions with updated styling
+*/}
+      {suggestionsVisible && suggestions.length > 0 && (
+        <View style={styles.suggestionsContainer}>
+          <Text style={styles.suggestionsTitle}>Suggestions:</Text>
+          <FlatList
+            data={suggestions}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                onPress={() => handleSuggestionSelect(item)} // Handle suggestion selection
+                style={styles.suggestionItemContainer} // Apply the suggestion item style
+              >
+                <Text style={styles.suggestionItemText}>{item}</Text>
+              </TouchableOpacity>
             )}
+            keyExtractor={(item) => item}
+            contentContainerStyle={styles.suggestionsList}
+          />
         </View>
+      )}
 
 
+      {wordData && (
+        <View style={styles.wordDetailsContainer}>
+          <Text style={styles.wordTitle}>{wordData[0].word}</Text>
+          <Text style={styles.phonetic}>{wordData[0].phonetic}</Text>
+          <FlatList
+            data={wordData[0].meanings}
+            renderItem={({ item }) => (
+              <View style={styles.meaningContainer}>
+                <Text style={styles.partOfSpeech}>{item.partOfSpeech}</Text>
+                {item.definitions.map((definition, index) => (
+                  <Text key={index} style={styles.definition}>
+                    {definition.definition}
+                  </Text>
+                ))}
+              </View>
+            )}
+            keyExtractor={(item, index) => index.toString()}
+            contentContainerStyle={styles.meaningsList}
+          />
+        </View>
+      )}
+     {loading && (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#007AFF" />
+      </View>
+    )}
+ {slideAlertMessage !== '' && (
+      <SlideAlert message={slideAlertMessage} onSlideUpComplete={() => setSlideAlertMessage('')}/>
+      
+    )}
+  
 
-    );
+      {/* ... Rest of your code ... */}
+    </View>
+  );
 };
 
-export default HomeScreen;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    paddingHorizontal: 20,
+    paddingTop: 50,
+  },
+  blueBackground: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    height: '20%', // Cover 20% of the screen
+    backgroundColor: '#2E86C1', // Sky blue color
+    borderBottomRightRadius: 20, // Rounded corners at the bottom
+    borderBottomLeftRadius: 20,
+  },
+  searchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: '8%', // Add some space below the blue background
+    backgroundColor: '#f0f0f0',
+    borderRadius: 10,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+  },
+  input: {
+    flex: 1,
+    paddingVertical: 8,
+    fontSize: 16,
+    color: '#333',
+  },
+  suggestionsContainer: {
+    marginTop: 10,
+    backgroundColor: '#ffffff',
+    borderRadius: 10,
+    padding: 10,
+    shadowColor: '#000',
+    shadowOpacity: 0.2,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 5,
+    elevation: 3,
+  },
+  suggestionsTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  suggestionsList: {
+    marginTop: 5,
+  },
+  suggestionItemContainer: {
+    borderBottomWidth: 1, // Add a line between each suggestion
+    borderBottomColor: '#ccc',
+    paddingVertical: 8,
+  },
+  suggestionItemText: {
+    fontSize: 18, // Increase the font size
+    color: '#333',
+  },
+  wordDetailsContainer: {
+    marginTop: 20,
+    backgroundColor: '#ffffff',
+    borderRadius: 10,
+    padding: 10,
+    shadowColor: '#000',
+    shadowOpacity: 0.2,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 5,
+    elevation: 3,
+  },
+  wordTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  phonetic: {
+    fontSize: 16,
+    color: '#555',
+  },
+  meaningContainer: {
+    marginBottom: 10,
+  },
+  partOfSpeech: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 5,
+  },
+  definition: {
+    fontSize: 14,
+    color: '#333',
+  },
+  contentContainer: {
+    flex: 1,
+    paddingHorizontal: 20,
+    marginTop: '20%',
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    zIndex: 1,
+  }
+});
 
+export default HomeScreen;

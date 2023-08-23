@@ -1,137 +1,91 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, FlatList, TextInput } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
-import { color } from 'react-native-elements/dist/helpers';
-const ITEM_LIST = [
-  { name: 'Belt', price: '59' },
-  { name: 'Blazer / Coat - Long', price: '399' },
-  { name: 'Blazer / Coat - Short', price: '299' },
-  { name: 'Boots Leather', price: '599' },
-  { name: 'Cap (Casual / Woolen)', price: '99' },
-  { name: 'Combo - Shirt and Pant', price: '149' },
-  { name: 'Dhoti Heavy', price: '169' },
-  { name: 'Dhoti Normal', price: '109' },
-  { name: 'Dhoti / Lungi (Silk)', price: '119' },
-  { name: 'Formal and Casual Trousers / Pants', price: '109' },
-  { name: 'Gloves(Leather)', price: '369' },
-  { name: 'Gloves(Woolen)', price: '69' },
-  { name: 'Handkerchief', price: '29' },
-  { name: 'Hats', price: '129' },
-  { name: 'Indo Western', price: '696' },
- 
- 
+import React from 'react';
+import { View, ScrollView, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import Swiper from 'react-native-swiper';
+import PatnerServices from "../components/Patners_services";
+
+const dummyAds = [
+  { id: 1, imageUrl: 'https://d3nn873nee648n.cloudfront.net/900x600/20301/300-ZM1040495.jpg' },
+  { id: 2, imageUrl: 'https://d3nn873nee648n.cloudfront.net/900x600/100233/300-ZM1023963.jpg' },
+  { id: 3, imageUrl: 'https://d3nn873nee648n.cloudfront.net/900x600/100087/300-ZM1027765.jpg' },
+  // Add more ad images
 ];
 
-const ItemList = () => {
-  const [items, setItems] = useState(ITEM_LIST);
-   const [searchQuery, setSearchQuery] = useState('');
+const quizGameImages = [
+  { id: 1, imageUrl: 'url-to-quiz-game-image-1' },
+  { id: 2, imageUrl: 'url-to-quiz-game-image-2' },
+  { id: 3, imageUrl: 'url-to-quiz-game-image-3' },
+  { id: 4, imageUrl: 'url-to-quiz-game-image-4' },
+];
 
- 
-  const renderItem = ({ item, index }) => (
-    <View style={styles.item}>
-      <Text style={styles.itemNumber}>{index + 1}.</Text>
-      <Text style={styles.itemName}>{item.name}</Text>
-      <Text style={styles.itemPrice}>₹ {item.price}</Text>
-    </View>
-  );
-
-   useEffect(() => {
-    const filteredItems = ITEM_LIST.filter((item) =>
-      item.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-    setItems(filteredItems);
-  }, [searchQuery]);
-
+const HomeScreen = () => {
   return (
-    <View style={styles.container}>
-      <TextInput
-            style={styles.searchBar}
-            onChangeText={setSearchQuery}
-            value={searchQuery}
-            placeholder=" Search items "
-            placeholderTextColor="#999"
-          />
-          
-      <Text style={styles.note}>Note*: The prices listed are dependent on your location </Text>
-      <FlatList
-        data={items}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.name}
-        contentContainerStyle={{ paddingBottom: 80,paddingHorizontal:5 }}
-      />
-    </View>
+    <ScrollView style={styles.container}>
+      <Swiper style={styles.slider} autoplay>
+        {dummyAds.map((ad) => (
+          <View key={ad.id} style={styles.slide}>
+            <Image source={{ uri: ad.imageUrl }} style={styles.adImage} />
+          </View>
+        ))}
+      </Swiper>
+
+       {/* Quick Food Component */}
+       <PatnerServices />
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 10,
+    backgroundColor: '#f9f9f9',
   },
-  title: {
-  fontWeight: 'bold',
-  fontSize: 21,
-  textAlign: 'center',
-  marginBottom: 10,
-  color:'#312e81'
-},
-searchBar: {
-    backgroundColor: '#fff',
-    borderRadius: 5,
-    height:42,
-    margin:8,
-    padding: 5,
-    fontSize: 16,
-    borderWidth: 1,
-    borderColor: "#c7d2fe",
-    marginBottom:5,
+  slider: {
+    height: 200,
   },
-  heading: {
+  slide: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  adImage: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
+  },
+  gamesSection: {
+    paddingVertical: 20,
+    paddingHorizontal: 15,
+  },
+  sectionTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 15,
+  },
+  imagesRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    backgroundColor: '#eee',
-    borderBottomWidth: 1,
-    borderBottomColor: '#ddd',
-    borderTopWidth:1,
-    borderTopColor:'#ddd',
+    marginTop: 10,
   },
-  headingText: {
-    fontWeight: 'bold',
-    fontSize: 15,
-  },
-  headingPrice: {
-    textAlign: 'right',
-  },
-  item: {
-    padding: 10,
-    fontSize: 18,
-    flexDirection: 'row',
-    alignItems: 'center',
-   
-  },
-  itemNumber: {
-    fontWeight: 'bold',
-    marginRight: 10,
-    width: 25,
-    textAlign: 'center',
-  },
-  itemName: {
+  imageContainer: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 10,
+    borderRadius: 10,
+    backgroundColor: '#ffffff',
+    marginHorizontal: 5,
+    shadowColor: '#000',
+    shadowOpacity: 0.2,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 5,
+    elevation: 3, // Android shadow
   },
-  itemPrice: {
-    fontWeight: 'bold',
-    textAlign: 'right',
-    flex: 0.3,
-    color:'#312e81',
+  gameImage: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
+    borderRadius: 10,
   },
-  note:{
-    fontSize:10,
-    paddingLeft:10,
-    marginBottom:10,
-  
-  }
 });
 
-export default ItemList;
+export default HomeScreen;

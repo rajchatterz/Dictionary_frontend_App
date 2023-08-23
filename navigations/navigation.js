@@ -22,6 +22,7 @@ import AboutUs from '../screens/Profile/AboutUs';
 import Profile from '../screens/ProfileScreen'
 import UserFeedback from '../screens/Profile/UserFeedback';
 import ReportDamage from '../screens/Profile/ReportDamage';
+import SearchResults from '../screens/SearchResultScreen';
 import Stepper from '../screens/service_order';
 
 import AuthContextProvider, { AuthContext } from '../store/auth-context';
@@ -214,37 +215,45 @@ function BottomTabNavigationfun() {
             <BottomTabs.Screen
                 name="HomeScreen"
                 component={HomeScreen}
+                options={{
+                    title: 'Search',
+                    headerShown: false,
+                    tabBarIcon: ({ focused, color, size }) => (
+
+                        <Ionicons name={focused ? 'earth' : 'earth-outline'} size={size} color={color} />
+
+                    ),
+
+                }} // Hide header for HomeScreen
 
             />
 
             < BottomTabs.Screen name="Hub" component={Cloud}
                 options={{
-                    title: 'Price List',
-                    tabBarLable: "Price List",
+                    title: 'Learn',
+                    tabBarLable: "Learn",
                     tabBarLabelStyle: {
                         fontSize: 12,
                         fontWeight: "600"
                     },
                     tabBarHideOnKeyboard: true,
                     tabBarIcon: ({ focused, color, size }) => (
-
-                        <Ionicons name={focused ? 'pricetags' : 'pricetags-outline'} size={size} color={color} />
-
+                        <Ionicons name={focused ? 'cube' : 'cube-outline'} size={size} color={color} />
                     ),
                 }}
             />
 
             < BottomTabs.Screen name="Order" component={Order}
                 options={{
-                    title: 'Order',
-                    tabBarLable: "Order",
+                    title: 'Favorites',
+                    tabBarLable: "Favorite",
                     tabBarLabelStyle: {
                         fontSize: 12,
                         fontWeight: "600"
                     },
                     tabBarHideOnKeyboard: true,
                     tabBarIcon: ({ focused, color, size }) => (
-                        <MaterialCommunityIcons name={focused ? "truck-delivery" : "truck-check-outline"} size={size + 2} color={color} />
+                        <Ionicons name={focused ? "heart" : "heart-outline"} size={size + 2} color={color} />
                     ),
                 }}
             />
@@ -292,6 +301,13 @@ function AuthenticatedStack() {
                     component={BottomTabNavigationfun}
                     options={{ headerShown: false }}
                 />
+              
+                <Stack.Screen
+                    name="SearchResults"
+                    component={SearchResults}
+                    options={{ headerShown: false }}
+                />
+
                 <Stack.Screen name="Notification" component={NotificationsStack} options={{ headerShown: false }} />
                 <Stack.Screen name="Help" component={HelpStack} options={{ headerShown: false }} />
                 <Stack.Screen name="About" component={AboutStack} options={{ headerShown: false }} />
