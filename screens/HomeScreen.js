@@ -128,7 +128,7 @@ const HomeScreen = () => {
         />
         <Ionicons
           name="search"
-          size={24}
+          size={26}
           color="#007AFF"
           onPress={handleSearch}
         />
@@ -207,7 +207,7 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     right: 0,
-    height: '20%', // Cover 20% of the screen
+    height: '30%', // Cover 20% of the screen
     backgroundColor: '#2E86C1', // Sky blue color
     borderBottomRightRadius: 20, // Rounded corners at the bottom
     borderBottomLeftRadius: 20,
@@ -215,7 +215,7 @@ const styles = StyleSheet.create({
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: '8%', // Add some space below the blue background
+    marginTop: '30%', // Add some space below the blue background
     backgroundColor: '#f0f0f0',
     borderRadius: 10,
     paddingVertical: 5,
@@ -224,7 +224,7 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     paddingVertical: 8,
-    fontSize: 16,
+    fontSize: 20,
     color: '#333',
   },
   suggestionsContainer: {
