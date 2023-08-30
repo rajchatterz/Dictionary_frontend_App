@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, FlatList, StyleSheet , ActivityIndicator } from 'react-native';
+import { View, Text, TextInput, ScrollView, TouchableOpacity, FlatList, StyleSheet, ActivityIndicator, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; // Expo's icon component
 import SlideAlert from '../components/SlideAlert';
+import HomeInfoCards from '../components/HomeInfoCards';
+import HomeTrendingCard from '../components/HomeTrendingCards'
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 
 const predefinedWordList = [
@@ -65,8 +67,36 @@ const HomeScreen = () => {
   const [loading, setLoading] = useState(false); // New state for loading indicator
   const [slideAlertMessage, setSlideAlertMessage] = useState(''); // Add this line
 
+  const wordOfTheDay = {
+    word: 'Spectacular',
+    meaning: 'Something truly impressive or remarkable.',
+    // Add pronunciation and derived information here
+  };
 
-  const handleSearch = async() => {
+  const didYouKnow = {
+    fact: 'Did you know that honey never spoils? Archaeologists have found pots of honey in ancient Egyptian tombs that are over 3,000 years old and still perfectly edible.',
+  };
+
+  const trendingData = [
+    {
+      id: '1',
+      imageSource: 'https://d3nn873nee648n.cloudfront.net/900x600/20440/300-SM1053541.jpg',
+      description: 'Discover the wonders of the animal kingdom.',
+    },
+    {
+      id: '2',
+      imageSource: 'https://d3nn873nee648n.cloudfront.net/900x600/20440/300-SM1046422.jpg',
+      description: 'Discover the wonders of the animal kingdom.',
+    },
+    {
+      id: '3',
+      imageSource: 'https://d3nn873nee648n.cloudfront.net/900x600/20326/300-ZM1039132.jpg',
+      description: 'Discover the wonders of the animal kingdom.',
+    }
+    // Add more data objects for each trending card
+  ];
+
+  const handleSearch = async () => {
     try {
       setLoading(true);
       const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${searchTerm}`);
@@ -116,6 +146,10 @@ const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.blueBackground} />
+     
+      <Text style={styles.dictionaryName}>MyDictionary</Text>
+      
+      
 
       <View style={styles.searchContainer}>
         <TextInput
@@ -132,7 +166,7 @@ const HomeScreen = () => {
           color="#007AFF"
           onPress={handleSearch}
         />
-        
+
       </View>
 
       {/*
@@ -179,19 +213,39 @@ const HomeScreen = () => {
           />
         </View>
       )}
-     {loading && (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#007AFF" />
-      </View>
-    )}
- {slideAlertMessage !== '' && (
-      <SlideAlert message={slideAlertMessage} onSlideUpComplete={() => setSlideAlertMessage('')}/>
-      
-    )}
-  
+      {loading && (
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color="#007AFF" />
+        </View>
+      )}
+      {slideAlertMessage !== '' && (
+        <SlideAlert message={slideAlertMessage} onSlideUpComplete={() => setSlideAlertMessage('')} />
 
-      {/* ... Rest of your code ... */}
+      )}
+
+      <ScrollView style={styles.scrollView} >
+        
+
+        <HomeInfoCards wordOfTheDay={wordOfTheDay} didYouKnow={didYouKnow} />
+
+        <View style={styles.trendingContainer}>
+          <Text style={styles.trendingTitle}>What's on Trending</Text>
+          <FlatList
+            data={trendingData}
+            horizontal
+            renderItem={({ item }) => (
+              <HomeTrendingCard imageSource={item.imageSource} description={item.description} />
+            )}
+            keyExtractor={item => item.id}
+            contentContainerStyle={styles.trendingList}
+          />
+        </View>
+        </ScrollView>
+
+        {/* ... Rest of your code ... */}
     </View>
+   
+ 
   );
 };
 
@@ -199,27 +253,47 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingHorizontal: 20,
-    paddingTop: 50,
   },
   blueBackground: {
+    backgroundColor: '#2E86C1', // Sky blue color
+    borderBottomRightRadius: 20,
+    borderBottomLeftRadius: 20,
+    height: "25%", // 25% of window height
+  },
+  dictionaryName: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    color: 'white',
+    textAlign: 'center',
+    paddingHorizontal: '27%',
+    marginTop: "20%",
     position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
-    height: '30%', // Cover 20% of the screen
-    backgroundColor: '#2E86C1', // Sky blue color
-    borderBottomRightRadius: 20, // Rounded corners at the bottom
-    borderBottomLeftRadius: 20,
-  },
+    alignItems: 'center', // Center horizontally
+   
+    },
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: '30%', // Add some space below the blue background
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#ffffff', // Set background color to blue
     borderRadius: 10,
     paddingVertical: 5,
     paddingHorizontal: 10,
+    marginTop: "35%", // 10% of window height
+    marginLeft: '5%', // 5% of window width
+    marginRight: '5%', // 5% of window width
+    position: 'absolute', // Position it fixed at the top
+    top: 0,
+    left: 0,
+    right: 0,
+  },
+  scrollView: {
+    flex: 1,
+    paddingHorizontal: "2%",
+    marginTop: "2%", // Adjust the marginTop to provide space for the fixed blue background and search bar
+    marginBottom: 2, // Add margin at the bottom to prevent cards from being hidden behind the bottom navigation
   },
   input: {
     flex: 1,
@@ -303,7 +377,20 @@ const styles = StyleSheet.create({
     right: 0,
     backgroundColor: 'rgba(255, 255, 255, 0.8)',
     zIndex: 1,
-  }
+  },
+
+  trendingContainer: {
+    marginTop: 20,
+  },
+  trendingTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  trendingList: {
+    paddingLeft: 20,
+  },
+
 });
 
 export default HomeScreen;
