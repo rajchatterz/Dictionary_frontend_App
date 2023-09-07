@@ -12,12 +12,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import AppLoading from 'expo-app-loading';
 
 import { GlobalStyles } from '../constants/style';
-import Cloud from '../screens/Cloud';
+import Learn from '../screens/LearnScreen';
 import HomeScreen from '../screens/HomeScreen';
 
 import Notification from '../screens/Notification';
 import Help from '../screens/Help';
-import Order from '../screens/OrderScreen';
+import Favorite from '../screens/FavoriteScreen';
 import AboutUs from '../screens/Profile/AboutUs';
 import Profile from '../screens/ProfileScreen'
 import UserFeedback from '../screens/Profile/UserFeedback';
@@ -228,14 +228,10 @@ function BottomTabNavigationfun() {
 
             />
 
-            < BottomTabs.Screen name="Hub" component={Cloud}
+            < BottomTabs.Screen name="Learn" component={Learn}
                 options={{
                     title: 'Learn',
-                    tabBarLable: "Learn",
-                    tabBarLabelStyle: {
-                        fontSize: 12,
-                        fontWeight: "600"
-                    },
+                    headerShown: false,
                     tabBarHideOnKeyboard: true,
                     tabBarIcon: ({ focused, color, size }) => (
                         <Ionicons name={focused ? 'cube' : 'cube-outline'} size={size} color={color} />
@@ -243,14 +239,10 @@ function BottomTabNavigationfun() {
                 }}
             />
 
-            < BottomTabs.Screen name="Order" component={Order}
+            < BottomTabs.Screen name="Favorite" component={Favorite}
                 options={{
                     title: 'Favorites',
-                    tabBarLable: "Favorite",
-                    tabBarLabelStyle: {
-                        fontSize: 12,
-                        fontWeight: "600"
-                    },
+                    headerShown: false,
                     tabBarHideOnKeyboard: true,
                     tabBarIcon: ({ focused, color, size }) => (
                         <Ionicons name={focused ? "heart" : "heart-outline"} size={size + 2} color={color} />
@@ -264,11 +256,7 @@ function BottomTabNavigationfun() {
             < BottomTabs.Screen name="Profile" component={Profile}
                 options={{
                     title: 'Profile',
-                    tabBarLable: "Profile",
-                    tabBarLabelStyle: {
-                        fontSize: 12,
-                        fontWeight: "600"
-                    },
+                    headerShown: false,
                     tabBarHideOnKeyboard: true,
                     tabBarIcon: ({ focused, color, size }) => (
 
@@ -327,7 +315,7 @@ function Navigation() {
     return (
         <NavigationContainer>
 
-            {!authCtx.isAuthenticated && <AuthenticatedStack />}
+            {!authCtx.isAuthenticated && <AuthStack/>} 
             {authCtx.isAuthenticated && <AuthenticatedStack />}
 
         </NavigationContainer>

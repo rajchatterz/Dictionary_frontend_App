@@ -132,27 +132,34 @@ function ProfileScreen() {
       <NavigationContainer independent={true} >
 
         <NativeBaseProvider>
+        <View style={styles.blueBackground} />
 
           <ScrollView maxW="100%">
+          <View style={styles.container}>
+          <View style={styles.profileHeader}>
+            <Avatar style={{width:100 , height:100}} bg="amber.500" source={{ uri: "https://images.unsplash.com/photo-1614289371518-722f2615943d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" }} size="lg">
+              NB
+              <Avatar.Badge bg="green.500" />
+            </Avatar>
+            <View style={styles.profileInfo}>
+              <Text style={styles.userName}>Audumber Chaudhari</Text>
+              <Text style={styles.completionText}>Profile Completion: 86%</Text>
+{/* 
+              <HStack>
+                <Box w="70%" pt="2"><Progress size="sm" colorScheme="emerald" bg={GlobalStyles.colors.primary200} mb={4} value={percentage} mx={2} />
+                </Box>
+                <Text fontSize="md" color="green">{percentage}%</Text>
+
+              </HStack> */}
+            </View>
+          </View>
 
 
             <VStack space={2} pt="4" alignItems="center">
 
-              <Avatar bg="amber.500" source={{
-                uri: "https://images.unsplash.com/photo-1614289371518-722f2615943d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-              }} size="2xl">
-                NB
-                <Avatar.Badge bg="green.500" />
-              </Avatar>
+              
 
-              <Heading pt="2" size="lg" style={{ color: "grey" }}>Audumber Chaudhari</Heading>
-
-              <HStack>
-                <Box w="80%" pt="2"><Progress size="lg" colorScheme="emerald" bg={GlobalStyles.colors.primary200} mb={4} value={percentage} mx={4} />
-                </Box>
-                <Text fontSize="lg" color="green">{percentage}%</Text>
-
-              </HStack>
+              
 
               <Box border="8" px="2" borderRadius="lg" backgroundColor="white" style={{ marginTop: 5, width: "95%" }}>
                 <View style={{ flexDirection: 'row', alignItems: 'center', padding: "2%" }}>
@@ -460,7 +467,7 @@ function ProfileScreen() {
             </VStack>
 
 
-
+</View>
           </ScrollView>
 
 
@@ -486,10 +493,31 @@ function ProfileScreen() {
 const styles = StyleSheet.create({
 
   container: {
-
-    paddingTop: "1%",
-    width: '100%'
-
+    
+  },
+  profileHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding:10,
+    marginBottom: 10,
+  },
+  profileInfo: {
+    marginLeft: 16,
+  },
+  userName: {
+    paddingTop:10,
+    fontSize: 24,
+    fontWeight: "bold",
+  },
+  completionText: {
+    fontSize: 16,
+    color: "gray",
+  },
+  blueBackground: {
+    backgroundColor: '#2E86C1',
+    borderBottomRightRadius: 10,
+    borderBottomLeftRadius: 10,
+    height: 120,
   },
   parent: {
 

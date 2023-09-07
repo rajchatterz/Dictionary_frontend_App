@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   },
   cardImage: {
     width: '100%',
-    height: 120,
+    height: 140,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
   },

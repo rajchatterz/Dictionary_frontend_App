@@ -4,6 +4,7 @@ import { Ionicons } from '@expo/vector-icons'; // Expo's icon component
 import SlideAlert from '../components/SlideAlert';
 import HomeInfoCards from '../components/HomeInfoCards';
 import HomeTrendingCard from '../components/HomeTrendingCards'
+import HomeWordGames from '../components/HomeWordGameCard';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 
 const predefinedWordList = [
@@ -81,7 +82,7 @@ const HomeScreen = () => {
     {
       id: '1',
       imageSource: 'https://d3nn873nee648n.cloudfront.net/900x600/20440/300-SM1053541.jpg',
-      description: 'Discover the wonders of the animal kingdom.',
+      description: 'Discover the wonders of the animal kingdom. Its really graet time to work here.',
     },
     {
       id: '2',
@@ -240,6 +241,12 @@ const HomeScreen = () => {
             contentContainerStyle={styles.trendingList}
           />
         </View>
+
+        <View style={styles.trendingContainer}>
+        <Text style={styles.trendingTitle}>Let's Play Games</Text>
+        <HomeWordGames/>
+        </View>
+       
         </ScrollView>
 
         {/* ... Rest of your code ... */}
@@ -293,7 +300,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: "2%",
     marginTop: "2%", // Adjust the marginTop to provide space for the fixed blue background and search bar
-    marginBottom: 2, // Add margin at the bottom to prevent cards from being hidden behind the bottom navigation
+    marginBottom: 20, // Add margin at the bottom to prevent cards from being hidden behind the bottom navigation
   },
   input: {
     flex: 1,

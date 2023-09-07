@@ -1,136 +1,163 @@
-import React, { useState, useContext } from "react";
-import { useNavigation } from '@react-navigation/native';
-import { Keyboard, TouchableWithoutFeedback } from 'react-native';
-
-import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
-import { View, Radio, KeyboardAvoidingView, ScrollView, Box, Text, Image, Heading, VStack, FormControl, Input, Link, Button, HStack, Center, NativeBaseProvider } from "native-base";
-import {base_url} from '../../utils/constants'
+import React, { useState } from "react";
+import { View, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { Box, Text, Heading, VStack, FormControl, Input, Button, Center, NativeBaseProvider, Image, ScrollView } from "native-base";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import  { AuthContext } from '../../store/auth-context';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import {signup} from '../../utils/auth'
+import { useNavigation } from '@react-navigation/native';
+import SlideAlert from '../../components/SlideAlert';
 
-
-
-
-
-const ExampleSignup = () => {
-  console.log("on SignUp Page")
-  const navigation = useNavigation();
+const SignupPage = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [college, setCollege] = useState('');
-  
-  const authCtx = useContext(AuthContext);
- 
-  const handleName = (name) => {
-    setName(name);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [isDatePickerVisible, setDatePickerVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [slideAlertMessage, setSlideAlertMessage] = useState(''); // Add this line
+
+
+  const navigation = useNavigation();
+
+  const handleDismissKeyboard = () => {
+    Keyboard.dismiss();
   };
 
-  const handleEmail = (email) => {
-    setEmail(email);
+  const showDatePicker = () => {
+    setDatePickerVisible(true);
   };
 
-  const handleCollege = (college) => {
-    setCollege(college);
+  const hideDatePicker = () => {
+    setDatePickerVisible(false);
   };
 
+  const handleDateConfirm = (date) => {
+    hideDatePicker();
+    setSelectedDate(date);
+  };
 
-
-
-  const handleSubmit = async () => {
-
-    console.log(name,email);
+  const handleSignup = async () => {
     try {
+      setIsLoading(true);
+
+      console.log("Sreenidhi");
       // Make a POST request to the API with the contact
-      const contact= await AsyncStorage.getItem('contact');
-      console.log(contact);
-     const response = await fetch(base_url+'/v1/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-         contact:contact,
-         password:contact+"@abc123",
-         name:name,
-         email:contact+"@gmail.com",
+      handleDismissKeyboard
+      
+    
+      
+     const contact= await AsyncStorage.getItem('contact');
+     const password = contact + "Pass@123"
 
-        })
-      });
+     console.log('phone', contact);
+      const data = await signup( contact, password, name , email)
 
-      const data = await response.json();
-      if (data.statusCode == 201) {
+      
+      if(data.statusCode == 201){
+        console.log("Code 200")
+        setIsLoading(false)
         await authCtx.authenticate(data.token.access.token)
         navigation.navigate('home');
-        console.log(data);
-      } else {
-        console.log(data.message)
+      }else
+      {
+        setSlideAlertMessage('Sorry, Looks like somthing went wrong !');
+        setIsLoading(false)
+        
       }
-
+      
+      // Simulate a delay (replace with actual logic)
+      setTimeout(() => {
+        // After successful signup or error handling, reset isLoading
+        setIsLoading(false);
+      }, 2000);
     } catch (error) {
       console.error(error);
-    } 
-  
+      setIsLoading(false); // Reset isLoading in case of an error
+    }
   };
 
   return (
-    <>
- <Box safeArea p="5" w="100%" maxW="100%" roundedBottom='xl' bg={["#3730a3"]}>
-          <Heading size="lg" fontWeight="700" color="white" _dark={{
-            color: "warmGray.50"
-          }}>
-            Signup , Buddy !
-          </Heading>
-          <Heading mt="1" _dark={{
-            color: "warmGray.200"
-          }} color="#818cf8" fontWeight="medium" size="xs">
-            Signup to continue!
-          </Heading>
-        </Box>
-    
-    <TouchableWithoutFeedback>
-     
-      <Center w="100%" >
-        
+    <NativeBaseProvider>
+      <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
+        <TouchableWithoutFeedback onPress={handleDismissKeyboard}>
+          <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+            <View style={{ flex: 1 }}>
+              <Image
+                alt="Description of the image"
+                source={{ uri: 'https://cdni.iconscout.com/illustration/premium/thumb/sign-up-or-registration-to-e-payment-application-3159825-2631917.png' }}
+                style={{ width: '100%', height: '35%', borderBottomLeftRadius: 20, borderBottomRightRadius: 20 }}
+                resizeMode="cover"
+              />
+              <Center flex={1} bg="white" px={3} paddingTop={5}>
+                <VStack space={3} width="100%">
+                <Heading size="lg" fontWeight="700" color="coolGray.800" _dark={{
+        color: "warmGray.50"
+      }}>
+                    SignUp
+                  </Heading>
+                  <Heading mt="1" _dark={{
+                    color: "warmGray.200"
+                  }} color="coolGray.600" fontWeight="medium" size="xs" style={{ marginTop: -7 }}>
+                    Almost done ! just wana know you more :)
+                  </Heading>
+                  <FormControl>
+                    <FormControl.Label>Name</FormControl.Label>
+                    <Input
+                      placeholder="Enter your name"
+                      value={name}
+                      onChangeText={text => setName(text)}
+                      size="lg"
+                      style={{ height: 50 }} // Set custom input height
+                    />
+                  </FormControl>
+                  <FormControl>
+                    <FormControl.Label>Email</FormControl.Label>
+                    <Input
+                      placeholder="Enter your email"
+                      value={email}
+                      onChangeText={text => setEmail(text)}
+                      keyboardType="email-address"
+                      size="lg"
+                      style={{ height: 50 }} // Set custom input height
+                    />
+                  </FormControl>
+                  {/* <FormControl>
+                    <FormControl.Label>Date of Birth</FormControl.Label>
+                    <Input
+                      placeholder="Select Date of Birth"
+                      value={selectedDate ? selectedDate.toDateString() : ''}
+                      onFocus={showDatePicker}
+                      size="lg"
+                    />
+                  </FormControl> */}
+                  <Button
+                    mt={2}
+                    colorScheme="indigo"
+                    size="lg"
+                    isLoading={isLoading}
+                    onPress={handleSignup}
+                    isDisabled={isLoading}
+                    isLoadingText="Signing Up"
+                  >
+                    SignUp
+                  </Button>
+                </VStack>
+              </Center>
+            </View>
+          </ScrollView>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
+      <DateTimePickerModal
+        isVisible={isDatePickerVisible}
+        mode="date"
+        onConfirm={handleDateConfirm}
+        onCancel={hideDatePicker}
+      />
+      {slideAlertMessage !== '' && (
+        <SlideAlert message={slideAlertMessage} onSlideUpComplete={() => setSlideAlertMessage('')} />
 
-
-        <Box safeArea p="2" py="2" px="2" w="95%" maxW="95%">
-          <VStack space={3} mt="5">
-            <FormControl mb="5">
-              <FormControl.Label>Name*</FormControl.Label>
-              <Input  onChangeText={handleName}
-        value={name} />
-
-            </FormControl>
-
-
-
-
-
-            <Button mt="2" colorScheme="indigo" size="lg" _text={{ fontSize: "lg" }} onPress={handleSubmit}>
-              Continue with Signup !
-            </Button>
-          </VStack>
-        </Box>
-      </Center>
-    </TouchableWithoutFeedback>
-    </>);
-
-};
-
-
-
-// export default LoginPage;
-
-export default OTPPage => {
-  return (
-    <NativeBaseProvider >
-      
-      <Center >
-        <ExampleSignup />
-      </Center>
+      )}
     </NativeBaseProvider>
   );
 };
 
-
-
+export default SignupPage;
