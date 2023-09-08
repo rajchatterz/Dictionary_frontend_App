@@ -50,7 +50,7 @@ export default function App() {
 
   return (
     <>
-      <StatusBar backgroundColor='#09458C' barStyle="light-content" />
+      <StatusBar backgroundColor='#2E86C1' barStyle="light-content" />
       <AuthContextProvider>
         <Root />
       </AuthContextProvider>

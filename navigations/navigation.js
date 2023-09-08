@@ -23,6 +23,7 @@ import Profile from '../screens/ProfileScreen'
 import UserFeedback from '../screens/Profile/UserFeedback';
 import ReportDamage from '../screens/Profile/ReportDamage';
 import SearchResults from '../screens/SearchResultScreen';
+import Search from '../screens/SearchScreen'
 import Stepper from '../screens/service_order';
 
 import AuthContextProvider, { AuthContext } from '../store/auth-context';
@@ -282,6 +283,25 @@ function AuthenticatedStack() {
                 screenOptions={{
                     animation: 'slide_from_right', //<-- this is what will do the trick
                     presentation: 'card',
+                    cardStyleInterpolator: ({ current, layouts }) => {
+                        return {
+                          cardStyle: {
+                            transform: [
+                              {
+                                translateX: current.progress.interpolate({
+                                  inputRange: [0, 1],
+                                  outputRange: [layouts.screen.width, 0],
+                                }),
+                              },
+                            ],
+                          },
+                        };
+                      },
+                      cardStyle: { backgroundColor: 'transparent' },
+                      transitionSpec: {
+                        open: { animation: 'timing', config: { duration: 150 } }, // Adjust the duration as needed
+                        close: { animation: 'timing', config: { duration: 150 } }, // Adjust the duration as needed
+                      },
 
                 }} >
                 <Stack.Screen
@@ -293,6 +313,12 @@ function AuthenticatedStack() {
                 <Stack.Screen
                     name="SearchResults"
                     component={SearchResults}
+                    options={{ headerShown: false }}
+                />
+
+                <Stack.Screen
+                    name="Search"
+                    component={Search}
                     options={{ headerShown: false }}
                 />
 

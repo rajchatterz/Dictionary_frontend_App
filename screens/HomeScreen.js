@@ -61,10 +61,7 @@ const predefinedWordList = [
 
 const HomeScreen = () => {
   const navigation = useNavigation();
-  const [searchTerm, setSearchTerm] = useState('');
-  const [wordData, setWordData] = useState(null);
-  const [suggestions, setSuggestions] = useState([]);
-  const [suggestionsVisible, setSuggestionsVisible] = useState(false); // New state for managing suggestion card visibility
+ 
   const [loading, setLoading] = useState(false); // New state for loading indicator
   const [slideAlertMessage, setSlideAlertMessage] = useState(''); // Add this line
 
@@ -97,50 +94,7 @@ const HomeScreen = () => {
     // Add more data objects for each trending card
   ];
 
-  const handleSearch = async () => {
-    try {
-      setLoading(true);
-      const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${searchTerm}`);
-      const data = await response.json();
-
-      if (data && Array.isArray(data) && data.length > 0) {
-        navigation.navigate('SearchResults', { searchResults: data });
-      } else {
-        // Show the slide-in and slide-up alert
-        console.log("Word not found")
-        setSlideAlertMessage('Sorry, we couldn\'t find definitions for the word you were looking for.');
-      }
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    } finally {
-      setLoading(false);
-    }
-
-  };
-
-  const handleSuggestionSelect = (selectedSuggestion) => {
-    console.log(selectedSuggestion)
-    setSearchTerm(selectedSuggestion);
-    setSuggestions([]);
-    setSuggestionsVisible(false);
-  };
-
-  const handleInputChange = (text) => {
-    setSearchTerm(text);
-
-    if (text.length >= 2) {
-      // Filter suggestions based on the predefined word list
-      const filteredSuggestions = predefinedWordList.filter(
-        (word) => word.toLowerCase().includes(text.toLowerCase())
-      );
-
-      setSuggestions(filteredSuggestions);
-      setSuggestionsVisible(true);
-    } else {
-      setSuggestions([]); // Clear suggestions if less than 2 letters
-      setSuggestionsVisible(false);
-    }
-  };
+  
 
 
 
@@ -148,72 +102,32 @@ const HomeScreen = () => {
     <View style={styles.container}>
       <View style={styles.blueBackground} />
      
-      <Text style={styles.dictionaryName}>MyDictionary</Text>
+      <Text style={styles.dictionaryName}>Vocabify</Text>
       
       
-
-      <View style={styles.searchContainer}>
-        <TextInput
-          style={styles.input}
-          placeholder="Search for a word"
-          value={searchTerm}
-          onChangeText={handleInputChange}
-          onFocus={() => setSuggestionsVisible(true)} // Show suggestions on focus
-          onBlur={() => setSuggestionsVisible(false)} // Hide suggestions on blur
-        />
-        <Ionicons
-          name="search"
-          size={26}
-          color="#007AFF"
-          onPress={handleSearch}
-        />
+    
+      <View style={styles.searchContainer} >
+      <TouchableOpacity
+    onPress={() => {
+      navigation.navigate('Search'); // Navigate to the "Search" screen when the search container is clicked
+    }}
+    style={{ flexDirection: 'row', alignItems: 'center' }} // Added flexDirection and alignItems
+  >
+    <Text style={styles.input}>Search from 17,00,000+</Text>
+    <Ionicons
+      name="search"
+      size={26}
+      color="#007AFF"
+      // onPress={handleSearch}
+    />
+  </TouchableOpacity>
+ 
+ 
 
       </View>
+     
 
-      {/*
-  Rendering the list of suggestions with updated styling
-*/}
-      {suggestionsVisible && suggestions.length > 0 && (
-        <View style={styles.suggestionsContainer}>
-          <Text style={styles.suggestionsTitle}>Suggestions:</Text>
-          <FlatList
-            data={suggestions}
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                onPress={() => handleSuggestionSelect(item)} // Handle suggestion selection
-                style={styles.suggestionItemContainer} // Apply the suggestion item style
-              >
-                <Text style={styles.suggestionItemText}>{item}</Text>
-              </TouchableOpacity>
-            )}
-            keyExtractor={(item) => item}
-            contentContainerStyle={styles.suggestionsList}
-          />
-        </View>
-      )}
-
-
-      {wordData && (
-        <View style={styles.wordDetailsContainer}>
-          <Text style={styles.wordTitle}>{wordData[0].word}</Text>
-          <Text style={styles.phonetic}>{wordData[0].phonetic}</Text>
-          <FlatList
-            data={wordData[0].meanings}
-            renderItem={({ item }) => (
-              <View style={styles.meaningContainer}>
-                <Text style={styles.partOfSpeech}>{item.partOfSpeech}</Text>
-                {item.definitions.map((definition, index) => (
-                  <Text key={index} style={styles.definition}>
-                    {definition.definition}
-                  </Text>
-                ))}
-              </View>
-            )}
-            keyExtractor={(item, index) => index.toString()}
-            contentContainerStyle={styles.meaningsList}
-          />
-        </View>
-      )}
+    
       {loading && (
         <View style={styles.loadingContainer}>
           <ActivityIndicator size="large" color="#007AFF" />

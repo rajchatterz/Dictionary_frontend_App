@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { View, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { Box, Text, Heading, VStack, FormControl, Input, Button, Center, NativeBaseProvider, Image, ScrollView } from "native-base";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import DateTimePickerModal from "react-native-modal-datetime-picker";
 import {signup} from '../../utils/auth'
 import { useNavigation } from '@react-navigation/native';
 import SlideAlert from '../../components/SlideAlert';
@@ -10,8 +9,6 @@ import SlideAlert from '../../components/SlideAlert';
 const SignupPage = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [isDatePickerVisible, setDatePickerVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [slideAlertMessage, setSlideAlertMessage] = useState(''); // Add this line
 
@@ -22,18 +19,7 @@ const SignupPage = () => {
     Keyboard.dismiss();
   };
 
-  const showDatePicker = () => {
-    setDatePickerVisible(true);
-  };
 
-  const hideDatePicker = () => {
-    setDatePickerVisible(false);
-  };
-
-  const handleDateConfirm = (date) => {
-    hideDatePicker();
-    setSelectedDate(date);
-  };
 
   const handleSignup = async () => {
     try {
@@ -120,15 +106,7 @@ const SignupPage = () => {
                       style={{ height: 50 }} // Set custom input height
                     />
                   </FormControl>
-                  {/* <FormControl>
-                    <FormControl.Label>Date of Birth</FormControl.Label>
-                    <Input
-                      placeholder="Select Date of Birth"
-                      value={selectedDate ? selectedDate.toDateString() : ''}
-                      onFocus={showDatePicker}
-                      size="lg"
-                    />
-                  </FormControl> */}
+            
                   <Button
                     mt={2}
                     colorScheme="indigo"

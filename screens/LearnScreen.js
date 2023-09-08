@@ -14,7 +14,9 @@ const LearnPage = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.blueBackground} />
+      <View style={styles.blueBackground}>
+        <Text style={styles.heading}>BrainBox</Text>
+      </View>
 
     {loading && (
         <View style={styles.loadingContainer}>
@@ -49,8 +51,15 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 10,
     borderBottomLeftRadius: 10,
     height: 120,
+    paddingLeft: 20, // Added padding to align the heading to the left
+    justifyContent: 'center', // Align text vertically in the middle
   },
- 
+  heading: {
+    marginTop:50,
+    fontSize: 30,
+    color: '#fff',
+    fontWeight: 'bold', // Make the font bold
+  },
   scrollView: {
     flex: 1,
     paddingHorizontal: "2%",
