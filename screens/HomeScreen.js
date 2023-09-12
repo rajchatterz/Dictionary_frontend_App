@@ -5,6 +5,7 @@ import SlideAlert from '../components/SlideAlert';
 import HomeInfoCards from '../components/HomeInfoCards';
 import HomeTrendingCard from '../components/HomeTrendingCards'
 import HomeWordGames from '../components/HomeWordGameCard';
+import WordOfTheDayCard from '../components/WordOfTheDay';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 
 const predefinedWordList = [
@@ -102,7 +103,7 @@ const HomeScreen = () => {
     <View style={styles.container}>
       <View style={styles.blueBackground} />
      
-      <Text style={styles.dictionaryName}>Vocabify</Text>
+      <Text style={styles.dictionaryName}>WordifyMe</Text>
       
       
     
@@ -140,7 +141,7 @@ const HomeScreen = () => {
 
       <ScrollView style={styles.scrollView} >
         
-
+      <WordOfTheDayCard />
         <HomeInfoCards wordOfTheDay={wordOfTheDay} didYouKnow={didYouKnow} />
 
         <View style={styles.trendingContainer}>
