@@ -34,6 +34,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import LoginScreen from '../screens/Auth/login';
+import GoogleSignIn from '../components/Auth/GoogleAuthentication';
 import SignupScreen from '../screens/Auth/signup';
 import OTPPage from '../screens/Auth/otp'
 
@@ -58,6 +59,8 @@ function AuthStack() {
                 contentStyle: { backgroundColor: 'white' },
             }}
         >
+            {/* <Stack.Screen name="Login" component={GoogleSignIn} options={{ headerShown: false }} /> */}
+
             <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
             <Stack.Screen name="OTP" component={OTPPage} options={{ headerShown: false }} />
             <Stack.Screen name="Signup" component={SignupScreen} options={{ headerShown: false }} />

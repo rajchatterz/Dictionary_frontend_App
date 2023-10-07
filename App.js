@@ -1,18 +1,14 @@
+
 import React from 'react';
-import { createContext, useEffect, useState, useContext } from 'react';
-import { Button } from 'react-native'
+import {useEffect, useState, useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
-
-
-import { NavigationContainer , useNavigation } from '@react-navigation/native';
-import { createNativeStackNavigator  } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AppLoading from 'expo-app-loading';
-
 import Navigation1 from './navigations/navigation';
 import AuthContextProvider, { AuthContext } from './store/auth-context';
+
+import { usePushNotifications } from "./pushNotification";
+
 
 
 //Root function
@@ -47,6 +43,9 @@ function Root() {
 
 
 export default function App() {
+
+  const { expoPushToken } = usePushNotifications();
+  console.log(expoPushToken);
 
   return (
     <>

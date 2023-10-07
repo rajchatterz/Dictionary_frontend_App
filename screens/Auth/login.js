@@ -5,6 +5,7 @@ import { View, Text, Image, Heading, VStack, FormControl, ScrollView, Input, But
 import { send_otp } from '../../utils/auth'
 import { AuthContext } from '../../store/auth-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import GoogleLogin from "../../components/Auth/GoogleAuthentication"
 
 const Example = () => {
   const navigation = useNavigation();
@@ -62,7 +63,7 @@ const Example = () => {
               size="2xl"
               placeholder="+91"
               height={12}
-              height='60' 
+          
               keyboardType="numeric"
               maxLength={10}
               value={contact}
@@ -86,6 +87,7 @@ const Example = () => {
             
             Continue with Phone
           </Button>
+          <GoogleLogin />
        
           <HStack mt={6} justifyContent="center">
             <Text fontSize="sm" color="warmGray.200">

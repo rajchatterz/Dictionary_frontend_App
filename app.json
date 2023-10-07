@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Expense-tracker-app",
-    "slug": "Expense-tracker-app",
+    "name": "WordifyMe",
+    "slug": "WordifyMe",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -18,16 +18,25 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.upclicklabs.wordifyme"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.upclicklabs.wordifyme",
+      "googleServicesFile": "./google-services.json"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "863e82d9-984d-4b2b-9716-8df12450dd2e"
+      }
+    },
+    "scheme":"wordifyme"
   }
 }
