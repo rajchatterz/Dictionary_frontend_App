@@ -1,10 +1,9 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useNavigation } from '@react-navigation/native';
 import { Keyboard, TouchableWithoutFeedback, KeyboardAvoidingView } from 'react-native';
-import { View, Text, Image, Heading, VStack, FormControl, ScrollView, Input, Button, HStack, Center, NativeBaseProvider } from "native-base";
+import { Text, Image, Heading, VStack, FormControl, ScrollView, Input, Button, HStack, Center, NativeBaseProvider } from "native-base";
 import { send_otp } from '../../utils/auth'
 import { AuthContext } from '../../store/auth-context';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import GoogleLogin from "../../components/Auth/GoogleAuthentication"
 
 const Example = () => {

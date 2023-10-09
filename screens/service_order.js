@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, TouchableOpacity ,TextInput,Button} from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity ,TextInput} from "react-native";
 import CheckBox from 'expo-checkbox'
 import Pickup from "./SearchResultScreen";
 import { Image } from 'react-native';
 import image from '../assets/delivery.png';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 const Stepper = () => {
   const [step, setStep] = useState(1);

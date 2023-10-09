@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Animated, StyleSheet } from 'react-native';
+import { Text, Animated, StyleSheet } from 'react-native';
 
 const SlideAlert = ({ message, onSlideUpComplete }) => {
   const [slideAnim] = useState(new Animated.Value(-100)); // Initial position outside the screen

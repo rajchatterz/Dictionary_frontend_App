@@ -1,5 +1,4 @@
-import { Lable } from 'react-native';
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { View, Text, Progress, ScrollView, Badge, Icon, IconButton, Box, Button, FlatList, Heading, Divider, Avatar, HStack, VStack, Spacer, Switch, Center, NativeBaseProvider } from "native-base";
 import { Feather } from '@expo/vector-icons';
@@ -7,7 +6,6 @@ import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { AntDesign } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
-import { FontAwesome5 } from '@expo/vector-icons';
 import { GlobalStyles } from '../constants/style';
 import { AuthContext } from '../store/auth-context';
 import BottomScreenDrawer from '../components/Notification_bottomdrawer';

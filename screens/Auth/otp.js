@@ -22,7 +22,6 @@ import {
 import { AuthContext } from "../../store/auth-context";
 import { verify_otp } from "../../utils/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import SlideAlert from "../../components/SlideAlert";
 
 const OTPPage = () => {
   const navigation = useNavigation();

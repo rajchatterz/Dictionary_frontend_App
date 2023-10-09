@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Modal, TouchableOpacity, Dimensions } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 
 const BottomScreenDrawer = ({ isVisible, content, onClose, handleClick , buttonText , heading }) => {

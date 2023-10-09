@@ -5,7 +5,6 @@ import {
   ScrollView,
   Pressable,
   ImageBackground,
-  TouchableOpacity,
 } from "react-native";
 import React from "react";
 import quickfood from "../data/quickfood";

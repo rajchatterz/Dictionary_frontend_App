@@ -2,15 +2,11 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
   Pressable,
   Dimensions,
   Image,
-  ImageBackground,
 } from "react-native";
 import React from "react";
-import quickfood from "../data/quickfood";
-import { MaterialIcons } from "@expo/vector-icons";
 
 const numColumns = 3;
 const screenWidth = Dimensions.get('window').width;

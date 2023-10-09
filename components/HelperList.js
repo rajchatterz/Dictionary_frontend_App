@@ -11,6 +11,7 @@ import {
   import { MaterialIcons } from "@expo/vector-icons";
   import { MaterialCommunityIcons } from "@expo/vector-icons";
   import { useNavigation } from "@react-navigation/native";
+  
   const MenuItem = ({ item }) => {
     const navigation = useNavigation();
     return (
