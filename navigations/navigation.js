@@ -1,15 +1,7 @@
 import React from 'react';
-import { createContext, useEffect, useState, useContext } from 'react';
-import { Button, View, Text, TouchableOpacity, Pressable } from 'react-native'
-import { StatusBar } from 'expo-status-bar';
-
-
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import AppLoading from 'expo-app-loading';
 
 import { GlobalStyles } from '../constants/style';
 import Learn from '../screens/LearnScreen';
@@ -26,15 +18,11 @@ import SearchResults from '../screens/SearchResultScreen';
 import Search from '../screens/SearchScreen'
 import Stepper from '../screens/service_order';
 
-import AuthContextProvider, { AuthContext } from '../store/auth-context';
+import { AuthContext } from '../store/auth-context';
 
 import { Ionicons } from '@expo/vector-icons';
-import { MaterialIcons } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { FontAwesome5 } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import LoginScreen from '../screens/Auth/login';
-import GoogleSignIn from '../components/Auth/GoogleAuthentication';
 import SignupScreen from '../screens/Auth/signup';
 import OTPPage from '../screens/Auth/otp'
 

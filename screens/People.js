@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Image, FlatList } from 'react-native'
-import { Badge } from 'react-bootstrap';
 import { Ionicons } from '@expo/vector-icons';
 
 

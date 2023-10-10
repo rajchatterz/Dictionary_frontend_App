@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View, ScrollView, Image, Pressable, Dimensions } from 'react-native'
+import { StyleSheet, Text, View, Image, Pressable, Dimensions } from 'react-native'
 import React from 'react'
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 
 const numColumns = 3;

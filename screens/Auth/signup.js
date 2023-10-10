@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from 'react-native';
-import { Box, Text, Heading, VStack, FormControl, Input, Button, Center, NativeBaseProvider, Image, ScrollView } from "native-base";
+import { Heading, VStack, FormControl, Input, Button, Center, NativeBaseProvider, Image, ScrollView } from "native-base";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {signup} from '../../utils/auth'
 import { useNavigation } from '@react-navigation/native';

@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { FontAwesome } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
 import { addToCart, decrementQuantity, incrementQuantity, removeFromCart } from "../redux/CartReducer";
+
 const MenuComponent = ({ food }) => {
   const dispatch = useDispatch();
   const [additems, setAddItems] = useState(0);
