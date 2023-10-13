@@ -117,7 +117,7 @@ const OTPPage = () => {
                     mt="2"
                     isLoadingText="verifying OTP"
                     colorScheme="indigo"
-                    mt="2"
+
                     size="lg"
                     _text={{ fontSize: "lg" }}
                     onPress={handleSubmit}

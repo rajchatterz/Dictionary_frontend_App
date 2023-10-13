@@ -7,6 +7,7 @@ async function authenticate_contact(contact) {
   const response = await axios.post(url, {
     contact: contact
   });
+  console.log('Dummy')
   console.log(response.data)
   return response.data;
 }
