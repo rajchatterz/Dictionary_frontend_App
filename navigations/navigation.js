@@ -19,6 +19,10 @@ import SearchResults from "../screens/SearchResultScreen";
 import Search from "../screens/SearchScreen";
 import Stepper from "../screens/service_order";
 
+//testing screens
+import  Dev from "../LakshitModule/Dev"
+import Devotp from "../LakshitModule/Devotp"
+
 import { AuthContext } from "../store/auth-context";
 
 import { Ionicons } from "@expo/vector-icons";
@@ -48,6 +52,21 @@ function AuthStack() {
       }}
     >
       {/* <Stack.Screen name="Login" component={GoogleSignIn} options={{ headerShown: false }} /> */}
+      
+      {/* Lakshit Testing screen stack ----------------------------------------*/}
+      <Stack.Screen
+        name="Dev"
+        component={Dev}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="Devotp"
+        component={Devotp}
+        options={{ headerShown: false }}
+      />
+
+      {/* --------------------------------------------------------------- */}
 
       <Stack.Screen
         name="Login"
