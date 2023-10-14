@@ -101,8 +101,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
-   
+    justifyContent: 'center',  
   },
   imageContainer: {
     alignItems: 'center',
@@ -149,7 +148,6 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     backgroundColor: '#ffffff',
     shadowColor: 'rgba(0, 1, 0, 1)',
-
     padding: 10,
   },
   errorMessage: {

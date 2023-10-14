@@ -1,21 +1,15 @@
-import {
-  View,
-  Text,
-  Image,
-  TextInput,
-  StyleSheet,
-  Pressable,
-  Keyboard,
-} from "react-native";
+import {View,Text,Image,TextInput,StyleSheet,Pressable,Keyboard,ActivityIndicator, SafeAreaView} from "react-native";
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { verify_otp } from "../utils/auth";
 import { AuthContext } from "../store/auth-context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 export default function Devotp() {
   const [OTP, setOTP] = useState("");
   const [OtpResponse, setOtpResponse] = useState(true);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [isLoading, setisLoading] = useState(false);
   const [slideAlertMessage, setSlideAlertMessage] = useState("");
   const authCtx = useContext(AuthContext);
@@ -57,8 +51,12 @@ export default function Devotp() {
   };
 
   return (
-    <View style={styles.container}>
-      <View>
+    <KeyboardAwareScrollView
+    contentContainerStyle={styles.container}
+    extraScrollHeight={100}
+    >
+    <SafeAreaView style={styles.container}>
+      <View style={styles.imageContainer}>
         <Image source={require("../assets/img2.png")} />
       </View>
       <View style={{ flex: 1, marginHorizontal: 10 }}>
@@ -84,16 +82,24 @@ export default function Devotp() {
           </Text>
         )}
         <Pressable 
-        isLoading={isLoading}
-        isDisabled={isLoading}
+        style={isLoading ? styles.disabledButton : styles.button}
+        isDisabled={isLoading || isButtonDisabled}
         isLoadingText="verifying OTP"
         onPress={handleSubmit}
-        style={styles.button}
         >
+           {isLoading ? (
+            <View style={styles.buttonContent} >
+              <ActivityIndicator color="white" size="small" />
+              <Text style={styles.spinnerText}>Verifying</Text>
+            </View>
+          ) : (
           <Text style={styles.btntxt}>Continue</Text>
+          )}
         </Pressable>
+        
       </View>
-    </View>
+    </SafeAreaView>
+    </KeyboardAwareScrollView>
   );
 }
 
@@ -102,7 +108,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flex: 1,
-    bottom: -100,
+    top:20
+  },
+  imageContainer: {
+    alignItems: 'center',
+    marginBottom: 20,
+    top:10
   },
   text: {
     fontSize: 24,
@@ -149,11 +160,30 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.8,
     elevation: 6,
     shadowRadius: 15,
-    shadowOffset: { width: 1, height: 13 },
+    shadowOffset: { width: 1, height: 13 }
   },
   btntxt: {
     fontSize: 16,
     fontWeight: "900",
     color: "white",
+  },
+  spinnerText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white',
+    marginLeft: 10,
+  },
+  disabledButton: {
+    backgroundColor: '#9B68B2',
+    height: 50,
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 40,
+  },
+  buttonContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center', 
   },
 });
