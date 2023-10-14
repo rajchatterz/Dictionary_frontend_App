@@ -106,6 +106,7 @@ const styles = StyleSheet.create({
   imageContainer: {
     alignItems: 'center',
     marginBottom: 20,
+    top:10
   },
   formContainer: {
     flex: 1,

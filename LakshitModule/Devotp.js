@@ -1,4 +1,4 @@
-import {View,Text,Image,TextInput,StyleSheet,Pressable,Keyboard,ActivityIndicator, SafeAreaView} from "react-native";
+import { View, Text, Image, TextInput, StyleSheet, Pressable, Keyboard, ActivityIndicator, SafeAreaView } from "react-native";
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { verify_otp } from "../utils/auth";
@@ -52,102 +52,112 @@ export default function Devotp() {
 
   return (
     <KeyboardAwareScrollView
-    contentContainerStyle={styles.container}
-    extraScrollHeight={100}
+      contentContainerStyle={styles.container}
+      extraScrollHeight={100}
     >
-    <SafeAreaView style={styles.container}>
-      <View style={styles.imageContainer}>
-        <Image source={require("../assets/img2.png")} />
-      </View>
-      <View style={{ flex: 1, marginHorizontal: 10 }}>
-        <Text style={styles.text}>Verify Your Phone</Text>
-        <Text style={styles.text2}>
-          Please input the OTP sent to your mobile number
-        </Text>
-        <Text style={styles.text3}>OTP</Text>
-        <TextInput
-          placeholder=" OTP "
-          maxLength={4}
-          secureTextEntry
-          textAlign="center"
-          placeholderTextColor={"#49454F"}
-          inputMode="numeric"
-          style={styles.input}
-          value={OTP}
-          onChangeText={(value) => setOTP(value)}
-        />
-        {!OtpResponse && (
-          <Text style={{ color: "red" }}>
-            You have entered an incorrect OTP !
-          </Text>
-        )}
-        <Pressable 
-        style={isLoading ? styles.disabledButton : styles.button}
-        isDisabled={isLoading || isButtonDisabled}
-        isLoadingText="verifying OTP"
-        onPress={handleSubmit}
-        >
-           {isLoading ? (
-            <View style={styles.buttonContent} >
-              <ActivityIndicator color="white" size="small" />
-              <Text style={styles.spinnerText}>Verifying</Text>
-            </View>
-          ) : (
-          <Text style={styles.btntxt}>Continue</Text>
-          )}
-        </Pressable>
-        
-      </View>
-    </SafeAreaView>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.imageContainer}>
+          <Image source={require("../assets/img2.png")} />
+        </View>
+        <View style={styles.formContainer}>
+         
+            <Text style={styles.text}>Verify Your Phone</Text>
+            <Text style={styles.text2}>
+              Please input the OTP sent to your mobile number
+            </Text>
+            <Text style={styles.text3}>OTP</Text>
+            <TextInput
+            
+              maxLength={4}
+              secureTextEntry
+              textAlign="left"
+              placeholderTextColor={"#49454F"}
+              inputMode="numeric"
+              style={styles.input}
+              value={OTP}
+              onChangeText={(value) => setOTP(value)}
+            />
+            {!OtpResponse && (
+              <Text style={{ color: "red" }}>
+                You have entered an incorrect OTP !
+              </Text>
+            )}
+            <Pressable
+              style={isLoading ? styles.disabledButton : styles.button}
+              isDisabled={isLoading || isButtonDisabled}
+              isLoadingText="verifying OTP"
+              onPress={handleSubmit}
+            >
+              {isLoading ? (
+                <View style={styles.buttonContent} >
+                  <ActivityIndicator color="white" size="small" />
+                  <Text style={styles.spinnerText}>Verifying</Text>
+                </View>
+              ) : (
+                <Text style={styles.btntxt}>Verify</Text>
+              )}
+            </Pressable>
+            <View style={{ flex : 1 }} />
+         
+        </View>
+      </SafeAreaView>
     </KeyboardAwareScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
-    justifyContent: "center",
     flex: 1,
-    top:20
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   imageContainer: {
     alignItems: 'center',
     marginBottom: 20,
-    top:10
+    top: 10
+  },
+  formContainer: {
+    flex: 1,
+    marginHorizontal: 10,
+    justifyContent: "flex-end",
+    padding: 10,
   },
   text: {
     fontSize: 24,
-    fontWeight: "bold",
-    padding: 5,
+    fontWeight: 'bold',
+    paddingBottom: 10,
+    textAlign: 'left',
   },
   text2: {
-    fontSize: 12,
-    fontWeight: "400",
+    fontSize: 15,
+    fontWeight: '500',
     lineHeight: 21,
+    color: 'grey',
     letterSpacing: 0.32,
     paddingBottom: 20,
+    textAlign: 'left',
   },
   text3: {
-    fontSize: 16,
-    fontWeight: "600",
-    color: "grey",
+    fontSize: 18,
+    fontWeight: '600',
+    color: 'grey',
     lineHeight: 21,
     letterSpacing: -0.32,
+    paddingBottom: 5,
+    textAlign: 'left',
   },
   input: {
-    height: 50,
+    height: 60,
     borderWidth: 1,
-    fontSize: 16,
-    fontWeight: "400",
+    fontSize: 20,
+    fontWeight: '400',
     lineHeight: 21,
     borderRadius: 4,
-    borderColor: "#1B1B1B",
-    backgroundColor: "#ffff",
-    shadowColor: "rgba(0, 1, 0, 1)",
-    shadowOpacity: 0.8,
-    elevation: 6,
-    shadowRadius: 15,
-    shadowOffset: { width: 1, height: 13 },
+    borderColor: '#ccc',
+    backgroundColor: '#ffffff',
+    shadowColor: 'rgba(0, 1, 0, 1)',
+    padding: 10,
+
   },
   button: {
     backgroundColor: "#6A0DAD",
@@ -163,7 +173,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 1, height: 13 }
   },
   btntxt: {
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: "900",
     color: "white",
   },
@@ -184,6 +194,6 @@ const styles = StyleSheet.create({
   buttonContent: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center', 
+    justifyContent: 'center',
   },
 });
