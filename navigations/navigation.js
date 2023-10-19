@@ -20,8 +20,9 @@ import Search from "../screens/SearchScreen";
 import Stepper from "../screens/service_order";
 
 //testing screens
-import  Dev from "../LakshitModule/Dev"
-import Devotp from "../LakshitModule/Devotp"
+import Dev from "../LakshitModule/Dev";
+import Devotp from "../LakshitModule/Devotp";
+import Items from "../LakshitModule/Items";
 
 import { AuthContext } from "../store/auth-context";
 
@@ -42,7 +43,7 @@ const BottomTabs = createBottomTabNavigator();
 function AuthStack() {
   return (
     <Stack.Navigator
-      initialRouteName="Dev"
+      initialRouteName="Items"
       screenOptions={{
         animation: "slide_from_right", //<-- this is what will do the trick
         presentation: "card",
@@ -52,11 +53,17 @@ function AuthStack() {
       }}
     >
       {/* <Stack.Screen name="Login" component={GoogleSignIn} options={{ headerShown: false }} /> */}
-      
+
       {/* Lakshit Testing screen stack ----------------------------------------*/}
       <Stack.Screen
         name="Dev"
         component={Dev}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="Items"
+        component={Items}
         options={{ headerShown: false }}
       />
 
