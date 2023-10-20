@@ -57,7 +57,7 @@ export default function Devotp() {
     >
       <SafeAreaView style={styles.container}>
         <View style={styles.imageContainer}>
-          <Image source={require("../assets/img2.png")} />
+        <Image style={{width:350,height:350,top:20}} source={require("../assets/pic2.png")} />
         </View>
         <View style={styles.formContainer}>
          

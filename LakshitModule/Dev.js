@@ -64,7 +64,7 @@ export default function Dev() {
     >
       <SafeAreaView style={styles.container}>
         <View style={styles.imageContainer}>
-          <Image source={require("../assets/img1.png")} />
+          <Image style={{width:350,height:350}} source={require("../assets/pic1.png")} />
         </View>
         <View style={styles.formContainer}>
           <Text style={styles.text}>

@@ -1,47 +1,39 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  ScrollView,
-  StyleSheet,
-  Pressable,
-  Image,
-  ActivityIndicator
-} from "react-native";
+import {View,Text,ScrollView,StyleSheet, Pressable,Image,ActivityIndicator} from "react-native";
+import * as Progress from "react-native-progress";
 import Feed from "./Feed";
-import * as Progress from 'react-native-progress'
 
-const MyPage = () => {
+const List = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [isLoading, setisLoading] = useState(false);
-
   return (
     <View style={styles.container}>
-        <Progress.Bar style={{
-        top:120,
-        borderRadius:10,
-      }} 
-        progress={0.2} 
-        color={'#A780E8'}
+      <Progress.Bar
+        style={{
+          top: 120,
+          borderRadius: 10,
+        }}
+        progress={0.7}
+        color={"#A780E8"}
         width={277}
         borderWidth={1}
-        borderColor={'#A780E8'}
-        unfilledColor={'white'}
+        borderColor={"#A780E8"}
+        unfilledColor={"white"}
         height={12}
-         />
-
-      <Text style={styles.questionText}>Your Native Language ?</Text>
+      />
+      <Text style={styles.BarText}>Almost Done...</Text>
+      <Text style={styles.questionText}>Pick Your Interest !</Text>
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.imageCardContainer}
       >
-        {Feed.slice(0,9).map((imageCard) => (
-          <View key={imageCard.id} style={[styles.card,styles.cardElevation]}>
+        {Feed.map((imageCard) => (
+          <View key={imageCard.id} style={[styles.card, styles.cardElevation]}>
             <Image
-              source={{ uri: imageCard.imageSource }}
+              source={{ uri: imageCard.imageSource2 }}
               style={styles.image}
             />
-            {/* <Text style={styles.Cardtext}>{imageCard.Language}</Text> */}
+            <Text style={styles.Cardtext}>{imageCard.Interest}</Text>
           </View>
         ))}
       </ScrollView>
@@ -56,7 +48,7 @@ const MyPage = () => {
             <Text style={styles.spinnerText}>Verifying</Text>
           </View>
         ) : (
-          <Text style={styles.btntxt}>Next</Text>
+          <Text style={styles.btntxt}>Continue</Text>
         )}
       </Pressable>
     </View>
@@ -74,13 +66,21 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "900",
     lineHeight: 29.26,
-    marginVertical: 40,
-    paddingTop: 130,
+    marginVertical: 20,
+    paddingTop: 125,
   },
   imageCardContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
+  },
+  Cardtext: {
+    fontSize: 16,
+    bottom: 30,
+    color: "white",
+    fontWeight: "900",
+    lineHeight: 21,
+    letterSpacing: -0.32,
   },
   card: {
     width: "30%",
@@ -102,12 +102,15 @@ const styles = StyleSheet.create({
     height: "100%",
     borderRadius: 10,
   },
-  Cardtext: {
+  BarText: {
+    top: 125,
+    lineHeight: 21,
+    letterSpacing: -0.32,
+    alignItems: "center",
+    marginRight: 165,
     fontSize: 16,
-    fontWeight: "900",
-    bottom: 30,
-    marginLeft: 25,
-    color: "#ffff",
+    fontWeight: "700",
+    color: "#A780E8",
   },
   btntxt: {
     fontSize: 20,
@@ -152,4 +155,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MyPage;
+export default List;
