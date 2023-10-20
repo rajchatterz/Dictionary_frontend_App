@@ -22,8 +22,8 @@ import Stepper from "../screens/service_order";
 //testing screens
 import Dev from "../LakshitModule/Dev";
 import Devotp from "../LakshitModule/Devotp";
-import Items from "../LakshitModule/Items";
-import List from "../LakshitModule/List";
+import SignUp3 from "../screens/Auth/SignUp3";
+import SignUp5 from "../screens/Auth/SignUp5";
 
 import { AuthContext } from "../store/auth-context";
 
@@ -44,7 +44,7 @@ const BottomTabs = createBottomTabNavigator();
 function AuthStack() {
   return (
     <Stack.Navigator
-      initialRouteName="Devotp"
+      initialRouteName="SignUp3"
       screenOptions={{
         animation: "slide_from_right", //<-- this is what will do the trick
         presentation: "card",
@@ -63,14 +63,14 @@ function AuthStack() {
       />
 
       <Stack.Screen
-        name="Items"
-        component={Items}
+        name="SignUp3"
+        component={SignUp3}
         options={{ headerShown: false }}
       />
 
       <Stack.Screen
-        name="List"
-        component={List}
+        name="SignUp5"
+        component={SignUp5}
         options={{ headerShown: false }}
       />
 

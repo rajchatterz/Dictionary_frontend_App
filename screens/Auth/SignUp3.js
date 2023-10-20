@@ -1,39 +1,49 @@
 import React, { useState } from "react";
-import {View,Text,ScrollView,StyleSheet, Pressable,Image,ActivityIndicator} from "react-native";
-import * as Progress from "react-native-progress";
-import Feed from "./Feed";
+import {
+  View,
+  Text,
+  ScrollView,
+  StyleSheet,
+  Pressable,
+  Image,
+  ActivityIndicator
+} from "react-native";
+import Feed from "../../LakshitModule/Feed";
+import * as Progress from 'react-native-progress'
+import { useNavigation } from "@react-navigation/native";
 
-const List = () => {
+const SignUp3 = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [isLoading, setisLoading] = useState(false);
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
-      <Progress.Bar
-        style={{
-          top: 120,
-          borderRadius: 10,
-        }}
-        progress={0.7}
-        color={"#A780E8"}
+        <Progress.Bar style={{
+        top:120,
+        borderRadius:10,
+      }} 
+        progress={0.2} 
+        color={'#A780E8'}
         width={277}
         borderWidth={1}
-        borderColor={"#A780E8"}
-        unfilledColor={"white"}
+        borderColor={'#A780E8'}
+        unfilledColor={'white'}
         height={12}
-      />
-      <Text style={styles.BarText}>Almost Done...</Text>
-      <Text style={styles.questionText}>Pick Your Interest !</Text>
+         />
+
+      <Text style={styles.questionText}>Your Native Language ?</Text>
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.imageCardContainer}
       >
-        {Feed.map((imageCard) => (
-          <View key={imageCard.id} style={[styles.card, styles.cardElevation]}>
+        {Feed.slice(0,9).map((imageCard) => (
+          <View key={imageCard.id} style={[styles.card,styles.cardElevation]}>
             <Image
-              source={{ uri: imageCard.imageSource2 }}
+              source={{ uri: imageCard.imageSource }}
               style={styles.image}
             />
-            <Text style={styles.Cardtext}>{imageCard.Interest}</Text>
+            {/* <Text style={styles.Cardtext}>{imageCard.Language}</Text> */}
           </View>
         ))}
       </ScrollView>
@@ -41,6 +51,7 @@ const List = () => {
         style={isLoading ? styles.disabledButton : styles.button}
         isDisabled={isLoading || isButtonDisabled}
         isLoadingText="verifying"
+        onPress={()=> navigation.navigate("SignUp5")}
       >
         {isLoading ? (
           <View style={styles.buttonContent}>
@@ -48,7 +59,7 @@ const List = () => {
             <Text style={styles.spinnerText}>Verifying</Text>
           </View>
         ) : (
-          <Text style={styles.btntxt}>Continue</Text>
+          <Text style={styles.btntxt}>Next</Text>
         )}
       </Pressable>
     </View>
@@ -66,21 +77,13 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "900",
     lineHeight: 29.26,
-    marginVertical: 20,
-    paddingTop: 125,
+    marginVertical: 40,
+    paddingTop: 130,
   },
   imageCardContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
-  },
-  Cardtext: {
-    fontSize: 16,
-    bottom: 30,
-    color: "white",
-    fontWeight: "900",
-    lineHeight: 21,
-    letterSpacing: -0.32,
   },
   card: {
     width: "30%",
@@ -102,15 +105,12 @@ const styles = StyleSheet.create({
     height: "100%",
     borderRadius: 10,
   },
-  BarText: {
-    top: 125,
-    lineHeight: 21,
-    letterSpacing: -0.32,
-    alignItems: "center",
-    marginRight: 165,
+  Cardtext: {
     fontSize: 16,
-    fontWeight: "700",
-    color: "#A780E8",
+    fontWeight: "900",
+    bottom: 30,
+    marginLeft: 25,
+    color: "#ffff",
   },
   btntxt: {
     fontSize: 20,
@@ -155,4 +155,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default List;
+export default SignUp3;
