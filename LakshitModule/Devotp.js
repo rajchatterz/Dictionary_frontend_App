@@ -32,7 +32,7 @@ export default function Devotp() {
 
       if (data.code === 200) {
         setisLoading(false);
-        navigation.navigate("Signup");
+        navigation.navigate("SignUp3");
       } else if (data.code === 201) {
         setisLoading(false);
         await authCtx.authenticate(data.token.access.token);

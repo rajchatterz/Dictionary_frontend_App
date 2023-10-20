@@ -2,10 +2,23 @@ import React, { useState } from "react";
 import {View,Text,ScrollView,StyleSheet, Pressable,Image,ActivityIndicator} from "react-native";
 import * as Progress from "react-native-progress";
 import Feed from "../../LakshitModule/Feed";
+import { useNavigation } from "@react-navigation/native";
 
 const SignUp5 = () => {
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-  const [isLoading, setisLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [selectedImages, setSelectedImages] = useState([]);
+  const navigation = useNavigation();
+
+  const toggleImageSelection = (imageId) => {
+    if (selectedImages.includes(imageId)) {
+      // If the image is already selected, remove it from the array
+      setSelectedImages(selectedImages.filter(id => id !== imageId));
+    } else {
+      // If the image is not selected, add it to the array
+      setSelectedImages([...selectedImages, imageId]);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Progress.Bar
@@ -22,25 +35,41 @@ const SignUp5 = () => {
         height={12}
       />
       <Text style={styles.BarText}>Almost Done...</Text>
-      <Text style={styles.questionText}>Pick Your Interest !</Text>
+      <Text style={styles.questionText}>Pick All Your Interested Topics!</Text>
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.imageCardContainer}
       >
         {Feed.map((imageCard) => (
-          <View key={imageCard.id} style={[styles.card, styles.cardElevation]}>
-            <Image
-              source={{ uri: imageCard.imageSource2 }}
-              style={styles.image}
-            />
-            <Text style={styles.Cardtext}>{imageCard.Interest}</Text>
+          <View
+            key={imageCard.id}
+            style={[
+              styles.card,
+              styles.cardElevation,
+              selectedImages.includes(imageCard.id) && styles.selectedImage,
+            ]}
+          >
+            <Pressable
+              style={styles.imageContainer}
+              onPress={() => toggleImageSelection(imageCard.id)}
+            >
+              <Image source={{ uri: imageCard.imageSource }} style={styles.image} />
+              {selectedImages.includes(imageCard.id) && <View style={styles.overlay} />}
+            </Pressable>
+            <View style={styles.imageTextContainer}>
+              <Text style={styles.imageText}>{imageCard.Interest}</Text>
+            </View>
           </View>
         ))}
       </ScrollView>
       <Pressable
-        style={isLoading ? styles.disabledButton : styles.button}
-        isDisabled={isLoading || isButtonDisabled}
-        isLoadingText="verifying"
+        style={isLoading || selectedImages.length === 0 ? styles.disabledButton : styles.button}
+        disabled={isLoading || selectedImages.length === 0}
+        onPress={() => {
+          // Handle the "Next" button press here, for example, navigate to the next screen.
+          // You can also pass the selectedImages array to the next screen if needed.
+          navigation.navigate("NextScreen", { selectedImages });
+        }}
       >
         {isLoading ? (
           <View style={styles.buttonContent}>
@@ -48,7 +77,7 @@ const SignUp5 = () => {
             <Text style={styles.spinnerText}>Verifying</Text>
           </View>
         ) : (
-          <Text style={styles.btntxt}>Continue</Text>
+          <Text style={styles.btntxt}>Next</Text>
         )}
       </Pressable>
     </View>
@@ -56,52 +85,8 @@ const SignUp5 = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 16,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  questionText: {
-    fontSize: 24,
-    fontWeight: "900",
-    lineHeight: 29.26,
-    marginVertical: 20,
-    paddingTop: 125,
-  },
-  imageCardContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-  },
-  Cardtext: {
-    fontSize: 16,
-    bottom: 30,
-    color: "white",
-    fontWeight: "900",
-    lineHeight: 21,
-    letterSpacing: -0.32,
-  },
-  card: {
-    width: "30%",
-    aspectRatio: 0.8,
-    marginVertical: 6,
-    borderColor: "#ddd",
-    borderRadius: 10,
-  },
-  cardElevation: {
-    shadowColor: "black",
-    shadowOpacity: 0.8,
-    elevation: 6,
-    shadowRadius: 10,
-    shadowOffset: { width: -3, height: 13 },
-  },
-  image: {
-    flex: 1,
-    width: "100%",
-    height: "100%",
-    borderRadius: 10,
-  },
+ 
+ 
   BarText: {
     top: 125,
     lineHeight: 21,
@@ -111,6 +96,75 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "700",
     color: "#A780E8",
+  },
+  container: {
+    flex: 1,
+    padding: 16,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  progressBar: {
+    top: 120,
+    borderRadius: 10,
+  },
+  questionText: {
+    fontSize: 24,
+    fontWeight: "900",
+    lineHeight: 29.26,
+    marginVertical: 40,
+    paddingTop: 130,
+  },
+  imageCardContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+  },
+  card: {
+    width: "30%",
+    aspectRatio: 0.8,
+    marginVertical: 6,
+    borderColor: "#ddd",
+    borderRadius: 10,
+    shadowColor: "black",
+    shadowOpacity: 0.8,
+    elevation: 6,
+    shadowRadius: 10,
+    shadowOffset: { width: -3, height: 13 },
+  },
+  imageContainer: {
+    flex: 1,
+    width: "100%",
+    height: "100%",
+  },
+  image: {
+    flex: 1,
+    width: "100%",
+    height: "100%",
+    borderRadius: 10,
+  },
+  selectedImage: {
+    borderWidth: 2,
+    borderColor: "transparent",
+  },
+  overlay: {
+    ...StyleSheet.absoluteFillObject,
+    borderRadius:10,
+    backgroundColor: "rgba(106, 13, 173, 0.5)", // Customize the overlay color and opacity
+  },
+  imageTextContainer: {
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
+    backgroundColor: "rgba(0, 0, 0, 0.3)",
+    padding: 5,
+    alignItems: "center",
+    borderBottomRightRadius: 10,
+    borderBottomLeftRadius: 10,
+  },
+  imageText: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "white",
   },
   btntxt: {
     fontSize: 20,
