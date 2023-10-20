@@ -44,7 +44,7 @@ const BottomTabs = createBottomTabNavigator();
 function AuthStack() {
   return (
     <Stack.Navigator
-      initialRouteName="SignUp3"
+      initialRouteName="Dev"
       screenOptions={{
         animation: "slide_from_right", //<-- this is what will do the trick
         presentation: "card",
