@@ -7,6 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 const SignUp5 = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedImages, setSelectedImages] = useState([]);
+  const [progress,setProgress] = useState(0.8)
   const navigation = useNavigation();
 
   const toggleImageSelection = (imageId) => {
@@ -26,7 +27,7 @@ const SignUp5 = () => {
           top: 120,
           borderRadius: 10,
         }}
-        progress={0.7}
+        progress={progress}
         color={"#A780E8"}
         width={277}
         borderWidth={1}
@@ -68,7 +69,7 @@ const SignUp5 = () => {
         onPress={() => {
           // Handle the "Next" button press here, for example, navigate to the next screen.
           // You can also pass the selectedImages array to the next screen if needed.
-          navigation.navigate("NextScreen", { selectedImages });
+          navigation.navigate("NextScreen",setProgress(progress+0.2), { selectedImages });
         }}
       >
         {isLoading ? (

@@ -17,13 +17,14 @@ const SignUp3 = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [progress,setProgress]=useState(0.4)
   const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
       <Progress.Bar
         style={styles.progressBar}
-        progress={0.2}
+        progress={progress}
         color={"#A780E8"}
         width={277}
         borderWidth={1}
@@ -54,7 +55,7 @@ const SignUp3 = () => {
               {selectedImage === imageCard.id && <View style={styles.overlay} />}
             </Pressable>
             <View style={styles.imageTextContainer}>
-              <Text style={styles.imageText}>{imageCard.Interest}</Text>
+              <Text style={styles.imageText}>{imageCard.Language}</Text>
             </View>
           </View>
         ))}
@@ -62,7 +63,7 @@ const SignUp3 = () => {
       <Pressable
         style={isLoading ? styles.disabledButton : styles.button}
         disabled={isLoading || isButtonDisabled}
-        onPress={() => navigation.navigate("SignUp5")}
+        onPress={() => navigation.navigate("SignUp4",setProgress(progress+0.2))}
       >
         {isLoading ? (
           <View style={styles.buttonContent}>

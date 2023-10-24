@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
 import { GlobalStyles } from "../constants/style";
 import Learn from "../screens/LearnScreen";
@@ -20,10 +21,13 @@ import Search from "../screens/SearchScreen";
 import Stepper from "../screens/service_order";
 
 //testing screens
-import Dev from "../LakshitModule/Dev";
-import Devotp from "../LakshitModule/Devotp";
+import SignUp1 from "../LakshitModule/SignUp1";
+import SignUp2 from "../LakshitModule/SignUp2";
 import SignUp3 from "../screens/Auth/SignUp3";
+import SignUp4 from "../LakshitModule/SignUp4";
 import SignUp5 from "../screens/Auth/SignUp5";
+import BoardingScreen1 from "../LakshitModule/BoardingScreen1";
+import BoardingScreen2 from "../LakshitModule/BoardingScreen2";
 
 import { AuthContext } from "../store/auth-context";
 
@@ -35,6 +39,7 @@ import OTPPage from "../screens/Auth/otp";
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
+const TopTab = createMaterialTopTabNavigator();
 
 //used for navigating from one screen to other in stack navigation
 
@@ -44,7 +49,7 @@ const BottomTabs = createBottomTabNavigator();
 function AuthStack() {
   return (
     <Stack.Navigator
-      initialRouteName="Dev"
+      initialRouteName="SignUp1"
       screenOptions={{
         animation: "slide_from_right", //<-- this is what will do the trick
         presentation: "card",
@@ -55,32 +60,33 @@ function AuthStack() {
     >
       {/* <Stack.Screen name="Login" component={GoogleSignIn} options={{ headerShown: false }} /> */}
 
-      {/* Lakshit Testing screen stack ----------------------------------------*/}
+     {/* Lakshit Testing Stack Screen  ----------------------------------------*/}
       <Stack.Screen
-        name="Dev"
-        component={Dev}
-        options={{ headerShown: false }}
+       name="SignUp1"
+       component={SignUp1}
+       options={{ headerShown: false }}
       />
-
       <Stack.Screen
-        name="SignUp3"
-        component={SignUp3}
-        options={{ headerShown: false }}
+       name="SignUp2"
+       component={SignUp2}
+       options={{ headerShown: false }}
       />
-
       <Stack.Screen
-        name="SignUp5"
-        component={SignUp5}
-        options={{ headerShown: false }}
+      name="TopTab"
+      component={TopTabNavigation}
+      options={{ headerShown: false}}
       />
-
       <Stack.Screen
-        name="Devotp"
-        component={Devotp}
-        options={{ headerShown: false }}
+       name="Boarding1"
+       component={BoardingScreen1}
+       options={{ headerShown: false }}
       />
-
-      {/* --------------------------------------------------------------- */}
+      <Stack.Screen
+       name="Boarding2"
+       component={BoardingScreen2}
+       options={{ headerShown: false }}
+      />
+    {/* --------------------------------------------------------------- */}
 
       <Stack.Screen
         name="Login"
@@ -99,6 +105,27 @@ function AuthStack() {
       />
     </Stack.Navigator>
   );
+}
+
+//TopTabNavigator
+
+function TopTabNavigation(){
+  return (
+    <TopTab.Navigator>
+      <TopTab.Screen
+       name="SignUp3"
+       component={SignUp3}
+      />
+       <TopTab.Screen
+       name="SignUp4"
+       component={SignUp4}
+      />
+      <TopTab.Screen
+       name="SignUp5"
+       component={SignUp5}
+      />
+    </TopTab.Navigator>
+  )
 }
 
 function NotificationsStack() {
@@ -335,6 +362,7 @@ function BottomTabNavigationfun() {
     </BottomTabs.Navigator>
   );
 }
+
 
 function AuthenticatedStack() {
   return (
