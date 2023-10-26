@@ -46,7 +46,7 @@ export default function Dev() {
         console.log("login-contact", contact);
         await authCtx.authenticateContact(contact);
         setIsLoading(false);
-        navigation.navigate("Devotp");
+        navigation.navigate("OTP");
       } else {
         console.log(data.message);
         setIsLoading(false);

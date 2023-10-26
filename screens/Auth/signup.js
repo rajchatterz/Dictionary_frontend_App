@@ -29,7 +29,6 @@ const SignupPage = () => {
       // Make a POST request to the API with the contact
       handleDismissKeyboard
       
-    
       
      const contact= await AsyncStorage.getItem('contact');
      const password = contact + "Pass@123"
@@ -42,7 +41,7 @@ const SignupPage = () => {
         console.log("Code 200")
         setIsLoading(false)
         await authCtx.authenticate(data.token.access.token)
-        navigation.navigate('home');
+        navigation.navigate('SignUp1');
       }else
       {
         setSlideAlertMessage('Sorry, Looks like somthing went wrong !');

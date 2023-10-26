@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import * as Progress from "react-native-progress";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SignUp3 = () => {
 
@@ -18,7 +19,29 @@ const SignUp3 = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [progress,setProgress]=useState(0.4)
+  const [error,setError] = useState()
   const navigation = useNavigation();
+
+
+  const ImageSelector = () => {
+    try{
+      if(selectedImage.trim() === '')
+    {
+      setError('Please Select one option!')
+      setProgress(0.4)
+    }
+    else{
+        AsyncStorage.setItem("native_language",selectedImage)
+        navigation.navigate("SignUp4")
+        setProgress(progress+0.2)
+        console.log(selectedImage)
+
+      }
+    }
+    catch{
+      console.error('Error storing data:', error);
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -26,11 +49,12 @@ const SignUp3 = () => {
         style={styles.progressBar}
         progress={progress}
         color={"#A780E8"}
-        width={277}
+        width={350}
         borderWidth={1}
         borderColor={"#A780E8"}
         unfilledColor={"white"}
         height={12}
+        animationType="timing"
       />
 
       <Text style={styles.questionText}>Your Native Language?</Text>
@@ -49,10 +73,10 @@ const SignUp3 = () => {
           >
             <Pressable
               style={styles.imageContainer}
-              onPress={() => setSelectedImage(imageCard.id)}
+              onPress={() => setSelectedImage(imageCard.Language)}
             >
               <Image source={{ uri: imageCard.imageSource }} style={styles.image} />
-              {selectedImage === imageCard.id && <View style={styles.overlay} />}
+              {selectedImage === imageCard.Language && <View style={styles.overlay} />}
             </Pressable>
             <View style={styles.imageTextContainer}>
               <Text style={styles.imageText}>{imageCard.Language}</Text>
@@ -63,7 +87,7 @@ const SignUp3 = () => {
       <Pressable
         style={isLoading ? styles.disabledButton : styles.button}
         disabled={isLoading || isButtonDisabled}
-        onPress={() => navigation.navigate("SignUp4",setProgress(progress+0.2))}
+        onPress={ImageSelector}
       >
         {isLoading ? (
           <View style={styles.buttonContent}>
@@ -84,17 +108,18 @@ const styles = StyleSheet.create({
     padding: 16,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor:'white'
   },
   progressBar: {
-    top: 120,
+    top: 62,
     borderRadius: 10,
   },
   questionText: {
     fontSize: 24,
     fontWeight: "900",
     lineHeight: 29.26,
-    marginVertical: 40,
-    paddingTop: 130,
+    marginVertical: 55,
+    paddingTop: 65,
   },
   imageCardContainer: {
     flexDirection: "row",
@@ -180,7 +205,7 @@ const styles = StyleSheet.create({
     height: 50,
     width: "90%",
     marginTop: 40,
-    bottom: 20,
+    bottom: 30,
     borderRadius: 8,
     justifyContent: "center",
     alignItems: "center",

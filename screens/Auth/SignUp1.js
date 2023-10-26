@@ -1,17 +1,49 @@
-import { StyleSheet, Text, View, TextInput, SafeAreaView,Pressable } from "react-native";
+import { StyleSheet, Text, View, TextInput, SafeAreaView,Pressable,ActivityIndicator} from "react-native";
 import React,{useState} from "react";
 import * as Progress from "react-native-progress";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from "@react-navigation/native";
 
 export default function SignUp1() {
-  const [Name, setName] = useState("");
+  const [name, setName] = useState("");
   const[progress,setProgress] = useState(0.05)
-  const [Email, setEmail] = useState("");
+  const [email, setEmail] = useState("");
   const [contact, setContact] = useState("");
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+
   const navigation = useNavigation();
+
+  const storeData = async () => {
+
+    try {
+      if(name.trim() === '' || email.trim() === '' || contact.trim() === '')
+    {
+      setError('Please Filled all the required details')
+      setProgress(0.05)
+    }
+    else{
+      setError('')
+      await AsyncStorage.setItem('name',name); 
+      await AsyncStorage.setItem('email',email);
+      await AsyncStorage.setItem('contact',contact);
+      console.log('Data stored successfully.');
+      console.log(name,email,contact)
+      navigation.navigate('SignUp2')
+      setProgress(progress+0.2)
+
+      // clearing the fields after submitting the data
+      setName('')
+      setEmail('')
+      setContact('')
+      setProgress(0.05)
+    }
+    } catch (error) {
+      console.error('Error storing data:', error);
+    }
+  };
 
   return (
     <KeyboardAwareScrollView
@@ -23,11 +55,12 @@ export default function SignUp1() {
           style={styles.progressBar}
           progress={progress}
           color={"#A780E8"}
-          width={277}
+          width={350}
           borderWidth={1}
           borderColor={"#A780E8"}
           unfilledColor={"white"}
           height={12}
+          animationType="timing"
         />
         <Text style={styles.questionText}>Let us know you better.</Text>
         <View
@@ -39,20 +72,22 @@ export default function SignUp1() {
             textAlignVertical="center"
             placeholderTextColor="#C4C4C4"
             inputMode="text"
-            value={Name}
+            value={name}
             onChangeText={(text) => setName(text)}
             style={styles.input}
           />
+
           <Text style={styles.inputText}>Email</Text>
           <TextInput
             placeholder="@gmail.com"
             textAlignVertical="center"
             placeholderTextColor="#C4C4C4"
             inputMode="email"
-            value={Email}
+            value={email}
             onChangeText={(text) => setEmail(text)}
             style={styles.input}
           />
+
           <Text style={styles.inputText}>Phone</Text>
           <TextInput
             placeholder="+91"
@@ -61,14 +96,15 @@ export default function SignUp1() {
             inputMode="numeric"
             maxLength={10}
             value={contact}
-            onChangeText={(text) => setPhone(text)}
+            onChangeText={(text) => setContact(text)}
             style={styles.input}
           />
+
         </View>
         <Pressable
         style={isLoading ? styles.disabledButton : styles.button}
         disabled={isLoading || isButtonDisabled}
-        onPress={() => navigation.navigate("SignUp2",setProgress(progress+0.2))}
+        onPress={storeData}
       >
         {isLoading ? (
           <View style={styles.buttonContent}>
@@ -79,6 +115,7 @@ export default function SignUp1() {
           <Text style={styles.btntxt}>Next</Text>
         )}
       </Pressable>
+      <Text style={styles.errorMsg}>{error}</Text>
       </SafeAreaView>
     </KeyboardAwareScrollView>
   );
@@ -89,9 +126,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor:'white'
   },
   progressBar: {
-    top: 120,
+    top: 80,
     borderRadius: 10,
   },
   questionText: {
@@ -99,7 +137,7 @@ const styles = StyleSheet.create({
     fontWeight: "900",
     lineHeight: 29.26,
     marginVertical: 40,
-    paddingTop: 130,
+    paddingTop: 95,
   },
   FormContainer:{
     flex:1,
@@ -132,7 +170,7 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: "#6A0DAD",
-    width:350,
+    width: 350,
     height:50,
     bottom: 50,
     borderRadius: 8,
@@ -147,7 +185,8 @@ const styles = StyleSheet.create({
   disabledButton: {
     backgroundColor: "#9B68B2",
     height: 50,
-    width: "90%",
+    width: 350,
+    top:-50,
     borderRadius: 8,
     justifyContent: "center",
     alignItems: "center",
@@ -170,4 +209,11 @@ const styles = StyleSheet.create({
     color: "white",
     marginLeft: 10,
   },
+  errorMsg:{
+    color:'red',
+    fontSize:15,
+    fontWeight:'bold',
+    margin:2,
+    bottom:40
+  }
 });
