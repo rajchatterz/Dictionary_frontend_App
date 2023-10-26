@@ -21,13 +21,13 @@ import Search from "../screens/SearchScreen";
 import Stepper from "../screens/service_order";
 
 //testing screens
-import SignUp1 from "../LakshitModule/SignUp1";
-import SignUp2 from "../LakshitModule/SignUp2";
+import SignUp1 from "../screens/Auth/SignUp1";
+import SignUp2 from "../screens/Auth/SignUp2";
 import SignUp3 from "../screens/Auth/SignUp3";
-import SignUp4 from "../LakshitModule/SignUp4";
+import SignUp4 from "../screens/Auth/SignUp4";
 import SignUp5 from "../screens/Auth/SignUp5";
-import BoardingScreen1 from "../LakshitModule/BoardingScreen1";
-import BoardingScreen2 from "../LakshitModule/BoardingScreen2";
+import BoardingScreen1 from "../screens/Auth/BoardingScreen1";
+import BoardingScreen2 from "../screens/Auth/BoardingScreen2";
 
 import { AuthContext } from "../store/auth-context";
 
@@ -49,7 +49,7 @@ const TopTab = createMaterialTopTabNavigator();
 function AuthStack() {
   return (
     <Stack.Navigator
-      initialRouteName="SignUp1"
+      initialRouteName="Boarding1"
       screenOptions={{
         animation: "slide_from_right", //<-- this is what will do the trick
         presentation: "card",
@@ -61,16 +61,6 @@ function AuthStack() {
       {/* <Stack.Screen name="Login" component={GoogleSignIn} options={{ headerShown: false }} /> */}
 
      {/* Lakshit Testing Stack Screen  ----------------------------------------*/}
-      <Stack.Screen
-       name="SignUp1"
-       component={SignUp1}
-       options={{ headerShown: false }}
-      />
-      <Stack.Screen
-       name="SignUp2"
-       component={SignUp2}
-       options={{ headerShown: false }}
-      />
       <Stack.Screen
       name="TopTab"
       component={TopTabNavigation}
@@ -111,18 +101,39 @@ function AuthStack() {
 
 function TopTabNavigation(){
   return (
-    <TopTab.Navigator>
+    <TopTab.Navigator
+    screenOptions={{
+      tabBarActiveTintColor: 'white',
+      tabBarInactiveTintColor: 'white',
+      tabBarIndicatorStyle:{
+        backgroundColor:'white'
+      }
+    }}
+    >
+       <TopTab.Screen
+       name="SignUp1"
+       component={SignUp1}
+       options={{ headerShown: false,swipeEnabled:true }}
+      />
+      <TopTab.Screen
+       name="SignUp2"
+       component={SignUp2}
+       options={{ headerShown: false,swipeEnabled:true }}
+      />
       <TopTab.Screen
        name="SignUp3"
        component={SignUp3}
+       options={{ headerShown: false,swipeEnabled:true}}
       />
        <TopTab.Screen
        name="SignUp4"
        component={SignUp4}
+       options={{ headerShown: false,swipeEnabled:true}}
       />
       <TopTab.Screen
        name="SignUp5"
        component={SignUp5}
+       options={{ headerShown: false,swipeEnabled:true}}
       />
     </TopTab.Navigator>
   )

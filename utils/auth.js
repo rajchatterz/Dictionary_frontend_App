@@ -31,7 +31,7 @@ async function authenticate_otp(contact, otp) {
 
 }
 
-async function authenticate_signup(contact, password, name , email) {
+async function authenticate_signup(contact, password, name , email,level_of_english,native_language,examAspirant,topics) {
   try {
     const url = base_url + `/v1/auth/register`;
     console.log("In Signup...........................................")
@@ -40,6 +40,10 @@ async function authenticate_signup(contact, password, name , email) {
       password: password,
       name: name,
       email: email,
+      level_of_english: level_of_english,
+      native_language:native_language,
+      examAspirant:true,
+      topics:topics
     });
     console.log("REquest send.........................................")
     return response.data;
@@ -65,9 +69,9 @@ export function verify_otp(contact, otp) {
   return authenticate_otp(contact, otp);
 }
 
-export function signup(contact, password, name , email) {
-  console.log(contact, password, name , email)
-  return authenticate_signup(contact, password, name , email);
+export function signup(contact, password, name , email,level_of_english,native_language,examAspirant,topics) {
+  console.log(contact, password, name , email,level_of_english,native_language,examAspirant,topics)
+  return authenticate_signup(contact, password, name , email,level_of_english,native_language,examAspirant,topics);
 }
 
 export function logout() {

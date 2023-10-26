@@ -3,12 +3,14 @@ import React, { useState } from "react";
 import * as Progress from "react-native-progress";
 import { RadioButton } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function SignUp2() {
   const [selectedValue, setSelectedValue] = useState("option1");
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [isLoading, setisLoading] = useState(false);
   const [progress,setProgress]=useState(0.2)
+  const [error, setError] = useState('');
   const navigation = useNavigation();
 
   const options = [
@@ -18,17 +20,42 @@ export default function SignUp2() {
     { label: "     Advanced", value: "option4" },
   ];
 
+  const handleRadioSelect = () => {
+    try{
+      if(selectedValue.trim() === '')
+    {
+      setError('Please Select one option!')
+      setProgress(0.2)
+    }
+    else{
+      setError('')
+      AsyncStorage.setItem('level_of_english',selectedValue)
+      navigation.navigate("SignUp3")
+      setProgress(progress+0.2)
+      console.log(selectedValue,'is Selected')
+
+      setSelectedValue('')
+      setProgress(0.2)
+    }
+  }
+    catch{
+      console.error('Error storing data:', error);
+    }
+  }
+  
+
   return (
     <View style={styles.container}>
       <Progress.Bar
         style={styles.progressBar}
         progress={progress}
         color={"#A780E8"}
-        width={277}
+        width={350}
         borderWidth={1}
         borderColor={"#A780E8"}
         unfilledColor={"white"}
         height={12}
+        animationType="timing"
       />
       <Text style={styles.questionText}>Level of English ?</Text>
       <View>
@@ -48,7 +75,7 @@ export default function SignUp2() {
               style={isLoading ? styles.disabledButton : styles.button}
               isDisabled={isLoading || isButtonDisabled}
               isLoadingText="verifying OTP"
-              onPress={()=>navigation.navigate('TopTab',setProgress(progress+0.2))}
+              onPress={handleRadioSelect}
             >
               {isLoading ? (
                 <View style={styles.buttonContent} >
@@ -59,6 +86,7 @@ export default function SignUp2() {
                 <Text style={styles.btntxt}>Next</Text>
               )}
             </Pressable>
+            <Text style={styles.errorMsg}>{error}</Text>
       </View>
     </View>
   );
@@ -69,9 +97,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor:'white'
   },
   progressBar: {
-    bottom:60,
+    bottom:80,
     borderRadius: 10,
   },
   questionText: {
@@ -79,14 +108,14 @@ const styles = StyleSheet.create({
     fontWeight: "900",
     lineHeight: 29.26,
     marginVertical: 40,
-    bottom:45
+    bottom:65
   },
   RadioContainer: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-start",
     margin: 15,
-    top:30,
+    bottom:30,
     height: 60,
     width: 328,
     borderRadius: 8,
@@ -99,7 +128,7 @@ const styles = StyleSheet.create({
   },
   RadioText: {
     fontSize: 20,
-    fontWeight: "600",
+    fontWeight: "900",
     lineHeight: 21,
     letterSpacing: -0.32,
     textAlign: "center",
@@ -109,7 +138,7 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: "#6A0DAD",
     height: 50,
-    top:130,
+    top:110,
     borderRadius: 8,
     justifyContent: "center",
     alignItems: "center",
@@ -143,4 +172,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  errorMsg:{
+    color:'red',
+    fontSize:15,
+    fontWeight:'bold',
+    margin:2,
+    bottom:50,
+    left:100
+  }
 });

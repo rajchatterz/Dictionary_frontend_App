@@ -4,7 +4,7 @@ export default [
     imageSource:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQShMOHBfPGb7D50_ZYOhDLdZl0mzLNr5Dayw&usqp=CAU',
     Language:'English',
     imageSource2:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEyq_jXOpPcM7SXHtyI8E8sa8HDZX358Sgxw&usqp=CAU',
-    Interest: "Tech",
+    Interest: "Technology",
   },
   {
     id: 2,
@@ -18,7 +18,7 @@ export default [
     imageSource:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRddLql5CC22pxnJQwU4YcXM5xqkaj_dokB4g&usqp=CAU",
     Language:'Hindi',
     imageSource2:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7S5FJ-Vi8FauVE4VeRZEVfNbv3FLLOFbQHA&usqp=CAU',
-    Interest: "Interview",
+    Interest: "English",
   },
   {
     id: 4,
