@@ -28,6 +28,7 @@ import SignUp4 from "../screens/Auth/SignUp4";
 import SignUp5 from "../screens/Auth/SignUp5";
 import BoardingScreen1 from "../screens/Auth/BoardingScreen1";
 import BoardingScreen2 from "../screens/Auth/BoardingScreen2";
+import MainHome from "../screens/MainHome";
 
 import { AuthContext } from "../store/auth-context";
 
@@ -49,7 +50,7 @@ const TopTab = createMaterialTopTabNavigator();
 function AuthStack() {
   return (
     <Stack.Navigator
-      initialRouteName="Boarding1"
+      initialRouteName="MainHome"
       screenOptions={{
         animation: "slide_from_right", //<-- this is what will do the trick
         presentation: "card",
@@ -64,6 +65,11 @@ function AuthStack() {
       <Stack.Screen
       name="TopTab"
       component={TopTabNavigation}
+      options={{ headerShown: false}}
+      />
+      <Stack.Screen
+      name="MainHome"
+      component={MainHome}
       options={{ headerShown: false}}
       />
       <Stack.Screen
