@@ -14,7 +14,7 @@ export default function SearchComp() {
       <View style={styles.searchcontainer}>
          <Text style={styles.searchbar}>Search for Words......</Text>
 
-          <Pressable onPress={() => navigation.navigate()} style={{bottom:58,position:'absolute',left:20}}>
+          <Pressable onPress={()=>console.log("Pressed")} style={{bottom:58,position:'absolute',left:20}}>
             <Fontisto name="search" size={22} color={"#8E5BE4"}/>
         </Pressable>
     </View>
