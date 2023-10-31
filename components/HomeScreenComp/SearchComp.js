@@ -1,10 +1,11 @@
-import { StyleSheet, Text, View, TextInput, Pressable } from "react-native";
+import { StyleSheet, Text, View,Pressable} from "react-native";
 import React from "react";
 import Fontisto from 'react-native-vector-icons/Fontisto'
 import { useNavigation } from "@react-navigation/native";
 
 export default function SearchComp() {
   const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <Text style={styles.headerText}>Hello, Saransh!</Text>
@@ -14,7 +15,7 @@ export default function SearchComp() {
       <View style={styles.searchcontainer}>
          <Text style={styles.searchbar}>Search for Words......</Text>
 
-          <Pressable onPress={()=>console.log("Pressed")} style={{bottom:58,position:'absolute',left:20}}>
+          <Pressable onPress={()=>navigation.navigate('SearchComp')} style={{bottom:58,position:'absolute',left:20}}>
             <Fontisto name="search" size={22} color={"#8E5BE4"}/>
         </Pressable>
     </View>
