@@ -1,7 +1,7 @@
 import { Dimensions, StyleSheet, TextInput, View } from 'react-native'
 import React from 'react'
 
-export default function SearchComp() {
+export default function SearchSection() {
   return (
     <View style={styles.container}>
        <TextInput 

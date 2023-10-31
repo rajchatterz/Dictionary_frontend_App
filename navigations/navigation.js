@@ -7,7 +7,7 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 
 import { GlobalStyles } from "../constants/style";
 import Learn from "../screens/LearnScreen";
-import HomeScreen from "../screens/HomeScreen";
+import HomeScreen from "../screens/Home/HomeScreen";
 
 import Notification from "../screens/Notification";
 import Help from "../screens/Help";
@@ -28,8 +28,7 @@ import SignUp4 from "../screens/Auth/SignUp4";
 import SignUp5 from "../screens/Auth/SignUp5";
 import BoardingScreen1 from "../screens/Auth/BoardingScreen1";
 import BoardingScreen2 from "../screens/Auth/BoardingScreen2";
-import MainHome from "../screens/MainHome";
-import SearchComp from "../LakshitModule/SearchComp";
+import SearchSection from "../LakshitModule/SearchSection";
 
 import { AuthContext } from "../store/auth-context";
 
@@ -51,7 +50,7 @@ const TopTab = createMaterialTopTabNavigator();
 function AuthStack() {
   return (
     <Stack.Navigator
-      initialRouteName="MainHome"
+      initialRouteName="HomeScreen"
       screenOptions={{
         animation: "slide_from_right", //<-- this is what will do the trick
         presentation: "card",
@@ -62,33 +61,28 @@ function AuthStack() {
     >
       {/* <Stack.Screen name="Login" component={GoogleSignIn} options={{ headerShown: false }} /> */}
 
-     {/* Lakshit Testing Stack Screen  ----------------------------------------*/}
+      {/* Lakshit Testing Stack Screen  ----------------------------------------*/}
       <Stack.Screen
-      name="TopTab"
-      component={TopTabNavigation}
-      options={{ headerShown: false}}
+        name="TopTab"
+        component={TopTabNavigation}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
-      name="MainHome"
-      component={MainHome}
-      options={{ headerShown: false}}
+        name="Boarding1"
+        component={BoardingScreen1}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
-      name="SearchComp"
-      component={SearchComp}
-      options={{ headerShown: false}}
+        name="Boarding2"
+        component={BoardingScreen2}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
-       name="Boarding1"
-       component={BoardingScreen1}
-       options={{ headerShown: false }}
+        name="SearchSection"
+        component={SearchSection}
+        options={{ headerShown: false }}
       />
-      <Stack.Screen
-       name="Boarding2"
-       component={BoardingScreen2}
-       options={{ headerShown: false }}
-      />
-    {/* --------------------------------------------------------------- */}
+      {/* --------------------------------------------------------------- */}
 
       <Stack.Screen
         name="Login"
@@ -111,44 +105,44 @@ function AuthStack() {
 
 //TopTabNavigator
 
-function TopTabNavigation(){
+function TopTabNavigation() {
   return (
     <TopTab.Navigator
-    screenOptions={{
-      tabBarActiveTintColor: 'white',
-      tabBarInactiveTintColor: 'white',
-      tabBarIndicatorStyle:{
-        backgroundColor:'white'
-      }
-    }}
+      screenOptions={{
+        tabBarActiveTintColor: "white",
+        tabBarInactiveTintColor: "white",
+        tabBarIndicatorStyle: {
+          backgroundColor: "white",
+        },
+      }}
     >
-       <TopTab.Screen
-       name="SignUp1"
-       component={SignUp1}
-       options={{ headerShown: false,swipeEnabled:true }}
+      <TopTab.Screen
+        name="SignUp1"
+        component={SignUp1}
+        options={{ headerShown: false, swipeEnabled: true }}
       />
       <TopTab.Screen
-       name="SignUp2"
-       component={SignUp2}
-       options={{ headerShown: false,swipeEnabled:true }}
+        name="SignUp2"
+        component={SignUp2}
+        options={{ headerShown: false, swipeEnabled: true }}
       />
       <TopTab.Screen
-       name="SignUp3"
-       component={SignUp3}
-       options={{ headerShown: false,swipeEnabled:true}}
-      />
-       <TopTab.Screen
-       name="SignUp4"
-       component={SignUp4}
-       options={{ headerShown: false,swipeEnabled:true}}
+        name="SignUp3"
+        component={SignUp3}
+        options={{ headerShown: false, swipeEnabled: true }}
       />
       <TopTab.Screen
-       name="SignUp5"
-       component={SignUp5}
-       options={{ headerShown: false,swipeEnabled:true}}
+        name="SignUp4"
+        component={SignUp4}
+        options={{ headerShown: false, swipeEnabled: true }}
+      />
+      <TopTab.Screen
+        name="SignUp5"
+        component={SignUp5}
+        options={{ headerShown: false, swipeEnabled: true }}
       />
     </TopTab.Navigator>
-  )
+  );
 }
 
 function NotificationsStack() {
@@ -385,7 +379,6 @@ function BottomTabNavigationfun() {
     </BottomTabs.Navigator>
   );
 }
-
 
 function AuthenticatedStack() {
   return (
