@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image,Dimensions} from "react-native";
+import { StyleSheet, Text, View,Image,Dimensions,Pressable} from "react-native";
 import React from "react";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 
@@ -13,12 +13,13 @@ export default function CardComp1() {
               source={require("../../assets/wave2.png")}
             />
           </View>
+          <Pressable onPress={()=>console.log('icon pressed')}  style={styles.cardicon}>
           <FontAwesome
             name="heart-o"
             size={20}
             color={"white"}
-            style={styles.cardicon}
           />
+          </Pressable>
           <Text style={styles.cardheader}>Word Of The Day !</Text>
           <Text style={styles.cardtext1}>Serendipity</Text>
           <Text style={styles.cardtext2}>
@@ -72,7 +73,7 @@ const styles = StyleSheet.create({
     width: 186,
     fontSize: 20,
     top: 10,
-    left: 17,
+    left: 20,
     color: "white",
     position: "absolute",
     lineHeight: 24.38,
@@ -82,7 +83,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 60,
     fontSize: 32,
-    left: 17,
+    left: 20,
     color: "white",
     fontWeight: "900",
     lineHeight: 39.01,
@@ -91,7 +92,7 @@ const styles = StyleSheet.create({
   cardtext2: {
     position: "absolute",
     top: 100,
-    left: 17,
+    left: 20,
     color: "white",
     fontSize: 16,
     fontWeight: "900",
