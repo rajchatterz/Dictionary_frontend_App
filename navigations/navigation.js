@@ -29,6 +29,7 @@ import SignUp5 from "../screens/Auth/SignUp5";
 import BoardingScreen1 from "../screens/Auth/BoardingScreen1";
 import BoardingScreen2 from "../screens/Auth/BoardingScreen2";
 import MainHome from "../screens/MainHome";
+import SearchComp from "../LakshitModule/SearchComp";
 
 import { AuthContext } from "../store/auth-context";
 
@@ -70,6 +71,11 @@ function AuthStack() {
       <Stack.Screen
       name="MainHome"
       component={MainHome}
+      options={{ headerShown: false}}
+      />
+      <Stack.Screen
+      name="SearchComp"
+      component={SearchComp}
       options={{ headerShown: false}}
       />
       <Stack.Screen
