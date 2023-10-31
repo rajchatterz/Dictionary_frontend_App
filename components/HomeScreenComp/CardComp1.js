@@ -10,7 +10,7 @@ export default function CardComp1() {
           <View style={styles.imagecard}>
             <Image
               style={styles.image}
-              source={require("../assets/wave2.png")}
+              source={require("../../assets/wave2.png")}
             />
           </View>
           <FontAwesome

@@ -1,8 +1,8 @@
 import { StyleSheet, View, Image, Dimensions } from 'react-native'
 import React from 'react'
-import SearchComp from '../components/SearchComp'
-import CardComp from '../components/CardComp1'
-import CardComp2 from '../components/CardComp2'
+import SearchComp from '../components/HomeScreenComp/SearchComp'
+import CardComp from '../components/HomeScreenComp/CardComp1'
+import CardComp2 from '../components/HomeScreenComp/CardComp2'
 
 export default function MainHome() {
   return (

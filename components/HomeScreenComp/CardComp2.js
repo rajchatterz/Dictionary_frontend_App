@@ -20,10 +20,10 @@ export default function CardComp2() {
           >
             <Image
               style={{ width: 81, height: 77 }}
-              source={require("../assets/Rectangle2.png")}
+              source={require("../../assets/Rectangle2.png")}
             />
             <Text style={{fontSize:20,top:5,fontWeight:'900',color:'#F24E1E',left:10}}>Guesss</Text>
-            <Image style={{height:20,width:20,right:50,bottom:17,marginLeft:19}} source={require('../assets/Vector2.png')}/>
+            <Image style={{height:20,width:20,right:50,bottom:17,marginLeft:19}} source={require('../../assets/Vector2.png')}/>
           </View>
         </View>
         <View
@@ -40,10 +40,10 @@ export default function CardComp2() {
           >
             <Image
               style={{ width: 81, height: 77 }}
-              source={require("../assets/Rectangle1.png")}
+              source={require("../../assets/Rectangle1.png")}
             />
             <Text style={{fontSize:20,top:5,fontWeight:'900',color:'#7781D4',left:10}}>Writee</Text>
-            <Image style={{height:20,width:20,right:50,bottom:17,marginLeft:19}} source={require('../assets/Vector1.png')}/>
+            <Image style={{height:20,width:20,right:50,bottom:17,marginLeft:19}} source={require('../../assets/Vector1.png')}/>
           </View>
         </View>
         <View
@@ -60,7 +60,7 @@ export default function CardComp2() {
           >
             <Image
               style={{ width: 81, height: 77 }}
-              source={require("../assets/Rectangle1.png")}
+              source={require("../../assets/Rectangle1.png")}
             />
           </View>
         </View>

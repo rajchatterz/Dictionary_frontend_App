@@ -1,8 +1,10 @@
 import { StyleSheet, Text, View, TextInput, Pressable } from "react-native";
 import React from "react";
 import Fontisto from 'react-native-vector-icons/Fontisto'
+import { useNavigation } from "@react-navigation/native";
 
 export default function SearchComp() {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <Text style={styles.headerText}>Hello, Saransh!</Text>
@@ -10,15 +12,9 @@ export default function SearchComp() {
         Let’s Begin your journey to amplify English.
       </Text>
       <View style={styles.searchcontainer}>
-         <TextInput 
-         placeholder='Search for Words......'
-         inputMode='text'
-         maxLength={15}
-         autoCorrect={true}
-         style={styles.searchbar}
-         textAlign="left"
-         />
-          <Pressable style={{bottom:58,position:'absolute',left:20}}>
+         <Text style={styles.searchbar}>Search for Words......</Text>
+
+          <Pressable onPress={() => navigation.navigate()} style={{bottom:58,position:'absolute',left:20}}>
             <Fontisto name="search" size={22} color={"#8E5BE4"}/>
         </Pressable>
     </View>
@@ -65,6 +61,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     bottom:70,
     textAlignVertical:'center',
-    paddingLeft:60
+    paddingLeft:60,
+    color:'#CCCCCC'
   },
 });
