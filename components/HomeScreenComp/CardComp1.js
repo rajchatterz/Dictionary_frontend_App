@@ -1,102 +1,70 @@
-import { StyleSheet, Text, View,Image,Dimensions,Pressable} from "react-native";
 import React from "react";
+import { StyleSheet, Text, View, Dimensions, Pressable } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+
+const baseFontSize = 20; // You can adjust this value as needed
 
 export default function CardComp1() {
   return (
-    <View style={styles.MainContainer}>
-      <View style={styles.cardcontainer}>
-        <View style={styles.card}>
-          <View style={styles.imagecard}>
-            <Image
-              style={styles.image}
-              source={require("../../assets/wave2.png")}
-            />
-          </View>
-          <Pressable onPress={()=>console.log('icon pressed')}  style={styles.cardicon}>
+    <View style={styles.container}>
+      <View style={styles.card}>
+        <Pressable onPress={() => console.log('icon pressed')} style={styles.cardIcon}>
           <FontAwesome
             name="heart-o"
-            size={20}
+            size={0.9375 * baseFontSize}
             color={"white"}
           />
-          </Pressable>
-          <Text style={styles.cardheader}>Word Of The Day !</Text>
-          <Text style={styles.cardtext1}>Serendipity</Text>
-          <Text style={styles.cardtext2}>
-            A fortunate and unexpected discovery{" "}
-          </Text>
-        </View>
+        </Pressable>
+        <Text style={styles.cardHeader}>Word Of The Day!</Text>
+        <Text style={styles.cardText1}>Serendipity</Text>
+        <Text style={styles.cardText2}>
+          A fortunate and unexpected discovery
+        </Text>
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  MainContainer: {
-    flex: 1,
+  container: {
     alignItems: "center",
-    justifyContent: "center",
-  },
-  cardcontainer: {
-    flex: 1,
-    alignItems: "center",
+    marginTop: 20,
   },
   card: {
     backgroundColor: "#7D51C6",
-    width:Dimensions.get('screen').width*0.9,
+    width: Dimensions.get('window').width * 0.9,
     height: 160,
-    borderRadius:10,
+    borderRadius: 10,
     padding: 10,
-    top:20
+    position: "relative",
   },
-  imagecard: {
-    flex: 1,
-    alignItems: "flex-end",
-    justifyContent: "flex-end",
-    top: 10,
-    left: 10,
-  },
-  image: {
-    width: "100%",
-    height: 160,
-    borderBottomRightRadius: 10,
-    borderTopRightRadius: 10,
-  },
-  cardicon: {
-    marginLeft: "92%",
-    top: 15,
+  cardIcon: {
     position: "absolute",
+    top: 10,
+    right: 10,
   },
-  cardheader: {
-    fontWeight: "900",
-    height: 28,
-    width: 186,
-    fontSize: 20,
+  cardHeader: {
+    fontSize: 0.9375 * baseFontSize,
+    fontWeight: "bold",
+    color: "white",
+    position: "absolute",
     top: 10,
     left: 20,
-    color: "white",
-    position: "absolute",
-    lineHeight: 24.38,
-    letterSpacing: -0.32,
   },
-  cardtext1: {
-    position: "absolute",
-    top: 60,
-    fontSize: 32,
-    left: 20,
+  cardText1: {
+    fontSize: 1.75 * baseFontSize,
+    fontWeight: "bold",
     color: "white",
-    fontWeight: "900",
-    lineHeight: 39.01,
-    letterSpacing: -0.32,
+    position: "absolute",
+    bottom: 40, // Adjusted to move the text to the bottom
+    left: 20,
   },
-  cardtext2: {
-    position: "absolute",
-    top: 100,
-    left: 20,
+  cardText2: {
+    fontSize: 0.875 * baseFontSize,
+    fontWeight: "bold",
     color: "white",
-    fontSize: 16,
-    fontWeight: "900",
-    lineHeight: 19.5,
-    letterSpacing: -0.32,
+    position: "absolute",
+    bottom: 10, // Adjusted to move the text to the bottom
+    left: 20,
   },
 });

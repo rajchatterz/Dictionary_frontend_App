@@ -1,70 +1,94 @@
-import React from "react";
-import { StyleSheet, Text, View,Pressable} from "react-native";
-import Fontisto from "react-native-vector-icons/Fontisto";
-import { useNavigation } from "@react-navigation/native";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, Text, View, Pressable } from "react-native";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 
- export default function SearchComp() {
-  const navigation = useNavigation();
+export default function SearchComp() {
+ 
+  const words = ["Word", "Vocabulary", "Language"]; // Replace with your desired words
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [displayedText, setDisplayedText] = useState("Search for Words");
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentWordIndex((prevIndex) => (prevIndex + 1) % words.length);
+    }, 3000); // Change the word every second
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    setDisplayedText(`Search for ${words[currentWordIndex]}`);
+  }, [currentWordIndex]);
+
   return (
     <View style={styles.container}>
-      <Text style={styles.headerText}>Hello, Saransh!</Text>
-      <Text style={styles.text2}>
-        Let’s Begin your journey to amplify English.
+      <View style={styles.headerTextContainer}>
+        <Text style={styles.helloText}>Hello,</Text>
+        <Text style={styles.saranshText}>Saransh!</Text>
+      </View>
+      <Text style={styles.text}>
+        Let's begin your journey to amplify English.
       </Text>
-      <View style={styles.searchcontainer}>
-        <Text style={styles.searchbar}>Search for Words......</Text>
-        <Pressable 
-         onPress={()=>navigation.navigate('SearchSection')} 
-         style={{ bottom: 57, position: "absolute", left: 20 }}
-        >
-          <Fontisto name="search" size={22} color={"#8E5BE4"} />
-        </Pressable>
+      <View style={styles.searchContainer}>
+      <Pressable
+            onPress={() => {
+              // Handle search icon press
+            }}
+            style={styles.searchIcon}
+          >
+            <FontAwesome name="search" size={22} color={"#8E5BE4"} />
+          </Pressable>
+        <Text style={styles.searchBar}>{displayedText}</Text>
       </View>
     </View>
   );
 }
 
-
+const baseFontSize = 20; // Define a base font size (adjust as needed)
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: "flex-start",
-    justifyContent: "flex-start",
+    position: "relative",
+    paddingTop: 200,
     padding: 20,
   },
-  headerText: {
-    width: 181,
-    height: 29,
-    fontSize: 24,
-    fontWeight: "900",
-    color: "white",
-    lineHeight: 29.26,
-    letterSpacing: -0.28,
-    bottom: 130,
+
+  headerTextContainer: {
+    flexDirection: "row",
+    alignItems: "center",
   },
-  text2: {
-    width: 349,
-    height: 19,
-    fontSize: 15,
+  helloText: {
+    fontSize: 1.5 * baseFontSize,
+    fontWeight: "300",
+    color: "white",
+  },
+  saranshText: {
+    fontSize: 1.5 * baseFontSize,
+    fontWeight: "600",
+    color: "white",
+    marginLeft: 5,
+  },
+  text: {
+    fontSize: 0.9375 * baseFontSize,
     fontWeight: "500",
     color: "white",
-    lineHeight: 18.29,
-    letterSpacing: -0.28,
-    bottom: 125,
+    marginBottom: 10,
   },
-  searchcontainer: {
-    flex: 1,
+  searchContainer: {
+    flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
-  },
-  searchbar: {
     backgroundColor: "white",
-    width: 360,
-    height: 50,
     borderRadius: 10,
-    bottom: 70,
-    textAlignVertical: "center",
-    paddingLeft: 60,
+    paddingHorizontal: 10,
+    marginTop: 10,
+  },
+  searchIcon: {
+    padding: 10,
+  },
+  searchBar: {
+    flex: 1,
+    height: 50,
     color: "#CCCCCC",
+    textAlignVertical: "center",
+    fontSize: 0.9375 * baseFontSize,
   },
 });
