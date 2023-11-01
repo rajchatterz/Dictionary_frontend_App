@@ -29,6 +29,7 @@ import SignUp5 from "../screens/Auth/SignUp5";
 import BoardingScreen1 from "../screens/Auth/BoardingScreen1";
 import BoardingScreen2 from "../screens/Auth/BoardingScreen2";
 import SearchSection from "../LakshitModule/SearchSection";
+import Substantiate from "../LakshitModule/Substantiate";
 
 import { AuthContext } from "../store/auth-context";
 
@@ -50,7 +51,7 @@ const TopTab = createMaterialTopTabNavigator();
 function AuthStack() {
   return (
     <Stack.Navigator
-      initialRouteName="HomeScreen"
+      initialRouteName="Substantiate"
       screenOptions={{
         animation: "slide_from_right", //<-- this is what will do the trick
         presentation: "card",
@@ -80,6 +81,11 @@ function AuthStack() {
       <Stack.Screen
         name="SearchSection"
         component={SearchSection}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Substantiate"
+        component={Substantiate}
         options={{ headerShown: false }}
       />
       {/* --------------------------------------------------------------- */}

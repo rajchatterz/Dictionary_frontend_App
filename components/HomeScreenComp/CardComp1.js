@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   cardIcon: {
     position: "absolute",
     top: 10,
-    right: 10,
+    right: 15,
   },
   cardHeader: {
     fontSize: 0.9375 * baseFontSize,
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "white",
     position: "absolute",
-    bottom: 10, // Adjusted to move the text to the bottom
+    bottom: 15, // Adjusted to move the text to the bottom
     left: 20,
   },
 });

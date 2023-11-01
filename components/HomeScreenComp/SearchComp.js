@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Pressable } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import { useNavigation } from "@react-navigation/native";
 
 export default function SearchComp() {
  
   const words = ["Word", "Vocabulary", "Language"]; // Replace with your desired words
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState("Search for Words");
+
+  const navigation = useNavigation();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -31,9 +34,7 @@ export default function SearchComp() {
       </Text>
       <View style={styles.searchContainer}>
       <Pressable
-            onPress={() => {
-              // Handle search icon press
-            }}
+            onPress={() => navigation.navigate('SearchSection')}
             style={styles.searchIcon}
           >
             <FontAwesome name="search" size={22} color={"#8E5BE4"} />

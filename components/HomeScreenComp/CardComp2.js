@@ -6,6 +6,8 @@ export default function CardComp2() {
     <View style={styles.container}>
       <View style={{flex:0.9,alignItems:'center',justifyContent:'center',top:45}}>
        <Text style={{fontSize:24,right:90,fontWeight:'900',color:'#263238',opacity:0.7}}>Play and Progress</Text>
+       
+       {/* Play annd Progress Card */}
       <ScrollView horizontal contentContainerStyle={{margin:9}}>
         <TouchableOpacity>
         <View style={{backgroundColor:'#F3B69B',height:140,width:125,margin:10,borderRadius:10}}>
@@ -48,7 +50,9 @@ export default function CardComp2() {
         </TouchableOpacity>
       </ScrollView>
       </View>
+      {/* Play annd Progress Card End.... */}
 
+      {/* Continue your Learning */}
       <View style={{flex:0.4,alignItems:'center',justifyContent:'center',top:45}}>
       <Text style={{fontSize:24,right:60,fontWeight:'900',color:'#263238',opacity:0.7}}>Continue your Learning</Text>
       <ScrollView horizontal contentContainerStyle={{margin:9}}>
@@ -93,6 +97,7 @@ export default function CardComp2() {
         </TouchableOpacity>
       </ScrollView>
       </View>
+      {/* Continue your Learning End... */}
     </View>
   )
 }
