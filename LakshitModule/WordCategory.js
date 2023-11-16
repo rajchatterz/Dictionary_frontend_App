@@ -7,7 +7,7 @@ import AntDesign from "react-native-vector-icons/AntDesign"
 
 export default function WordCategory() {
   return (
-      <ScrollView showsVerticalScrollIndicator={false} >
+      <ScrollView horizontal={false} showsVerticalScrollIndicator={false} >
           <View style={styles.container}>
         <AntDesign onPress={()=>console.log("Pressed")} style={{top:100,right:180}} name="arrowleft" size={22} color={'#FFFFFF'}/>
       <Image style={styles.curve} source={require("../assets/Group1.png")} />
@@ -15,6 +15,9 @@ export default function WordCategory() {
       <View style={styles.cardcontainer}>
         <ScrollView
         showsVerticalScrollIndicator={false}
+        horizontal={false}
+        nestedScrollEnabled={true}
+        contentContainerStyle={{bottom:15}}
         >
           {feed.map((item)=>(
             <View
@@ -44,7 +47,7 @@ export default function WordCategory() {
 
               />
               <Text style={{textAlign:'left',left:115,bottom: 75,fontSize:13}}>{item.word}</Text>
-              <FontAwesome5 style={{textAlign:'right',bottom: 93,right:15,}} name="arrow-circle-right" size={22} color={'#8F6ACD'}/>
+              <FontAwesome5 onPress={()=> console.log("Pressed")} style={{textAlign:'right',bottom: 93,right:15,}} name="arrow-circle-right" size={22} color={'#8F6ACD'}/>
             </View>
           ))}
         </ScrollView>
@@ -60,7 +63,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#A678F2",
-    top:30
+    top:25
   },
   curve: {
     width: "100%",
@@ -70,7 +73,7 @@ const styles = StyleSheet.create({
   cardcontainer: {
     width: "100%",
     height:'80%',
-    bottom:70,
+    bottom:60,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "white",
