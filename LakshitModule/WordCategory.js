@@ -7,29 +7,29 @@ import AntDesign from "react-native-vector-icons/AntDesign"
 
 export default function WordCategory() {
   return (
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false} >
           <View style={styles.container}>
         <AntDesign onPress={()=>console.log("Pressed")} style={{top:100,right:180}} name="arrowleft" size={22} color={'#FFFFFF'}/>
       <Image style={styles.curve} source={require("../assets/Group1.png")} />
       <Text style={styles.word}>Word Categories</Text>
       <View style={styles.cardcontainer}>
-        <FlatList
-          showsVerticalScrollIndicator={false}
-          data={feed}
-          renderItem={({ item }) => (
+        <ScrollView
+        showsVerticalScrollIndicator={false}
+        >
+          {feed.map((item)=>(
             <View
-              style={styles.listcard}
+            style={styles.listcard}
+          >
+            <Image
+              style={styles.cardimage}
+              source={{ uri: item.imageSource2 }}
+            />
+            <Text
+              style={styles.cardtext}
             >
-              <Image
-                style={styles.cardimage}
-                source={{ uri: item.imageSource2 }}
-              />
-              <Text
-                style={styles.cardtext}
-              >
-                {item.Interest}
-              </Text>
-              <Text style={{textAlign:'left',left:115,bottom: 95,fontSize:10}}>{item.check} {item.progress}</Text>
+              {item.Interest}
+            </Text>
+            <Text style={{textAlign:'left',left:115,bottom: 95,fontSize:10}}>{item.check} {item.progress}</Text>
               <Progress.Bar
               style={{bottom:90,left:115}}
               progress={item.progress}
@@ -46,8 +46,8 @@ export default function WordCategory() {
               <Text style={{textAlign:'left',left:115,bottom: 75,fontSize:13}}>{item.word}</Text>
               <FontAwesome5 style={{textAlign:'right',bottom: 93,right:15,}} name="arrow-circle-right" size={22} color={'#8F6ACD'}/>
             </View>
-          )}
-        />
+          ))}
+        </ScrollView>
       </View>
       </View>
       </ScrollView>
