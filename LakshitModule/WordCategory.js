@@ -4,8 +4,10 @@ import feed from "./Feed";
 import * as Progress from "react-native-progress";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import AntDesign from "react-native-vector-icons/AntDesign"
+import { useNavigation } from "@react-navigation/native";
 
 export default function WordCategory() {
+  const navigation = useNavigation();
   return (
       <ScrollView horizontal={false} showsVerticalScrollIndicator={false} >
           <View style={styles.container}>
@@ -47,7 +49,7 @@ export default function WordCategory() {
 
               />
               <Text style={{textAlign:'left',left:115,bottom: 75,fontSize:13}}>{item.word}</Text>
-              <FontAwesome5 onPress={()=> console.log("Pressed")} style={{textAlign:'right',bottom: 93,right:15,}} name="arrow-circle-right" size={22} color={'#8F6ACD'}/>
+              <FontAwesome5 onPress={()=>navigation.navigate('WordList')} style={{textAlign:'right',bottom: 93,right:15,}} name="arrow-circle-right" size={22} color={'#8F6ACD'}/>
             </View>
           ))}
         </ScrollView>

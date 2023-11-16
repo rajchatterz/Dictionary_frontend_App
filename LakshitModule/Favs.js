@@ -3,13 +3,15 @@ import React from "react";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Feed from "./Feed";
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import { useNavigation } from "@react-navigation/native";
 
 export default function Favs() {
+  const navigation = useNavigation();
   const fixedLength = 5;
   return (
     <View style={styles.container}>
       <AntDesign
-        onPress={() => console.log("Pressed")}
+        onPress={() => navigation.navigate("Resist")}
         style={{ top:74, right: 170 }}
         name="arrowleft"
         size={22}
@@ -22,7 +24,7 @@ export default function Favs() {
       </Text>
       <FlatList
       showsVerticalScrollIndicator={false}
-      contentContainerStyle={{top:50}}
+      contentContainerStyle={{top:70}}
        data={Feed.slice(0,fixedLength)} 
        renderItem={({ item }) => (
       <View style={styles.listcard}>
