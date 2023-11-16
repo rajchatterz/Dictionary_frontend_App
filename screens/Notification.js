@@ -15,7 +15,7 @@ const data = [
 
 ]
 
-export default NotificationsView = ({ }) => {
+export default function NotificationsView ({ }) {
   const [notifications, setNotifications] = useState(data)
   const renderNotifications = () => {
     if (notifications.length === 0) {
@@ -25,7 +25,7 @@ export default NotificationsView = ({ }) => {
             style={styles.noNotificationsImage}
             source={image}
           />
-          <Text style={styles.noNotificationsText}>No notifications to display yet :(</Text>
+          <Text style={styles.noNotificationsText}>No notifications to display yet :(</Text>)
         </View>
       )
     } else {

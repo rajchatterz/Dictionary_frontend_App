@@ -30,6 +30,11 @@ import BoardingScreen1 from "../screens/Auth/BoardingScreen1";
 import BoardingScreen2 from "../screens/Auth/BoardingScreen2";
 import SearchSection from "../LakshitModule/SearchSection";
 import Substantiate from "../LakshitModule/Substantiate";
+import WordCategory from "../LakshitModule/WordCategory";
+import WordList from "../LakshitModule/WordList";
+import Favs from "../LakshitModule/Favs";
+import Resist from "../LakshitModule/Resist";
+import SwipeList from "../LakshitModule/SwipeList";
 
 import { AuthContext } from "../store/auth-context";
 
@@ -51,7 +56,7 @@ const TopTab = createMaterialTopTabNavigator();
 function AuthStack() {
   return (
     <Stack.Navigator
-      initialRouteName="Substantiate"
+      initialRouteName="Favs"
       screenOptions={{
         animation: "slide_from_right", //<-- this is what will do the trick
         presentation: "card",
@@ -86,6 +91,36 @@ function AuthStack() {
       <Stack.Screen
         name="Substantiate"
         component={Substantiate}
+        options={{ headerShown: false }}
+      />
+      
+      <Stack.Screen
+        name="WordCategory"
+        component={WordCategory}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="WordList"
+        component={WordList}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="Favs"
+        component={Favs}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="Resist"
+        component={Resist}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="SwipeList"
+        component={SwipeList}
         options={{ headerShown: false }}
       />
       {/* --------------------------------------------------------------- */}
