@@ -421,6 +421,19 @@ function AuthenticatedStack() {
         />
 
         <Stack.Screen
+        name="SearchSection"
+        component={SearchSection}
+        options={{ headerShown: false }}
+      />
+      
+      <Stack.Screen
+        name="Substantiate"
+        component={Substantiate}
+        options={{ headerShown: false }}
+      />
+        
+
+        <Stack.Screen
           name="SearchResults"
           component={SearchResults}
           options={{ headerShown: false }}
