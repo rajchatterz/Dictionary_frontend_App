@@ -1,14 +1,16 @@
 import React from "react";
 import { StyleSheet, Text, View, Dimensions, Pressable } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import { useNavigation } from "@react-navigation/native";
 
 const baseFontSize = 20; // You can adjust this value as needed
 
 export default function CardComp1() {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <View style={styles.card}>
-        <Pressable onPress={() => console.log('icon pressed')} style={styles.cardIcon}>
+        <Pressable onPress={() => navigation.navigate('Favorite')} style={styles.cardIcon}>
           <FontAwesome
             name="heart-o"
             size={0.9375 * baseFontSize}

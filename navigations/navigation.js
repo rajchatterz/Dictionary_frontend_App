@@ -28,13 +28,10 @@ import SignUp4 from "../screens/Auth/SignUp4";
 import SignUp5 from "../screens/Auth/SignUp5";
 import BoardingScreen1 from "../screens/Auth/BoardingScreen1";
 import BoardingScreen2 from "../screens/Auth/BoardingScreen2";
-import SearchSection from "../LakshitModule/SearchSection";
-import Substantiate from "../LakshitModule/Substantiate";
-import WordCategory from "../LakshitModule/WordCategory";
-import WordList from "../LakshitModule/WordList";
-import Favs from "../LakshitModule/Favs";
-import Resist from "../LakshitModule/Resist";
-import SwipeList from "../LakshitModule/SwipeList";
+import Substantiate from "../screens/Substantiate";
+import WordList from "../screens/WordList";
+import Resist from "../screens/Resist";
+import SwipeList from "../screens/SwipeList";
 
 import { AuthContext } from "../store/auth-context";
 
@@ -56,7 +53,7 @@ const TopTab = createMaterialTopTabNavigator();
 function AuthStack() {
   return (
     <Stack.Navigator
-      initialRouteName="WordCategory"
+      initialRouteName="SignUp1"
       screenOptions={{
         animation: "slide_from_right", //<-- this is what will do the trick
         presentation: "card",
@@ -81,46 +78,6 @@ function AuthStack() {
       <Stack.Screen
         name="Boarding2"
         component={BoardingScreen2}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="SearchSection"
-        component={SearchSection}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Substantiate"
-        component={Substantiate}
-        options={{ headerShown: false }}
-      />
-      
-      <Stack.Screen
-        name="WordCategory"
-        component={WordCategory}
-        options={{ headerShown: false }}
-      />
-
-      <Stack.Screen
-        name="WordList"
-        component={WordList}
-        options={{ headerShown: false }}
-      />
-
-      <Stack.Screen
-        name="Favs"
-        component={Favs}
-        options={{ headerShown: false }}
-      />
-
-      <Stack.Screen
-        name="Resist"
-        component={Resist}
-        options={{ headerShown: false }}
-      />
-
-      <Stack.Screen
-        name="SwipeList"
-        component={SwipeList}
         options={{ headerShown: false }}
       />
       {/* --------------------------------------------------------------- */}
@@ -497,6 +454,28 @@ function AuthenticatedStack() {
           component={ServiceStack}
           options={{ headerShown: false }}
         />
+        <Stack.Screen
+        name="Substantiate"
+        component={Substantiate}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="WordList"
+        component={WordList}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Resist"
+        component={Resist}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="SwipeList"
+        component={SwipeList}
+        options={{ headerShown: false }}
+      />
       </Stack.Navigator>
     </>
   );

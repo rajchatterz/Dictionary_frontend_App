@@ -1,19 +1,22 @@
 import { StyleSheet, Text, View,FlatList,Image} from 'react-native'
 import React,{useState} from 'react'
-import Feed from './Feed'
+import Feed from '../LakshitModule/Feed'
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import AntDesign from "react-native-vector-icons/AntDesign"
 import { useNavigation } from '@react-navigation/native';
 import Ionicons from "react-native-vector-icons/Ionicons"
 
 export default function WordList () {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <Ionicons onPress={()=>navigation.navigate('SwipeList')} name="eye" size={24}color={'black'} style={{top:95,left:160}}/>
-        <AntDesign onPress={()=>navigation.navigate('Favs')} style={{top:65,right:170}} name="arrowleft" size={24} color={'black'}/>
+      <View style={{flex:1,flexDirection:'row',top:85}}>
+      <Ionicons style={{left:210}} onPress={()=>navigation.navigate('SwipeList')} name="eye" size={24}color={'black'}/>
+       <AntDesign style={{right:150}} onPress={()=>navigation.goBack()} name="arrowleft" size={24} color={'black'}/>
         <Text style={styles.headertext}>Word list</Text>
-        <FlatList
+      </View>
+      <View style={{flex:4,bottom:40}}>
+         <FlatList
         showsVerticalScrollIndicator={false}
          data={Feed}
          renderItem={({item}) =>
@@ -32,10 +35,11 @@ export default function WordList () {
               >
                 {item.word}
               </Text>
-              <FontAwesome5 onPress={()=>navigation.navigate('Favs')} style={{textAlign:'right',bottom: 85,right:20,}} name="arrow-circle-right" size={22} color={'#8F6ACD'}/>
+              <FontAwesome5 style={{bottom:80,textAlign:'right',right:20}} onPress={()=>navigation.navigate('Resist')} name="arrow-circle-right" size={22} color={'#8F6ACD'}/>
          </View>
         }
         />
+        </View>
     </View>
   )
 }
@@ -44,7 +48,8 @@ const styles = StyleSheet.create({
     container:{
         flex:1,
         alignItems:'center',
-        justifyContent:'center'
+        justifyContent:'center',
+        backgroundColor:'white'
     },
     listcard:{
         backgroundColor: "white",
@@ -52,7 +57,6 @@ const styles = StyleSheet.create({
         height: 110,
         borderRadius: 10,
         marginBottom: 15,
-        top: 120,
         elevation: 4,
         shadowColor: "#000000",
         shadowOffset: { width: 0, height: 4 },
@@ -73,10 +77,10 @@ const styles = StyleSheet.create({
         left: 115,
       },
       headertext:{
-        right:110,
-        top:40,
         fontSize:20,
-        fontWeight:'900'
+        fontWeight:'900',
+        right:140,
+        bottom:2
       },
       cardtext2:{
         textAlign: "left",
