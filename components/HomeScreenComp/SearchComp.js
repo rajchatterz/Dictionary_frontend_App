@@ -34,7 +34,7 @@ export default function SearchComp() {
       </Text>
       <View style={styles.searchContainer}>
       <Pressable
-            onPress={() => navigation.navigate('SearchSection')}
+            onPress={() => navigation.navigate('Search')}
             style={styles.searchIcon}
           >
             <FontAwesome name="search" size={22} color={"#8E5BE4"} />

@@ -1,11 +1,13 @@
 import {StyleSheet, Text, View,Image } from "react-native";
 import React from "react";
 import AntDesign from "react-native-vector-icons/AntDesign"
+import { useNavigation } from "@react-navigation/native";
 export default function Substantiate() {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
         <View style={styles.topcardcontainer}>
-        <AntDesign onPress={()=>console.log('Pressed')} style={{top:30,left:30}} name="arrowleft" size={22} color={'#FFFFFF'}/>
+        <AntDesign onPress={()=>navigation.goBack()} style={{top:30,left:30}} name="arrowleft" size={22} color={'#FFFFFF'}/>
         <View style={{flex:1,alignItems:'center',justifyContent:'center',top:25}}>
         <Text style={{fontSize:28,lineHeight:34.15,letterSpacing:1,fontWeight:'900',color:'white'}}>Substantiate</Text>
         </View>
@@ -24,7 +26,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "flex-start",
-    top:40
+    top:40,
+    backgroundColor:'white'
   },
   topcardcontainer: {
     width: '100%',

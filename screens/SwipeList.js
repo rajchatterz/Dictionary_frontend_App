@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import React, { useState, useRef } from "react";
-import Feed from "./Feed";
+import Feed from "../LakshitModule/Feed";
 import Swiper from "react-native-deck-swiper";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import AntDesign from "react-native-vector-icons/AntDesign";
@@ -37,19 +37,6 @@ export default function SwipeList() {
 
   return (
     <View style={styles.container}>
-      <Ionicons onPress={()=>navigation.navigate('WordList')} name="eye-off-sharp" size={24}color={'black'} style={{bottom: 285,left:170}}/>
-      <AntDesign
-        onPress={() => console.log("Pressed")}
-        style={{ bottom: 315, right: 180 }}
-        name="arrowleft"
-        size={25}
-        color={"black"}
-      />
-      <Text
-        style={{ bottom: 340, right: 65, fontSize: 18, fontWeight: "bold" }}
-      >
-        Vocabulary mapping
-      </Text>
       <Swiper
         ref={swiperRef}
         backgroundColor="white"
@@ -65,7 +52,20 @@ export default function SwipeList() {
         stackSeparation={1}
         infinite
       />
-      <View style={{ top: 190, right: 120 }}>
+      <Ionicons onPress={()=>navigation.navigate('WordList')} name="eye-off-sharp" size={24}color={'black'} style={{bottom: 154,left:170}}/>
+      <AntDesign
+        onPress={() =>navigation.goBack()}
+        style={{ bottom: 184, right: 180 }}
+        name="arrowleft"
+        size={25}
+        color={"black"}
+      />
+      <Text
+        style={{ bottom: 210, right: 65, fontSize: 18, fontWeight: "bold" }}
+      >
+        Vocabulary mapping
+      </Text>
+      <View style={{ top: 285, right: 120 }}>
         <AntDesign.Button
           name="questioncircle"
           size={94}
@@ -77,7 +77,7 @@ export default function SwipeList() {
         />
         <Text style={{ fontSize: 20, left: 40 }}>NO</Text>
       </View>
-      <View style={{ top: 55, left: 120 }}>
+      <View style={{ top: 150, left: 120 }}>
         <AntDesign.Button
           name="checkcircle"
           size={94}
@@ -89,8 +89,8 @@ export default function SwipeList() {
         />
         <Text style={{ fontSize: 20, left: 35 }}>YES</Text>
       </View>
-      <View style={{ top: 100 }}>
-        <Pressable style={styles.Button}>
+      <View style={{ top: 190 }}>
+        <Pressable onPress={() =>navigation.goBack()} style={styles.Button}>
           <Text style={styles.btntext}>Come Back Later</Text>
         </Pressable>
       </View>
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    top: 130,
+    backgroundColor:'white'
   },
   card: {
     flex: 0.55,
@@ -111,6 +111,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "white",
     borderRadius: 16,
+    top:110
   },
   cardImage: {
     width: "100%",

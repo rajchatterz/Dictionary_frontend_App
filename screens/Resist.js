@@ -1,4 +1,4 @@
-import Feed from "./Feed";
+import Feed from "../LakshitModule/Feed";
 import React, { useState } from "react";
 import {
   View,
@@ -9,14 +9,16 @@ import {
   Image,
 } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
+import { useNavigation } from "@react-navigation/native";
 
 const Resist = () => {
   const [selectedImage, setSelectedImage] = useState(null);
+  const navigation = useNavigation()
 
   return (
     <View style={styles.container}>
       <AntDesign
-        onPress={() => console.log("Pressed")}
+        onPress={() => navigation.goBack()}
         style={{ top: 80, right: 180 }}
         name="arrowleft"
         size={25}
