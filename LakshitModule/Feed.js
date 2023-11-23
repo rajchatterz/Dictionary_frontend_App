@@ -6,10 +6,10 @@ export default [
     imageSource2:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEyq_jXOpPcM7SXHtyI8E8sa8HDZX358Sgxw&usqp=CAU',
     Interest: "Technology",
     check:'Progress',
-    progress:'0.8',
+    progress:0.8,
     word:'300 word',
     caption:"A line where two pieces of fabric are sewn together.",
-    alphabet:'A'
+    alphabet:'A',
   },
   {
     id: 2,
@@ -18,7 +18,7 @@ export default [
     imageSource2:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzNWQH0NsFjX8Ye-CknIDG5zeZCjIk95RzPQ&usqp=CAU',
     Interest: "History",
     check:'Progress',
-    progress:'0.2',
+    progress:0.2,
     word:'300 word',
     caption:"A line where two pieces of fabric are sewn together.",
     alphabet:'B'
@@ -30,7 +30,7 @@ export default [
     imageSource2:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7S5FJ-Vi8FauVE4VeRZEVfNbv3FLLOFbQHA&usqp=CAU',
     Interest: "English",
     check:'Progress',
-    progress:'0.6',
+    progress:0.6,
     word:'300 word',
     caption:"A line where two pieces of fabric are sewn together.",
     alphabet:'C'
@@ -42,10 +42,12 @@ export default [
     imageSource2:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcjWCTbglsHm25yAnCLNewY4se875o-xRuww&usqp=CAU',
     Interest: "Communication",
     check:'Progress',
-    progress:'0.4',
+    progress:0.4,
     word:'300 word',
     caption:"A line where two pieces of fabric are sewn together.",
-    alphabet:'D'
+    alphabet:'D',
+    firstname:'Rohan Joshi',
+    complete:'96.44%'
   },
   {
     id: 5,
@@ -54,9 +56,11 @@ export default [
     imageSource2:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3369e8m_T_q0MTj19HwW3RN2Qg8Jmk4az0A&usqp=CAU',
     Interest: "Art",
     check:'Progress',
-    progress:'0.3',
+    progress:0.3,
     word:'300 word',
-    caption:"A line where two pieces of fabric are sewn together."
+    caption:"A line where two pieces of fabric are sewn together.",
+    firstname:'Laxman ',
+    complete:'93.80%'
   },
   {
     id: 6,
@@ -65,9 +69,11 @@ export default [
     imageSource2:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIas8NV2uI-i4I46KAZ8XT_AtTlLt3dV9wjg&usqp=CAU',
     Interest: "Space",
     check:'Progress',
-    progress:'0.7',
+    progress:0.7,
     word:'300 word',
-    caption:"A line where two pieces of fabric are sewn together."
+    caption:"A line where two pieces of fabric are sewn together.",
+    firstname:'Akshat Joshi',
+    complete:'91.80%'
   },
   {
     id: 7,
@@ -76,9 +82,11 @@ export default [
     imageSource2:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXlkbf8h4GZVyeX0fVfDfC93rKua5IkVunkw&usqp=CAU',
     Interest: "Fruits",
     check:'Progress',
-    progress:'0.5',
+    progress:0.5,
     word:'300 word',
-    caption:"A line where two pieces of fabric are sewn together."
+    caption:"A line where two pieces of fabric are sewn together.",
+    firstname:'Muskan Sharma',
+    complete:'91.30%'
   },
   {
     id: 8,
@@ -87,9 +95,11 @@ export default [
     imageSource2:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROrNYNPVLVujmVAHP97ggDQhm6edKKXll1mQ&usqp=CAU',
     Interest: "Motivation",
     check:'Progress',
-    progress:'0.9',
+    progress:0.9,
     word:'300 word',
-    caption:"A line where two pieces of fabric are sewn together."
+    caption:"A line where two pieces of fabric are sewn together.",
+    firstname:'Jayant Soni',
+    complete:'90.20%'
   },
   {
     id: 9,
@@ -98,8 +108,10 @@ export default [
     imageSource2:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQB3iNLafuAGXLSYpCzCkt4VKRz0Y7OAnsQ-w&usqp=CAU',
     Interest: "Medical",
     check:'Progress',
-    progress:'0.2',
-    word:'300 word'
+    progress:0.2,
+    word:'300 word',
+    firstname:'Priya Singh',
+    complete:'89.55%'
   },
   {
     id: 10,
@@ -108,8 +120,10 @@ export default [
     imageSource2:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnL9nGqVuyDnGMP4vt_qjnPeU6lI3DiJXnpg&usqp=CAU',
     Interest: "Medical",
     check:'Progress',
-    progress:'0.7',
-    word:'300 word'
+    progress:0.7,
+    word:'300 word',
+    firstname:'Raghav mittal',
+    complete:'88%'
   },
   {
     id: 11,
@@ -118,8 +132,10 @@ export default [
     imageSource2:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSul-UN51qT9Epebu06mx8IYTdiHVuoclsNCw&usqp=CAU',
     Interest: "Medical",
     check:'Progress',
-    progress:'0.4',
-    word:'300 word'
+    progress:0.4,
+    word:'300 word',
+    firstname:'Neeraj Jain',
+    complete:'85.50%'
   },
   {
     id: 12,
@@ -128,7 +144,9 @@ export default [
     imageSource2:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRU3DlaWF5ad075XvGqkpWZoeqnsfajTSyjpg&usqp=CAU',
     Interest: "Medical",
     check:'Progress',
-    progress:'0.25',
-    word:'300 word'
+    progress:0.25,
+    word:'300 word',
+    firstname:'Satish kumar',
+    complete:'80%'
   },
 ];
