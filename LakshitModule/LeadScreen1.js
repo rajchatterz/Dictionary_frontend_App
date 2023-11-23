@@ -4,6 +4,7 @@ import {
   View,
   TouchableOpacity,
   ImageBackground,
+  ScrollView,
 } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -32,7 +33,9 @@ export default function LeadScreen1() {
         </TouchableOpacity>
       </View>
       <TopCards />
-      <CurveContainer/>
+      {/* Adjust the position of CurveContainer */}
+      <CurveContainer style={styles.curveContainer} />
+
     </View>
   );
 }
@@ -80,5 +83,11 @@ const styles = StyleSheet.create({
     height: 1000,
     resizeMode: "cover",
     justifyContent: "center",
+  },
+  curveContainer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
   },
 });

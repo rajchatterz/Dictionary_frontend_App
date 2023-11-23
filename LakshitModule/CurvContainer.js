@@ -6,7 +6,6 @@ export default function CurveContainer() {
   return (
       <View style={styles.curvecontainer}>
           <ScrollView 
-          nestedScrollEnabled={true}
           showsVerticalScrollIndicator={false}
           horizontal={false}
           >

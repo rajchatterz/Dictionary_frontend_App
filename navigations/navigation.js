@@ -375,7 +375,7 @@ function BottomTabNavigationfun() {
         }}
       />
 
-      <BottomTabs.Screen
+      {/* <BottomTabs.Screen
         name="Favorite"
         component={Favorite}
         options={{
@@ -386,6 +386,23 @@ function BottomTabNavigationfun() {
             <Ionicons
               name={focused ? "heart" : "heart-outline"}
               size={size + 2}
+              color={color}
+            />
+          ),
+        }}
+      /> */}
+
+<BottomTabs.Screen
+        name="LeaderBoard"
+        component={LeadBoard}
+        options={{
+          title: "LeaderBoard",
+          headerShown: false,
+          tabBarHideOnKeyboard: true,
+          tabBarIcon: ({ focused, color, size }) => (
+            <Ionicons
+            name={focused ? "trophy" : "trophy-outline"}
+            size={size + 2}
               color={color}
             />
           ),
@@ -519,6 +536,13 @@ function AuthenticatedStack() {
         component={SwipeList}
         options={{ headerShown: false }}
       />
+
+      <Stack.Screen
+        name="LeadBoard"
+        component={LeadBoard}
+        options={{ headerShown: false }}
+      />
+
       </Stack.Navigator>
     </>
   );
