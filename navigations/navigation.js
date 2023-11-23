@@ -32,6 +32,10 @@ import Substantiate from "../screens/Substantiate";
 import WordList from "../screens/WordList";
 import Resist from "../screens/Resist";
 import SwipeList from "../screens/SwipeList";
+import LeadScreen1 from "../LakshitModule/LeadScreen1";
+import LeadScreen2 from "../LakshitModule/LeadScreen2";
+import LeadScreen3 from "../LakshitModule/LeadScreen3";
+
 
 import { AuthContext } from "../store/auth-context";
 
@@ -40,7 +44,6 @@ import { FontAwesome } from "@expo/vector-icons";
 import LoginScreen from "../screens/Auth/login";
 import SignupScreen from "../screens/Auth/signup";
 import OTPPage from "../screens/Auth/otp";
-
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 const TopTab = createMaterialTopTabNavigator();
@@ -53,7 +56,7 @@ const TopTab = createMaterialTopTabNavigator();
 function AuthStack() {
   return (
     <Stack.Navigator
-      initialRouteName="SignUp1"
+      initialRouteName="LeaderBoard"
       screenOptions={{
         animation: "slide_from_right", //<-- this is what will do the trick
         presentation: "card",
@@ -80,6 +83,11 @@ function AuthStack() {
         component={BoardingScreen2}
         options={{ headerShown: false }}
       />
+      <Stack.Screen
+        name="LeaderBoard"
+        component={LeadBoard}
+        options={{ headerShown: false }}
+      />
       {/* --------------------------------------------------------------- */}
 
       <Stack.Screen
@@ -102,7 +110,6 @@ function AuthStack() {
 }
 
 //TopTabNavigator
-
 function TopTabNavigation() {
   return (
     <TopTab.Navigator
@@ -142,6 +149,33 @@ function TopTabNavigation() {
     </TopTab.Navigator>
   );
 }
+
+function LeadBoard() {
+  return (
+    <TopTab.Navigator
+      screenOptions={{
+        tabBarStyle:{height:0},
+        style: {backgroundColor: 'transparent'}
+      }}
+    >
+      <TopTab.Screen
+        name="LeadScreen1"
+        component={LeadScreen1}
+        options={{ headerShown: false,swipeEnabled:false}}
+      />
+      <TopTab.Screen
+        name="LeadScreen2"
+        component={LeadScreen2}
+        options={{ headerShown: false,swipeEnabled:false}}
+      />
+      <TopTab.Screen
+        name="LeadScreen3"
+        component={LeadScreen3}
+        options={{ headerShown: false,swipeEnabled:false}}
+      />
+    </TopTab.Navigator>
+    );
+  }
 
 function NotificationsStack() {
   return (
