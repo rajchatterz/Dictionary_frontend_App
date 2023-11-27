@@ -32,10 +32,9 @@ import Substantiate from "../screens/Substantiate";
 import WordList from "../screens/WordList";
 import Resist from "../screens/Resist";
 import SwipeList from "../screens/SwipeList";
-import LeadScreen1 from "../LakshitModule/LeadScreen1";
-import LeadScreen2 from "../LakshitModule/LeadScreen2";
-import LeadScreen3 from "../LakshitModule/LeadScreen3";
-
+import LeadScreen1 from "../components/LeaderBoardComp/LeadScreen1";
+import LeadScreen2 from "../components/LeaderBoardComp/LeadScreen2";
+import LeadScreen3 from "../components/LeaderBoardComp/LeadScreen3";
 
 import { AuthContext } from "../store/auth-context";
 
@@ -56,7 +55,7 @@ const TopTab = createMaterialTopTabNavigator();
 function AuthStack() {
   return (
     <Stack.Navigator
-      initialRouteName="LeaderBoard"
+      initialRouteName="SignUp1"
       screenOptions={{
         animation: "slide_from_right", //<-- this is what will do the trick
         presentation: "card",
@@ -81,11 +80,6 @@ function AuthStack() {
       <Stack.Screen
         name="Boarding2"
         component={BoardingScreen2}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="LeaderBoard"
-        component={LeadBoard}
         options={{ headerShown: false }}
       />
       {/* --------------------------------------------------------------- */}
@@ -154,28 +148,28 @@ function LeadBoard() {
   return (
     <TopTab.Navigator
       screenOptions={{
-        tabBarStyle:{height:0},
-        style: {backgroundColor: 'transparent'}
+        tabBarStyle: { height: 0 },
+        style: { backgroundColor: "transparent" },
       }}
     >
       <TopTab.Screen
         name="LeadScreen1"
         component={LeadScreen1}
-        options={{ headerShown: false,swipeEnabled:false}}
+        options={{ headerShown: false, swipeEnabled: false }}
       />
       <TopTab.Screen
         name="LeadScreen2"
         component={LeadScreen2}
-        options={{ headerShown: false,swipeEnabled:false}}
+        options={{ headerShown: false, swipeEnabled: false }}
       />
       <TopTab.Screen
         name="LeadScreen3"
         component={LeadScreen3}
-        options={{ headerShown: false,swipeEnabled:false}}
+        options={{ headerShown: false, swipeEnabled: false }}
       />
     </TopTab.Navigator>
-    );
-  }
+  );
+}
 
 function NotificationsStack() {
   return (
@@ -374,25 +368,7 @@ function BottomTabNavigationfun() {
           ),
         }}
       />
-
-      {/* <BottomTabs.Screen
-        name="Favorite"
-        component={Favorite}
-        options={{
-          title: "Favorites",
-          headerShown: false,
-          tabBarHideOnKeyboard: true,
-          tabBarIcon: ({ focused, color, size }) => (
-            <Ionicons
-              name={focused ? "heart" : "heart-outline"}
-              size={size + 2}
-              color={color}
-            />
-          ),
-        }}
-      /> */}
-
-<BottomTabs.Screen
+      <BottomTabs.Screen
         name="LeaderBoard"
         component={LeadBoard}
         options={{
@@ -401,8 +377,8 @@ function BottomTabNavigationfun() {
           tabBarHideOnKeyboard: true,
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons
-            name={focused ? "trophy" : "trophy-outline"}
-            size={size + 2}
+              name={focused ? "trophy" : "trophy-outline"}
+              size={size + 2}
               color={color}
             />
           ),
@@ -468,9 +444,6 @@ function AuthenticatedStack() {
         component={SearchSection}
         options={{ headerShown: false }}
       /> */}
-      
-   
-        
 
         <Stack.Screen
           name="SearchResults"
@@ -515,34 +488,33 @@ function AuthenticatedStack() {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-        name="Substantiate"
-        component={Substantiate}
-        options={{ headerShown: false }}
-      />
+          name="Substantiate"
+          component={Substantiate}
+          options={{ headerShown: false }}
+        />
 
-      <Stack.Screen
-        name="WordList"
-        component={WordList}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Resist"
-        component={Resist}
-        options={{ headerShown: false }}
-      />
+        <Stack.Screen
+          name="WordList"
+          component={WordList}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Resist"
+          component={Resist}
+          options={{ headerShown: false }}
+        />
 
-      <Stack.Screen
-        name="SwipeList"
-        component={SwipeList}
-        options={{ headerShown: false }}
-      />
+        <Stack.Screen
+          name="SwipeList"
+          component={SwipeList}
+          options={{ headerShown: false }}
+        />
 
-      <Stack.Screen
-        name="LeadBoard"
-        component={LeadBoard}
-        options={{ headerShown: false }}
-      />
-
+        <Stack.Screen
+          name="LeadBoard"
+          component={LeadBoard}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
     </>
   );

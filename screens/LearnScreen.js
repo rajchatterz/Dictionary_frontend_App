@@ -32,7 +32,7 @@ export default function WordCategory() {
             showsVerticalScrollIndicator={false}
             horizontal={false}
             nestedScrollEnabled={true}
-            contentContainerStyle={{ bottom: 15, flex: 1 }}
+            contentContainerStyle={{ bottom: 15}}
           >
             {feed.map((item) => (
               <View key={item.id} style={styles.listcard}>

@@ -1,14 +1,16 @@
 import { StyleSheet, Text, View, ScrollView, Image} from "react-native";
 import React from "react";
-import Feed from "./Feed";
+import Feed from "../../LakshitModule/Feed";
 
 export default function CurveContainer() {
   return (
       <View style={styles.curvecontainer}>
           <ScrollView 
           showsVerticalScrollIndicator={false}
+          nestedScrollEnabled={true}
           horizontal={false}
           >
+            <View style={{marginBottom:210}}>
             {Feed.slice(3,12).map((item) => (
               <View key={item.id} style={styles.listcard}>
                 <View
@@ -57,6 +59,7 @@ export default function CurveContainer() {
                 </View>
               </View>
             ))}
+            </View>
           </ScrollView>
       </View>
   );
@@ -66,15 +69,13 @@ const styles = StyleSheet.create({
   curvecontainer: {
     width:'200%',
     flex:1,
+    top:140,
     alignItems:'center',
-    justifyContent:'flex-end',
+    justifyContent:'center',
     backgroundColor:'white',
     borderTopLeftRadius:450,
     borderTopRightRadius:450,
-    top:380,
     opacity:0.99,
-    overflow:'scroll',
-    position:'absolute',
   },
   listcard: {
     top:60,

@@ -8,7 +8,9 @@ import Fontisto from "react-native-vector-icons/Fontisto";
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
-       <ScrollView horizontal={false}>
+       <ScrollView
+       showsVerticalScrollIndicator={false}
+        horizontal={false}>
        <View style={styles.profileImage}>
           <Image style={styles.profileImage} source={require('../../assets/profile.png')} />
         </View>

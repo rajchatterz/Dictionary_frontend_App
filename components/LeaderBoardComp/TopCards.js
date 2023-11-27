@@ -10,8 +10,8 @@ export default function TopCards() {
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "center",
-          top: 260,
-          position:'absolute',
+          top:160,
+          left:5,
         }}
       >
         <LinearGradient
@@ -31,7 +31,7 @@ export default function TopCards() {
           >
             <Image
               style={{ width: 65, height: 65 }}
-              source={require("../assets/profile.png")}
+              source={require("../../assets/profile.png")}
             />
             <Text style={styles.badge1}>2</Text>
             <Text style={{fontSize:10,fontWeight:"900",color:'white',left:4,bottom:3}}>Arjun kumar</Text>
@@ -54,10 +54,10 @@ export default function TopCards() {
               borderWidth: 2,
             }}
           >
-            <Image style={{width:23.16,height:21,bottom:30,left:35}} source={require('../assets/Crown.png')}/>
+            <Image style={{width:23.16,height:21,bottom:30,left:35}} source={require('../../assets/Crown.png')}/>
             <Image
               style={{ width: 99, height: 99,bottom:21}}
-              source={require("../assets/profile.png")}
+              source={require("../../assets/profile.png")}
             />
              <Text style={styles.badge3}>1</Text>
              <Text style={{fontSize:13,fontWeight:"900",color:'white',left:4,bottom:30}}>Sonam Powar</Text>
@@ -83,7 +83,7 @@ export default function TopCards() {
           >
             <Image
               style={{ width: 65, height: 65 }}
-              source={require("../assets/profile.png")}
+              source={require("../../assets/profile.png")}
             />
             <Text style={styles.badge2}>3</Text>
             <Text style={{fontSize:10,fontWeight:"900",color:'white',left:4,bottom:3}}>Ram Jadhav</Text>
