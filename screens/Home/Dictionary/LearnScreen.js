@@ -7,7 +7,7 @@ import {
   ScrollView,
 } from "react-native";
 import React from "react";
-import feed from "../LakshitModule/Feed";
+import feed from "../../../LakshitModule/Feed";
 import * as Progress from "react-native-progress";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import AntDesign from "react-native-vector-icons/AntDesign";
@@ -25,13 +25,12 @@ export default function WordCategory() {
           size={22}
           color={"#FFFFFF"}
         />
-        <Image style={styles.curve} source={require("../assets/Group1.png")} />
+        <Image style={styles.curve} source={require("../../../assets/Group1.png")} />
         <Text style={styles.word}>Word Categories</Text>
         <View style={styles.cardcontainer}>
           <ScrollView
             showsVerticalScrollIndicator={false}
             horizontal={false}
-            nestedScrollEnabled={true}
             contentContainerStyle={{ bottom: 15}}
           >
             {feed.map((item) => (

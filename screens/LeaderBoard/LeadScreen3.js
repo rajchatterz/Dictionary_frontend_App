@@ -1,8 +1,8 @@
 import {StyleSheet,Text,View,TouchableOpacity,ScrollView,Image} from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
-import TopCards from "./TopCards";
-import CurveContainer from "./CurvContainer";
+import TopCards from "../../components/LeaderBoardComp/TopCards";
+import CurveContainer from "../../components/LeaderBoardComp/CurvContainer";
 
 export default function LeadScreen3() {
   const navigation = useNavigation();

@@ -6,7 +6,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
 import { GlobalStyles } from "../constants/style";
-import Learn from "../screens/LearnScreen";
+import Learn from "../screens/Home/Dictionary/LearnScreen";
 import HomeScreen from "../screens/Home/HomeScreen";
 
 import Notification from "../screens/Notification";
@@ -17,7 +17,7 @@ import Profile from "../screens/ProfileScreen";
 import UserFeedback from "../screens/Profile/UserFeedback";
 import ReportDamage from "../screens/Profile/ReportDamage";
 import SearchResults from "../screens/SearchResultScreen";
-import Search from "../screens/SearchScreen";
+import Search from "../screens/Home/Dictionary/SearchScreen";
 import Stepper from "../screens/service_order";
 
 //testing screens
@@ -28,13 +28,13 @@ import SignUp4 from "../screens/Auth/SignUp4";
 import SignUp5 from "../screens/Auth/SignUp5";
 import BoardingScreen1 from "../screens/Auth/BoardingScreen1";
 import BoardingScreen2 from "../screens/Auth/BoardingScreen2";
-import Substantiate from "../screens/Substantiate";
-import WordList from "../screens/WordList";
-import Resist from "../screens/Resist";
-import SwipeList from "../screens/SwipeList";
-import LeadScreen1 from "../components/LeaderBoardComp/LeadScreen1";
-import LeadScreen2 from "../components/LeaderBoardComp/LeadScreen2";
-import LeadScreen3 from "../components/LeaderBoardComp/LeadScreen3";
+import Substantiate from "../screens/Home/Dictionary/Substantiate";
+import WordList from "../screens/Home/Dictionary/WordList";
+import Resist from "../screens/Home/Quiz/Resist";
+import SwipeList from "../screens/Home/Dictionary/SwipeList";
+import LeadScreen1 from "../screens/LeaderBoard/LeadScreen1";
+import LeadScreen2 from "../screens/LeaderBoard/LeadScreen2";
+import LeadScreen3 from "../screens/LeaderBoard/LeadScreen3";
 
 import { AuthContext } from "../store/auth-context";
 
@@ -80,6 +80,11 @@ function AuthStack() {
       <Stack.Screen
         name="Boarding2"
         component={BoardingScreen2}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Favorite"
+        component={Favorite}
         options={{ headerShown: false }}
       />
       {/* --------------------------------------------------------------- */}
@@ -384,7 +389,6 @@ function BottomTabNavigationfun() {
           ),
         }}
       />
-
       <BottomTabs.Screen
         name="Profile"
         component={Profile}

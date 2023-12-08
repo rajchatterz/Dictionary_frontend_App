@@ -11,7 +11,7 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Entypo from "react-native-vector-icons/Entypo";
 import { useNavigation } from "@react-navigation/native";
-import Feed from "../LakshitModule/Feed";
+import Feed from "../../../LakshitModule/Feed";
 
 export default function SearchSection() {
   const navigation = useNavigation();

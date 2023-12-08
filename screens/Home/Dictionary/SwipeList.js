@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import React, { useState, useRef } from "react";
-import Feed from "../LakshitModule/Feed";
+import Feed from "../../../LakshitModule/Feed";
 import Swiper from "react-native-deck-swiper";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import AntDesign from "react-native-vector-icons/AntDesign";

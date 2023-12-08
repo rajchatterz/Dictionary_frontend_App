@@ -12,9 +12,9 @@ export default function Substantiate() {
         <Text style={{fontSize:28,lineHeight:34.15,letterSpacing:1,fontWeight:'900',color:'white'}}>Substantiate</Text>
         </View>
         <View style={{flex:1,flexDirection:'row',alignItems:'center',justifyContent:'space-evenly',marginHorizontal:30}}> 
-            <Image style={{width:65,height:65,}} source={require('../assets/save.png')}/>
-            <Image style={{width:65,height:65,}} source={require('../assets/favorite.png')}/>
-            <Image style={{width:65,height:65,}} source={require('../assets/share.png')}/>
+            <Image style={{width:65,height:65,}} source={require('../../../assets/save.png')}/>
+            <Image style={{width:65,height:65,}} source={require('../../../assets/favorite.png')}/>
+            <Image style={{width:65,height:65,}} source={require('../../../assets/share.png')}/>
       </View>
       </View>
     </View>

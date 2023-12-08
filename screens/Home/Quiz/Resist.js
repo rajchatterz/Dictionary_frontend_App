@@ -1,4 +1,4 @@
-import Feed from "../LakshitModule/Feed";
+import Feed from "../../../LakshitModule/Feed";
 import React, { useState } from "react";
 import {
   View,

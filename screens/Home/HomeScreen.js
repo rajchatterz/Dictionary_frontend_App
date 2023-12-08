@@ -4,8 +4,11 @@ import SearchComp from "../../components/HomeScreenComp/SearchComp";
 import CardComp from "../../components/HomeScreenComp/CardComp1";
 import CardComp2 from "../../components/HomeScreenComp/CardComp2";
 import Fontisto from "react-native-vector-icons/Fontisto";
+import { useNavigation } from "@react-navigation/native";
 
 export default function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
        <ScrollView
@@ -14,7 +17,7 @@ export default function HomeScreen() {
        <View style={styles.profileImage}>
           <Image style={styles.profileImage} source={require('../../assets/profile.png')} />
         </View>
-       <Pressable onPress={() => console.log('iconPressed')} style={styles.bellIcon}>
+       <Pressable onPress={() => navigation.navigate('Favorite')} style={styles.bellIcon}>
           <Fontisto name="bell" size={40} color={"white"} />
         </Pressable>
       <Image
@@ -28,8 +31,7 @@ export default function HomeScreen() {
             <CardComp />
             <CardComp2 />
             <CardComp2 />
-            <CardComp2 />
-          
+            
         </View>
       </ScrollView>
       

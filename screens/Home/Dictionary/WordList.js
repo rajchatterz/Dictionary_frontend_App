@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View,FlatList,Image} from 'react-native'
 import React,{useState} from 'react'
-import Feed from '../LakshitModule/Feed'
+import Feed from '../../../LakshitModule/Feed'
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import AntDesign from "react-native-vector-icons/AntDesign"
 import { useNavigation } from '@react-navigation/native';
