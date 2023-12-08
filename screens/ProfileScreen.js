@@ -520,7 +520,7 @@ const styles = StyleSheet.create({
     color: "gray",
   },
   blueBackground: {
-    backgroundColor: '#2E86C1',
+    backgroundColor: '#A678F2',
     borderBottomRightRadius: 10,
     borderBottomLeftRadius: 10,
     height: 120,

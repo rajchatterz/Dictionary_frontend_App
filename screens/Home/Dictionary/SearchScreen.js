@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   Dimensions,
   StyleSheet,
@@ -5,8 +6,8 @@ import {
   View,
   Text,
   FlatList,
+  TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Entypo from "react-native-vector-icons/Entypo";
@@ -25,48 +26,52 @@ export default function SearchSection() {
 
   return (
     <View style={styles.container}>
-         <AntDesign
+      <AntDesign
         onPress={() => navigation.navigate("HomeScreen")}
-        style={{ right: 195, top: 100 }}
+        style={styles.icon}
         name="arrowleft"
         size={22}
         color={"#49454F"}
       />
-      <TextInput
-        placeholder="Search for Words......"
-        style={[styles.searchbar, styles.searchbarshadow]}
-        onChangeText={(text) => setSearchTerm(text)}
-        value={setWordData}
-      />
-      <FontAwesome
-        style={{ right: 140, top: 77 }}
-        name="search"
-        size={22}
-        color={"#8E5BE4"}
-        onPress={()=>navigation.navigate('Substantiate')}
-      />
-   
-      <View style={{top:100}}>
-        <Text style={styles.recenttext}>Recent Searches</Text>
+      <View style={styles.searchContainer}>
+        <TextInput
+          placeholder="Search for Words..."
+          style={styles.searchInput}
+          onChangeText={(text) => setSearchTerm(text)}
+          value={setWordData}
+        />
+        <FontAwesome
+          style={styles.searchIcon}
+          name="search"
+          size={22}
+          color={"#8E5BE4"}
+          onPress={() => navigation.navigate('Substantiate')}
+        />
+      </View>
+
+      <View style={styles.recentSearchContainer}>
+        <Text style={styles.recentText}>Recent Searches</Text>
         <Entypo
-          style={{ right: 140, bottom: 20 }}
+          style={styles.backIcon}
           name="back-in-time"
           size={20}
           color={"#49454F"}
         />
-        </View>
-      <View style={{top:90}}>
-        <FlatList
-          contentContainerStyle={{ flexDirection: "row", flexWrap: "wrap"}}
-          data={filteredData}
-          renderItem={({ item }) => (
-            <View style={styles.textpill}>
-              <Text>{item.Interest}</Text>
-            </View>
-          )}
-          keyExtractor={(item) => item.id}
-        />
       </View>
+
+      <FlatList
+        contentContainerStyle={styles.flatListContainer}
+        data={filteredData}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            style={styles.textPill}
+            onPress={() => console.log(item.Interest)} // Add action on press
+          >
+            <Text>{item.Interest}</Text>
+          </TouchableOpacity>
+        )}
+        keyExtractor={(item) => item.id}
+      />
     </View>
   );
 }
@@ -74,45 +79,62 @@ export default function SearchSection() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "flex-start",
-    backgroundColor:'white'
-  },
-  searchbar: {
     backgroundColor: "white",
-    width: Dimensions.get("screen").width * 0.85,
-    height: 43,
-    borderRadius: 10,
-    paddingLeft: 50,
+    paddingTop: 100,
+  },
+  icon: {
     position: "absolute",
-    right: 20,
-    top:90
+    left: 20,
+    top: 60,
   },
-  searchbarshadow: {
-    shadowColor: "black",
-    shadowOpacity: 0.8,
-    elevation: 6,
-    shadowRadius: 10,
-    shadowOffset: { width: -3, height: 13 },
+  searchContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginHorizontal: 20,
+    marginBottom: 20,
   },
-  recenttext: {
+  searchInput: {
+    flex: 1,
+    backgroundColor: "#F0F0F0",
+    height: 40,
+    borderRadius: 10,
+    paddingLeft: 15,
+    marginRight: 10,
+  },
+  searchIcon: {
+    color: "#8E5BE4",
+  },
+  recentSearchContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginHorizontal: 20,
+    marginBottom: 10,
+  },
+  backIcon: {
+    marginRight: 5,
+    color: "#49454F",
+  },
+  recentText: {
     fontSize: 16,
     fontWeight: "500",
-    lineHeight: 19.5,
-    letterSpacing: -0.32,
-    right:110
+    color: "#49454F",
   },
-  textpill: {
+  flatListContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-around",
+  },
+  textPill: {
     padding: 10,
-    borderWidth: 0.4,
+    borderWidth: 0.5,
     margin: 10,
     borderColor: "#ABABAB",
     borderRadius: 20,
+    backgroundColor: "white",
+    elevation: 3,
     shadowColor: "black",
     shadowOpacity: 0.8,
-    elevation:3,
-    shadowRadius: 20,
-    shadowOffset: { width: 4, height: 4},
-    backgroundColor:'white'
+    shadowRadius: 10,
+    shadowOffset: { width: 0, height: 4 },
   },
 });
