@@ -4,7 +4,7 @@ import { Heading, VStack, FormControl, Input, Button, Center, NativeBaseProvider
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {signup} from '../../utils/auth'
 import { useNavigation } from '@react-navigation/native';
-import SlideAlert from '../../components/SlideAlert';
+import SlideAlert from '../../components/TostMessage/SlideAlert';
 
 const SignupPage = () => {
   const [name, setName] = useState('');
