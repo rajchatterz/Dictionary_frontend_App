@@ -1,4 +1,6 @@
 
+import "react-native-gesture-handler";
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import React from 'react';
 import { useEffect, useState, useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
@@ -70,14 +72,18 @@ export default function App() {
 
   return (
     <>
+   
       <StatusBar backgroundColor='#A678F2' barStyle="light-content" />
       <AuthContextProvider>
+      
         <Root />
+        
         <>
           {/* this is an Toast message*/}
           <Toast config={toastConfig} />
         </>
       </AuthContextProvider>
+     
     </>
   );
 }

@@ -35,11 +35,13 @@ import SwipeList from "../screens/SwipeList";
 import LeadScreen1 from "../components/LeaderBoardComp/LeadScreen1";
 import LeadScreen2 from "../components/LeaderBoardComp/LeadScreen2";
 import LeadScreen3 from "../components/LeaderBoardComp/LeadScreen3";
+import GoogleSignIn from "../components/Auth/GoogleAuthentication";
 
 import { AuthContext } from "../store/auth-context";
 
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
+import LoginOptions from  "../screens/Auth/loginOptions";
 import LoginScreen from "../screens/Auth/login";
 import SignupScreen from "../screens/Auth/signup";
 import OTPPage from "../screens/Auth/otp";
@@ -55,7 +57,7 @@ const TopTab = createMaterialTopTabNavigator();
 function AuthStack() {
   return (
     <Stack.Navigator
-      initialRouteName="Login"
+      initialRouteName="LoginOptions"
       screenOptions={{
         animation: "slide_from_right", //<-- this is what will do the trick
         presentation: "card",
@@ -83,6 +85,12 @@ function AuthStack() {
         options={{ headerShown: false }}
       />
       {/* --------------------------------------------------------------- */}
+
+      <Stack.Screen
+        name="LoginOptions"
+        component={LoginOptions}
+        options={{ headerShown: false }}
+      />
 
       <Stack.Screen
         name="Login"
