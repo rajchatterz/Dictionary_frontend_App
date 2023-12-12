@@ -36,11 +36,6 @@ export default function HomeScreen() {
           <CardComp />
           <CardComp2 />
           <CardComp2 />
-          <CardComp2 />
-        
-            <CardComp />
-            <CardComp2 />
-            <CardComp2 />
             
         </View>
       </ScrollView>

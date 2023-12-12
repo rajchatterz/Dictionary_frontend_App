@@ -35,6 +35,9 @@ import SwipeList from "../screens/Home/Dictionary/SwipeList";
 import LeadScreen1 from "../screens/LeaderBoard/LeadScreen1";
 import LeadScreen2 from "../screens/LeaderBoard/LeadScreen2";
 import LeadScreen3 from "../screens/LeaderBoard/LeadScreen3";
+import Plans from "../LakshitModule/Plans";
+import Sheets from "../LakshitModule/BottomSheet";
+import TurnContact from '../LakshitModule/TurnContact'
 
 import { AuthContext } from "../store/auth-context";
 
@@ -55,7 +58,7 @@ const TopTab = createMaterialTopTabNavigator();
 function AuthStack() {
   return (
     <Stack.Navigator
-      initialRouteName="Login"
+      initialRouteName="Plans"
       screenOptions={{
         animation: "slide_from_right", //<-- this is what will do the trick
         presentation: "card",
@@ -85,6 +88,21 @@ function AuthStack() {
       <Stack.Screen
         name="Favorite"
         component={Favorite}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Plans"
+        component={Plans}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Sheets"
+        component={Sheets}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="TurnContact"
+        component={TurnContact}
         options={{ headerShown: false }}
       />
       {/* --------------------------------------------------------------- */}
