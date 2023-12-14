@@ -1,44 +1,115 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { StyleSheet, View, Image, ScrollView, Pressable, Text } from "react-native";
 import SearchComp from "../../components/HomeScreenComp/SearchComp";
 import CardComp from "../../components/HomeScreenComp/CardComp1";
 import CardComp2 from "../../components/HomeScreenComp/CardComp2";
 import Fontisto from "react-native-vector-icons/Fontisto";
+import { useNavigation } from "@react-navigation/native";
+import RBSheet from "react-native-raw-bottom-sheet";
+import ContactPermission from "../../components/HomeScreenComp/contactPermission";
+import NotificationPermission from "../../components/HomeScreenComp/notificationPermission";
+import * as Contacts from 'expo-contacts';
+import * as Notifications from 'expo-notifications';
+
 import SlideAlert from '../../components/TostMessage/SlideAlert';
 
 export default function HomeScreen() {
-  const [notificationCount, setNotificationCount] = useState(5); // Set the actual count as needed
+  const refRBSheet = useRef();
+  const navigation = useNavigation();
 
-  return (
-    <View style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false} horizontal={false}>
-        <View style={styles.profileImage}>
-          <Image style={styles.profileImage} source={require('../../assets/profile.png')} />
-        </View>
-        <Pressable onPress={() => console.log('iconPressed')} style={styles.bellIcon}>
-          <Fontisto name="bell-alt" size={40} color={"white"} />
-          {notificationCount > 0 && (
-            <View style={styles.notificationBadge}>
-              <Text style={styles.notificationText}>{notificationCount}</Text>
-            </View>
-          )}
-        </Pressable>
-        <Image
-          style={styles.backgroundImage}
-          source={require("../../assets/wave1.png")}
-        />
+const [notificationCount, setNotificationCount] = useState(5); // Set the actual count as needed
+const [contactPermission, setContactPermission] = useState(false);
+const [notificationPermission, setNotificationPermission] = useState(false);
 
-        <SearchComp />
-        <View style={styles.cardcontainer}>
-          <CardComp />
-          <CardComp2 />
-          <CardComp2 />
-          <CardComp2 />
-        </View>
-      </ScrollView>
-    </View>
-  );
-}
+useEffect(() => {
+  // Check and request contact permission
+  refRBSheet.current.open();
+ 
+
+  // Check and request notification permission
+  // (async () => {
+  //   const { status } = await Notifications.requestPermissionsAsync();
+  //   setNotificationPermission(status === "granted");
+  // })();
+}, []);
+
+const openNotificationPermission = () => {
+  // Open NotificationPermission only if contact permission is granted
+  if (contactPermission) {
+    refRBSheet.current.open();
+  } else {
+    // Handle the case when contact permission is not granted
+    console.log("Contact permission not granted.");
+  }
+};
+
+const handleContinue = () => {
+  console.log("Continue");
+  // Implement your logic after the user has given contact permission and continued
+  // For example, navigate to the next screen
+  navigation.navigate('NextScreen');
+};
+
+return (
+  <View style={styles.container}>
+    <ScrollView showsVerticalScrollIndicator={false} horizontal={false}>
+      <View style={styles.profileImage}>
+        <Image style={styles.profileImage} source={require('../../assets/profile.png')} />
+      </View>
+      <Pressable onPress={() => navigation.navigate('Favorite')} style={styles.bellIcon}>
+        <Fontisto name="bell-alt" size={40} color={"white"} />
+        {notificationCount > 0 && (
+          <View style={styles.notificationBadge}>
+            <Text style={styles.notificationText}>{notificationCount}</Text>
+          </View>
+        )}
+      </Pressable>
+      <Image
+        style={styles.backgroundImage}
+        source={require("../../assets/wave1.png")}
+      />
+
+      <SearchComp />
+      <View style={styles.cardcontainer}>
+        <CardComp />
+        <CardComp2 />
+        <CardComp2 />
+
+      </View>
+
+    </ScrollView>
+
+
+    {/* bottom drawer */}
+    <RBSheet
+      ref={refRBSheet}
+      height={550}
+      openDuration={250}
+      closeOnDragDown={true}
+      closeOnPressMask={false}
+      customStyles={{
+        wrapper: {
+          backgroundColor: "rgba(0,0,0,0.8)", // Adjust the opacity as needed
+        },
+        draggableIcon: {
+          backgroundColor: "grey"
+        },
+        container: {
+          borderTopLeftRadius: 10,
+          borderTopRightRadius: 10
+        }
+      }}
+    >
+<ContactPermission onContinue={handleContinue} />
+     
+     
+    </RBSheet>
+
+
+  </View>
+);
+      }
+
 
 const styles = StyleSheet.create({
   container: {

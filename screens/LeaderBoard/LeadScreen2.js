@@ -1,55 +1,54 @@
-import {StyleSheet,Text, View,TouchableOpacity,ScrollView,Image,} from "react-native";
+import {StyleSheet,Text,View,TouchableOpacity,ScrollView,Image} from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
-import TopCards from "./TopCards";
-import CurveContainer from "./CurvContainer";
+import TopCards from "../../components/LeaderBoardComp/TopCards";
+import CurveContainer from "../../components/LeaderBoardComp/CurvContainer";
 
-export default function LeadScreen1() {
+export default function LeadScreen2() {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <View style={{alignItems:'flex-end',right:10}}>
-      <Image
-        style={styles.backgroundImage}
-        source={require("../../assets/ellipse1.png")}
-      />
+      <View style={{ alignItems: "flex-end", right: 10 }}>
+        <Image
+          style={styles.backgroundImage}
+          source={require("../../assets/ellipse1.png")}
+        />
       </View>
-      <View style={{alignItems:'flext-start',left:80,bottom:5}}>
-      <Image
-        style={styles.backgroundImage}
-        source={require("../../assets/ellipse2.png")}
-      />
+      <View style={{ alignItems: "flext-start", left: 80, bottom: 5 }}>
+        <Image
+          style={styles.backgroundImage}
+          source={require("../../assets/ellipse2.png")}
+        />
       </View>
-      <View style={{alignItems:'center',right:80,top:120}}>
-      <Image
-        style={styles.backgroundImage}
-        source={require("../../assets/ellipse4.png")}
-      />
+      <View style={{ alignItems: "center", right: 80, top: 120 }}>
+        <Image
+          style={styles.backgroundImage}
+          source={require("../../assets/ellipse4.png")}
+        />
       </View>
-      <View style={{alignItems:'center',left:80,top:90}}>
-      <Image
-        style={styles.backgroundImage}
-        source={require("../../assets/ellipse6.png")}
-      />
+      <View style={{ alignItems: "center", left:80,top:90}}>
+        <Image
+          style={styles.backgroundImage}
+          source={require("../../assets/ellipse6.png")}
+        />
       </View>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        vertical={true}
+        horizontal={false}
         contentContainerStyle={styles.scrollview}
+        vertical={true}
       >
         <View style={{ alignItems: "center", justifyContent: "center" }}>
           <Text style={styles.headtext}>Leader Board</Text>
           <View style={styles.navcard}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Text style={{fontWeight:"900"}}>All time</Text>
+            </TouchableOpacity>
             <View style={styles.background}>
               <Text style={{ color: "white", fontWeight: "900" }}>
-                All time
+                This week
               </Text>
             </View>
-            <TouchableOpacity
-              onPress={() => navigation.navigate("LeadScreen2")}
-            >
-              <Text style={{ right: 15,fontWeight:"900" }}>This week</Text>
-            </TouchableOpacity>
             <TouchableOpacity
               onPress={() => navigation.navigate("LeadScreen3")}
             >
@@ -95,11 +94,11 @@ const styles = StyleSheet.create({
     borderRadius: 11,
     alignItems: "center",
     justifyContent: "center",
-    right: 25,
+    right: 3,
   },
   scrollview: { flexGrow: 1 },
   backgroundImage: {
     position: "absolute",
-    top:50,
+    top: 50,
   },
 });

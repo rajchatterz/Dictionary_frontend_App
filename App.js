@@ -12,8 +12,6 @@ import Toast, { BaseToast, ErrorToast }  from 'react-native-toast-message';  //T
 
 import { usePushNotifications } from "./pushNotification";
 
-
-
 //Root function
 function Root() {
   const [isTryingLogin, setIsTryingLogin] = useState(true);
@@ -22,7 +20,7 @@ function Root() {
 
   useEffect(() => {
     async function fetchToken() {
-      const storedToken = await AsyncStorage.getItem('token');
+      const storedToken = await AsyncStorage.getItem("token");
 
       if (storedToken) {
         authCtx.authenticate(storedToken);
@@ -41,12 +39,7 @@ function Root() {
   return <Navigation1 />;
 }
 
-
-
-
-
 export default function App() {
-
   const { expoPushToken } = usePushNotifications();
   console.log(expoPushToken);
 
@@ -58,17 +51,16 @@ export default function App() {
     success: (props) => (
       <BaseToast
         {...props}
-        style={{ backgroundColor:'#23C552' , width:'95%'  }}
+        style={{ backgroundColor: "#23C552", width: "95%" }}
         contentContainerStyle={{ paddingHorizontal: 15 }}
         text1Style={{
-          
-          color:'white',
+          color: "white",
           fontSize: 20,
-          fontWeight: '400'
+          fontWeight: "400",
         }}
       />
-    )
-      }
+    ),
+  };
 
   return (
     <>
