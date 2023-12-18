@@ -10,6 +10,8 @@ export default [
     word:'300 word',
     caption:"A line where two pieces of fabric are sewn together.",
     alphabet:'A',
+    icon:'check-circle',
+    iconcolor:"#0F2167"
   },
   {
     id: 2,
@@ -21,7 +23,9 @@ export default [
     progress:0.2,
     word:'300 word',
     caption:"A line where two pieces of fabric are sewn together.",
-    alphabet:'B'
+    alphabet:'B',
+    icon:'check-circle',
+    iconcolor:"#65B741"
   },
   {
     id: 3,
@@ -33,7 +37,9 @@ export default [
     progress:0.6,
     word:'300 word',
     caption:"A line where two pieces of fabric are sewn together.",
-    alphabet:'C'
+    alphabet:'C',
+    icon:'ticket-percent',
+    iconcolor:"#FD8D14"
   },
   {
     id: 4,
@@ -47,7 +53,9 @@ export default [
     caption:"A line where two pieces of fabric are sewn together.",
     alphabet:'D',
     firstname:'Rohan Joshi',
-    complete:'96.44%'
+    complete:'96.44%',
+    iconcross:'circle-with-cross',
+    iconcolor:"#FF90BC"
   },
   {
     id: 5,
@@ -60,7 +68,9 @@ export default [
     word:'300 word',
     caption:"A line where two pieces of fabric are sewn together.",
     firstname:'Laxman ',
-    complete:'93.80%'
+    complete:'93.80%',
+    icon:'check-circle',
+    iconcolor:"#0F2167"
   },
   {
     id: 6,
@@ -73,7 +83,9 @@ export default [
     word:'300 word',
     caption:"A line where two pieces of fabric are sewn together.",
     firstname:'Akshat Joshi',
-    complete:'91.80%'
+    complete:'91.80%',
+    icon:"ticket-percent",
+    iconcolor:"#FD8D14"
   },
   {
     id: 7,

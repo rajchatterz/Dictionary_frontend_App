@@ -58,6 +58,7 @@ const SignUp5 = () => {
         console.log("Code 201")
         setIsLoading(false)
         await authCtx.authenticate(data.token.access.token)
+        authCtx.authenticateUserId(data._id)
         navigation.navigate('SignUp1');
         setProgress(progress + 0.2);
       }else

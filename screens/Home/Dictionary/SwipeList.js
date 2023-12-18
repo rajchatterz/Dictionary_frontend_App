@@ -1,31 +1,37 @@
 import { StyleSheet, Text, View, Image, Pressable } from "react-native";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef,useEffect} from "react";
 import Feed from "../../../LakshitModule/Feed";
 import Swiper from "react-native-deck-swiper";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Ionicons from "react-native-vector-icons/Ionicons"
 import { useNavigation } from "@react-navigation/native";
-
-const Card = ({ card }) => {
-  return (
-    <View style={styles.card}>
-      <Image source={{ uri: card.imageSource }} style={styles.cardImage} />
-      <View style={styles.textcontainer}>
-        <Text style={styles.headtext}>{card.Interest}</Text>
-        <MaterialCommunityIcons
-          name="volume-high"
-          size={32}
-          style={{ textAlign: "right", right: 20, bottom: 25 }}
-        />
-        <Text style={styles.caption}>{card.caption}</Text>
-      </View>
-    </View>
-  );
-};
+import axios from "axios";
 
 export default function SwipeList() {
   const [index, setIndex] = useState(0);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "https://dictionarybackendapp-production.up.railway.app/v1/wordifyme/user-word-category/65798b945026a7002a24e194",
+          {
+            headers: {
+              Authorization: `Bearer ${`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NTc5OGI5NDUwMjZhNzAwMmEyNGUxOTQiLCJpYXQiOjE3MDI4OTY1MDcsImV4cCI6MTcwMjkxMDkwNywidHlwZSI6ImFjY2VzcyJ9.Kxp_NmYw8IK0fAyewKb4NOiLxaEfViMroeWvN2xfc0o`}`,
+            },
+          }
+        );
+        const newData = response.data.data;
+        setData(newData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const swiperRef = useRef();
 
@@ -35,19 +41,38 @@ export default function SwipeList() {
     setIndex((index + 1) % Feed.length);
   };
 
+  const Card = (card) => {
+  return (
+    <View style={styles.card}>
+      <Image source={{ uri:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQShMOHBfPGb7D50_ZYOhDLdZl0mzLNr5Dayw&usqp=CAU' }} style={styles.cardImage} />
+      <View style={styles.textcontainer}>
+        <Text style={styles.headtext}>{card?.meaning}</Text>
+        <MaterialCommunityIcons
+          name="volume-high"
+          size={32}
+          style={{ textAlign: "right", right: 20, bottom: 25 }}
+          onPress={()=>console.warn("Speak")}
+        />
+        <Text style={styles.caption}>{card?.use_case}</Text>
+        <Text style={{top:90,left:20,position:'absolute'}} >{card?.word}</Text>
+      </View>
+    </View>
+  );
+};
+
   return (
     <View style={styles.container}>
       <Swiper
         ref={swiperRef}
         backgroundColor="white"
-        cards={Feed}
+        cards={data.flatMap((category) => category.wordsList)}
         cardIndex={index}
-        renderCard={(card) => <Card card={card} />}
+        renderCard={(card) => Card(card)}
         onSwiped={onSwiped}
         disableBottomSwipe
         disableTopSwipe
         animateCardOpacity
-        stackSize={4}
+        stackSize={2}
         stackScale={10}
         stackSeparation={1}
         infinite
@@ -109,7 +134,7 @@ const styles = StyleSheet.create({
     flex: 0.55,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "white",
+    backgroundColor: "grey",
     borderRadius: 16,
     top:110
   },

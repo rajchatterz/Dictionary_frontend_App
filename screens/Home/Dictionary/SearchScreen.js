@@ -18,11 +18,19 @@ export default function SearchSection() {
   const navigation = useNavigation();
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [wordData, setWordData] = useState(Feed);
+  const [recentSearches, setRecentSearches] = useState([]);
 
-  const filteredData = Feed.filter((item) =>
-    item.Interest.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const handleSearch = () => {
+    if (!recentSearches.includes(searchTerm)) {
+      // Update recent searches with the new search term
+      setRecentSearches([searchTerm, ...recentSearches.slice(0, 4)]);
+      console.log('Searching for:', searchTerm);
+    }
+  };
+
+  const clearSearch = () => {
+    setSearchTerm('')
+  }
 
   return (
     <View style={styles.container}>
@@ -38,14 +46,14 @@ export default function SearchSection() {
           placeholder="Search for Words..."
           style={styles.searchInput}
           onChangeText={(text) => setSearchTerm(text)}
-          value={setWordData}
+          value={searchTerm}
         />
         <FontAwesome
           style={styles.searchIcon}
           name="search"
           size={22}
           color={"#8E5BE4"}
-          onPress={() => navigation.navigate('Substantiate')}
+          onPress={handleSearch}
         />
       </View>
 
@@ -56,21 +64,22 @@ export default function SearchSection() {
           name="back-in-time"
           size={20}
           color={"#49454F"}
+          onPress={clearSearch}
         />
       </View>
 
       <FlatList
         contentContainerStyle={styles.flatListContainer}
-        data={filteredData}
+        data={recentSearches}
+        keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
           <TouchableOpacity
             style={styles.textPill}
-            onPress={() => console.log(item.Interest)} // Add action on press
+            onPress={() => console.log(item)} // Add action on press
           >
-            <Text>{item.Interest}</Text>
+            <Text>{item}</Text>
           </TouchableOpacity>
         )}
-        keyExtractor={(item) => item.id}
       />
     </View>
   );

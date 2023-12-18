@@ -8,6 +8,7 @@ import { useNavigation } from "@react-navigation/native";
 import RBSheet from "react-native-raw-bottom-sheet";
 import ContactPermission from "../../components/HomeScreenComp/contactPermission";
 import NotificationPermission from "../../components/HomeScreenComp/notificationPermission";
+import NewNotify from "../../LakshitModule/NewNotify";
 import * as Contacts from 'expo-contacts';
 import * as Notifications from 'expo-notifications';
 
@@ -55,7 +56,7 @@ return (
       <View style={styles.profileImage}>
         <Image style={styles.profileImage} source={require('../../assets/profile.png')} />
       </View>
-      <Pressable onPress={() => navigation.navigate('Favorite')} style={styles.bellIcon}>
+      <Pressable onPress={() => navigation.navigate('NewNotify')} style={styles.bellIcon}>
         <Fontisto name="bell-alt" size={40} color={"white"} />
         {notificationCount > 0 && (
           <View style={styles.notificationBadge}>

@@ -38,6 +38,7 @@ import Plans from "../LakshitModule/Plans";
 import NotificationPermission from "../components/HomeScreenComp/notificationPermission";
 import ContactPermission from '../components/HomeScreenComp/contactPermission'
 import GoogleSignIn from "../components/Auth/GoogleAuthentication";
+import NewNotify from "../LakshitModule/NewNotify";
 
 import { AuthContext } from "../store/auth-context";
 
@@ -96,6 +97,12 @@ function AuthStack() {
         component={Plans}
         options={{ headerShown: false }}
       />
+      <Stack.Screen
+        name="NewNotify"
+        component={NewNotify}
+        options={{ headerShown: false }}
+        />
+
       <Stack.Screen
         name="Sheets"
         component={NotificationPermission}

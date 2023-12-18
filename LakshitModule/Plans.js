@@ -1,15 +1,29 @@
-import { StyleSheet, Text, View, Image, Pressable } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Animated,
+  Pressable,
+  Image,
+} from "react-native";
 import React, { useState } from "react";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 export default function Plans() {
-  const [checked, setChecked] = useState(false);
+  const [checkbox1, setCheckbox1] = useState(false);
+  const [checkbox2, setCheckbox2] = useState(false);
 
-  const plans = [
-    {value :'option1'},
-    {value :'option2'}
-  ]
+  const handleCheckboxChange = (checkboxNumber) => {
+    if (checkboxNumber === 1) {
+      setCheckbox1(true);
+      setCheckbox2(false);
+    } else if (checkboxNumber === 2) {
+      setCheckbox1(false);
+      setCheckbox2(true);
+    }
+  };
   return (
     <View style={styles.container}>
       <View style={styles.headcontainer}>
@@ -24,45 +38,148 @@ export default function Plans() {
           <Image style={styles.image} source={require("../assets/plans.png")} />
         </View>
       </View>
-        <View style={styles.groupcontainer1}>
+      <TouchableOpacity style={styles.groupcontainer1}>
         <BouncyCheckbox
-        size={25}
-        fillColor="#80CAC9"
-        unfillColor="#FFFFFF"
-          isChecked={checked}
+          size={25}
+          fillColor="#80CAC9"
+          unfillColor="#FFFFFF"
+          isChecked={checkbox1}
           onValueChange={(isChecked) => setChecked(isChecked)}
-          style={{top:20,left:10}}
+          style={{ top: 20, left: 10 }}
         />
-        <View style={{flex:1,alignItems:'flex-start',justifyContent:'center',bottom:15}}>
-          <Text style={{fontSize:18,color:'#3A1155',fontWeight:'bold',left:50,lineHeight:30,letterSpacing:-0.28}}>Free (Basic)</Text>
-          <Text style={{fontSize:14,color:'#3A1155',left:50,letterSpacing:-0.28}}>Don't even try pro</Text>
+        <View
+          style={{
+            flex: 1,
+            alignItems: "flex-start",
+            justifyContent: "center",
+            bottom: 15,
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 18,
+              color: "#3A1155",
+              fontWeight: "bold",
+              left: 50,
+              lineHeight: 30,
+              letterSpacing: -0.28,
+            }}
+          >
+            Free (Basic)
+          </Text>
+          <Text
+            style={{
+              fontSize: 14,
+              color: "#3A1155",
+              left: 50,
+              letterSpacing: -0.28,
+            }}
+          >
+            Don't even try pro
+          </Text>
         </View>
-      </View>
-      <View style={styles.groupcontainer2}>
-      <BouncyCheckbox
-      size={25}
-      fillColor="#80CAC9"
-      unfillColor="#FFFFFF"
-        isChecked={checked}
-        onValueChange={(isChecked) => setChecked(isChecked)}
-        style={{flex:1,alignItems:'center',left:10,top:50}}
-      />
-      <View style={styles.popular}>
-        <Text style={{fontSize:14,fontWeight:'900',color:'white'}}>POPULAR</Text>
-      </View>
-        <View style={{flex:1,alignItems:'flex-start',justifyContent:'center',bottom:85}}>
-          <Text style={{fontSize:18,color:'#3A1155',fontWeight:'bold',left:50,lineHeight:30,letterSpacing:-0.28}}>Free (Basic)</Text>
-          <Text style={{fontSize:17,color:'#3A1155',left:50,letterSpacing:-0.28}}>Just @  Rs.49  /- </Text>
-          <Text style={{fontSize:14,color:'#3A1155',left:50,letterSpacing:-0.28}}>A : Switch to basic (always free) </Text>
-          <Text style={{fontSize:14,color:'#3A1155',left:50,letterSpacing:-0.28}}>B : Interview Preparation</Text>
-          <Text style={{fontSize:14,color:'#3A1155',left:50,letterSpacing:-0.28}}>C : Improve Business communication </Text>
-          <Text style={
-            {fontSize:14,color:'#3A1155',left:50,letterSpacing:-0.28,width:'75%'}
-          }>D : Get Word List for CAT, MPSC , SAT , UPSE , ILETS , GRE , GMAT & other</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.groupcontainer2}>
+        <BouncyCheckbox
+          size={25}
+          fillColor="#80CAC9"
+          unfillColor="#FFFFFF"
+          isChecked={checkbox2}
+          onValueChange={(isChecked) => setChecked(isChecked)}
+          style={{ flex: 1, alignItems: "center", left: 10, top: 50 }}
+        />
+        <View style={styles.popular}>
+          <Text style={{ fontSize: 14, fontWeight: "900", color: "white" }}>
+            POPULAR
+          </Text>
         </View>
-        <Text style={{fontSize:14,color:'#3A1155',textAlign:'right',fontWeight:'bold',right:20,bottom:20}}>*Billed monthly</Text>
-      </View>
-      <Pressable onPress={()=>console.log('Continue')} style={styles.button}>
+        <View
+          style={{
+            flex: 1,
+            alignItems: "flex-start",
+            justifyContent: "center",
+            bottom: 85,
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 18,
+              color: "#3A1155",
+              fontWeight: "bold",
+              left: 50,
+              lineHeight: 30,
+              letterSpacing: -0.28,
+            }}
+          >
+            Free
+          </Text>
+          <Text
+            style={{
+              fontSize: 17,
+              color: "#3A1155",
+              left: 50,
+              letterSpacing: -0.28,
+            }}
+          >
+            Just @ Rs.49 /-{" "}
+          </Text>
+          <Text
+            style={{
+              fontSize: 14,
+              color: "#3A1155",
+              left: 50,
+              letterSpacing: -0.28,
+            }}
+          >
+            A : Switch to basic (always free){" "}
+          </Text>
+          <Text
+            style={{
+              fontSize: 14,
+              color: "#3A1155",
+              left: 50,
+              letterSpacing: -0.28,
+            }}
+          >
+            B : Interview Preparation
+          </Text>
+          <Text
+            style={{
+              fontSize: 14,
+              color: "#3A1155",
+              left: 50,
+              letterSpacing: -0.28,
+            }}
+          >
+            C : Improve Business communication{" "}
+          </Text>
+          <Text
+            style={{
+              fontSize: 14,
+              color: "#3A1155",
+              left: 50,
+              letterSpacing: -0.28,
+              width: "75%",
+            }}
+          >
+            D : Get Word List for CAT, MPSC , SAT , UPSE , ILETS , GRE , GMAT &
+            other
+          </Text>
+        </View>
+        <Text
+          style={{
+            fontSize: 14,
+            color: "#3A1155",
+            textAlign: "right",
+            fontWeight: "bold",
+            right: 20,
+            bottom: 20,
+          }}
+        >
+          *Billed monthly
+        </Text>
+      </TouchableOpacity>
+      <Pressable onPress={() => console.log("Continue")} style={styles.button}>
         <Text style={styles.btntxt}>Continue</Text>
       </Pressable>
     </View>
@@ -139,16 +256,15 @@ const styles = StyleSheet.create({
     fontWeight: "900",
     color: "white",
   },
-  popular:
-  {
-    bottom:86,
-    width:91,
-    height:33,
-    alignItems:'center',
-    justifyContent:'center',
-    left:248,
-    backgroundColor:'#32BDD2',
-    borderTopRightRadius:10,
-    borderBottomLeftRadius:4
-  }
+  popular: {
+    bottom: 86,
+    width: 91,
+    height: 33,
+    alignItems: "center",
+    justifyContent: "center",
+    left: 248,
+    backgroundColor: "#32BDD2",
+    borderTopRightRadius: 10,
+    borderBottomLeftRadius: 4,
+  },
 });
