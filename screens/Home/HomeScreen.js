@@ -18,30 +18,29 @@ export default function HomeScreen() {
   const navigation = useNavigation();
 
 const [notificationCount, setNotificationCount] = useState(5); // Set the actual count as needed
-const [contactPermission, setContactPermission] = useState(false);
 const [notificationPermission, setNotificationPermission] = useState(false);
 
 useEffect(() => {
-  // Check and request contact permission
-  refRBSheet.current.open();
- 
+  const checkAndRequestContactPermission = async () => {
+    const { status } = await Contacts.getPermissionsAsync();
 
-  // Check and request notification permission
-  // (async () => {
-  //   const { status } = await Notifications.requestPermissionsAsync();
-  //   setNotificationPermission(status === "granted");
-  // })();
+    if (status !== "granted") {
+      // Permission not granted, open RBSheet to request permission
+      setTimeout(() => {
+        refRBSheet.current.open();
+      }, 2000);
+    }
+  };
+  checkAndRequestContactPermission()
 }, []);
 
-const openNotificationPermission = () => {
-  // Open NotificationPermission only if contact permission is granted
-  if (contactPermission) {
-    refRBSheet.current.open();
-  } else {
-    // Handle the case when contact permission is not granted
-    console.log("Contact permission not granted.");
+const toggleBottomSheet = () => {
+  if (refRBSheet.current) {
+    refRBSheet.current.close();
   }
 };
+
+
 
 const handleContinue = () => {
   console.log("Continue");
@@ -100,7 +99,7 @@ return (
         }
       }}
     >
-<ContactPermission onContinue={handleContinue} />
+<ContactPermission onClose={toggleBottomSheet} />
      
      
     </RBSheet>

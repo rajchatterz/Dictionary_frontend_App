@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { View, StyleSheet, Text, TouchableOpacity, Image, Pressable } from "react-native";
 import * as Contacts from 'expo-contacts';
 
-const ContactPermission = () => {
+const ContactPermission = ({ onClose }) => {
   const [permissionStatus, setPermissionStatus] = useState(null);
 
   useEffect(() => {
@@ -28,8 +28,13 @@ const ContactPermission = () => {
       await requestContactPermission();
       // Check the permission status again after requesting
       checkContactPermission();
+      onClose();
     }
   };
+
+  const handleMayBeLater = async()=>{
+    onClose()
+  }
 
   return (
     <View style={styles.container}>
@@ -45,7 +50,7 @@ const ContactPermission = () => {
         <Pressable onPress={handleContinue} style={styles.button}>
           <Text style={styles.buttonText}>Continue</Text>
         </Pressable>
-        <TouchableOpacity style={styles.maybeLater} onPress={() => console.log("Maybe Later")}>
+        <TouchableOpacity style={styles.maybeLater} onPress={handleMayBeLater}>
           <Text style={styles.maybebuttonText}>Maybe Later</Text>
         </TouchableOpacity>
       </View>
