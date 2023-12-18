@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext,useEffect } from "react";
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { View, Text, Progress, ScrollView, Badge, Icon, IconButton, Box, Button, FlatList, Heading, Divider, Avatar, HStack, VStack, Spacer, Switch, Center, NativeBaseProvider } from "native-base";
 import { Feather } from '@expo/vector-icons';
@@ -9,9 +9,12 @@ import { Ionicons } from '@expo/vector-icons';
 import { GlobalStyles } from '../constants/style';
 import { AuthContext } from '../store/auth-context';
 import BottomScreenDrawer from '../components/Notification_bottomdrawer';
-
+import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function ProfileScreen() {
+  const [data, setData] = useState([]);
+
   const authCtx = useContext(AuthContext);
   const navigation = useNavigation();
   const apiData = {
@@ -21,14 +24,36 @@ function ProfileScreen() {
 
   const percentage = (apiData.numerator / apiData.denominator) * 100;
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = await AsyncStorage.getItem("token");
+        const response = await axios.get("https://dictionarybackendapp-production.up.railway.app/v1/users/65798b945026a7002a24e194",
+          {
+            headers: {
+              Authorization: `Bearer ${`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NTc5OGI5NDUwMjZhNzAwMmEyNGUxOTQiLCJpYXQiOjE3MDI4OTY1MDcsImV4cCI6MTcwMjkxMDkwNywidHlwZSI6ImFjY2VzcyJ9.Kxp_NmYw8IK0fAyewKb4NOiLxaEfViMroeWvN2xfc0o`}`,
+            },
+          }
+        );
+        const newData = response.data;
+        setData(newData);
+        // console.log(newData)
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
 
   //user info from server
   const userInfo = [
-    { icon: "phone-portrait-outline", label: "Phone", value: "+91 7798121777", badge: "Verified" },
-    { icon: "mail-open-outline", label: "Email", value: "rohitkale@gmail.com" },
-    { icon: "location-outline", label: "Location", value: "Pune, Maharashtra" },
-    { icon: "calendar-outline", label: "Date of Birth", value: "28/03/1995" },
-    { icon: "person-outline", label: "Gender", value: "Male" }
+    { icon: "phone-portrait-outline", label: "Phone", value:(data.contact), badge: "Verified" },
+    { icon: "mail-open-outline", label: "Email", value: (data.email) },
+    { icon: "location-outline", label: "Location", value: (data.city)}, // (data.city)
+    { icon: "calendar-outline", label: "Date of Birth", value: (data.dob) }, // (data.dob)
+    { icon: "person-outline", label: "Gender", value: (data.gender) } // (data.gender)
   ];
 
   notificationInfo = [
@@ -109,11 +134,6 @@ function ProfileScreen() {
     </Box>
   );
 
-
-
-
-
-
   const logout_function = async () => {
     console.log("logging you out..")
     await authCtx.logout()
@@ -140,12 +160,12 @@ function ProfileScreen() {
               <VStack space={2} pt="4" alignItems="center">
                 <Box border="8" px="2" borderRadius="lg" backgroundColor="white" style={{ marginTop: 5, width: "95%" }}>
                   <View style={styles.profileHeader}>
-                    <Avatar style={{ width: 100, height: 100 }} bg="amber.500" source={{ uri: "https://images.unsplash.com/photo-1614289371518-722f2615943d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" }} size="lg">
+                    <Avatar style={{ width: 100, height: 100 }} bg="amber.500" source={{ uri: data.profileImage}} size="lg">
                       NB
                       <Avatar.Badge bg="green.500" />
                     </Avatar>
                     <View style={styles.profileInfo}>
-                      <Text style={styles.userName}>Audumber C</Text>
+                      <Text style={styles.userName}>{data.name}</Text>
                       <Text style={styles.completionText}>Profile Completion: 86%</Text>
                     </View>
                   </View>

@@ -2,9 +2,7 @@ import {
   StyleSheet,
   Text,
   View,
-  Image,
   ScrollView,
-  TouchableOpacity,
 } from "react-native";
 import React from "react";
 import CompeteAndWin from "./CompeteAndWin/CompeteAndWin";

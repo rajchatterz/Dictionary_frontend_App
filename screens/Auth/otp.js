@@ -35,7 +35,7 @@ export default function Devotp() {
         navigation.navigate("TopTab");
       } else if (data.code === 201) {
         setisLoading(false);
-        await authCtx.authenticate(data.token.access.token);
+        authCtx.authenticate(data.token.access.token);
         navigation.navigate("Dev");
       } else {
         setisLoading(false);

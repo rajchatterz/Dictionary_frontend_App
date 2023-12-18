@@ -34,9 +34,7 @@ export default function HomeScreen() {
         <SearchComp />
         <View style={styles.cardcontainer}>
           <CardComp />
-          <CardComp2 />
-          <CardComp2 />
-            
+          <CardComp2 />            
         </View>
       </ScrollView>
     </View>

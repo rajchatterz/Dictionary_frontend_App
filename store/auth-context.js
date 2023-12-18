@@ -5,15 +5,18 @@ import { createContext, useEffect, useState } from 'react';
 export const AuthContext = createContext({
   token: '',
   contact:'',
+  userid:'',
   isAuthenticated: false,
   authenticate: (token) => {},
   authenticateContact:(contact)=>{},
+  authenticateUserId:(userid)=>{},
   logout: () => {},
 });
 
 function AuthContextProvider({ children }) {
   const [authToken, setAuthToken] = useState();
   const [authContact, setContact] = useState();
+  const [authUserID, setUserID] = useState();
 
   function authenticate(token) {
     setAuthToken(token);
@@ -26,6 +29,11 @@ function AuthContextProvider({ children }) {
  
     }
 
+  function authenticateUserId (userid) {
+    setUserID(userid)
+    AsyncStorage.setItem('userid',userid);
+  }
+
   function logout() {
     setAuthToken(null);
     AsyncStorage.removeItem('token');
@@ -34,9 +42,11 @@ function AuthContextProvider({ children }) {
   const value = {
     token: authToken,
     contact:authContact,
+    userid:authUserID,
     isAuthenticated: !!authToken,
     authenticate: authenticate,
     authenticateContact:authenticateContact,
+    authenticateUserId:authenticateUserId,
     logout: logout,
   };
 
