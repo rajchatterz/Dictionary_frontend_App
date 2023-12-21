@@ -38,7 +38,7 @@ import Plans from "../LakshitModule/Plans";
 import NotificationPermission from "../components/HomeScreenComp/notificationPermission";
 import ContactPermission from '../components/HomeScreenComp/contactPermission'
 import GoogleSignIn from "../components/Auth/GoogleAuthentication";
-import NewNotify from "../LakshitModule/NewNotify";
+import NewNotification from "../screens/NewNotification";
 
 import { AuthContext } from "../store/auth-context";
 
@@ -97,11 +97,11 @@ function AuthStack() {
         component={Plans}
         options={{ headerShown: false }}
       />
-      <Stack.Screen
+      {/* <Stack.Screen
         name="NewNotify"
         component={NewNotify}
         options={{ headerShown: false }}
-        />
+        /> */}
 
       <Stack.Screen
         name="Sheets"
@@ -211,7 +211,7 @@ function LeadBoard() {
 function NotificationsStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen
+      {/* <Stack.Screen
         name="Notification"
         component={Notification}
         options={{
@@ -223,6 +223,11 @@ function NotificationsStack() {
             backgroundColor: GlobalStyles.colors.primary800,
           },
         }}
+      /> */}
+      <Stack.Screen
+        name="NewNotification"
+        component={NewNotification}
+        options={{headerShown:(false)}}
       />
     </Stack.Navigator>
   );

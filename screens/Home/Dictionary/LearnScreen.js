@@ -15,11 +15,16 @@ export default function WordCategory() {
     const fetchData = async () => {
       try {
         const token = await AsyncStorage.getItem("token");
+
+        if (!token) {
+          console.error("Token not found in AsyncStorage");
+          return;
+        }
         const response = await axios.get(
           "https://dictionarybackendapp-production.up.railway.app/v1/wordifyme/user-word-category/65798b945026a7002a24e194",
           {
             headers: {
-              Authorization: `Bearer ${`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NTc5OGI5NDUwMjZhNzAwMmEyNGUxOTQiLCJpYXQiOjE3MDI4OTY1MDcsImV4cCI6MTcwMjkxMDkwNywidHlwZSI6ImFjY2VzcyJ9.Kxp_NmYw8IK0fAyewKb4NOiLxaEfViMroeWvN2xfc0o`}`,
+              Authorization:  `Bearer ${token}`,
             },
           }
         );

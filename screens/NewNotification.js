@@ -5,9 +5,9 @@ import {
   FontAwesome,
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
-import feed from "./Feed";
+import feed from "../LakshitModule/Feed";
 
-export default function NewNotify() {
+export default function NewNotification() {
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor:'white'
   },
   innerContainer: {
     flex: 1,

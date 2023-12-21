@@ -5,18 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="16b21344-beb4-4f88-90b8-9b446dc534d3" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/LakshitModule/BottomSheet.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LakshitModule/Plans.js" beforeDir="false" afterPath="$PROJECT_DIR$/LakshitModule/Plans.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LakshitModule/TurnContact.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/HomeScreenComp/CardComp2.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/HomeScreenComp/CardComp2.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/navigations/navigation.js" beforeDir="false" afterPath="$PROJECT_DIR$/navigations/navigation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/Auth/otp.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Auth/otp.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/Home/Dictionary/LearnScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Home/Dictionary/LearnScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/Home/HomeScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Home/HomeScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/auth-context.js" beforeDir="false" afterPath="$PROJECT_DIR$/store/auth-context.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/home.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/learn.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/learn.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,15 +26,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;AndroidSdkUpdater&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "cidr.known.project.marker": "true",
+    "last_opened_file_path": "E:/React Native/Dictionary_frontend_App",
+    "settings.editor.selected.configurable": "AndroidSdkUpdater"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

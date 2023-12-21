@@ -1,18 +1,48 @@
-import { StyleSheet, Text, View, ScrollView, Image} from "react-native";
-import React from "react";
-import Feed from "../../LakshitModule/Feed";
+import { StyleSheet, Text, View, ScrollView, Image } from "react-native";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function CurveContainer() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = await AsyncStorage.getItem("token");
+
+        if (!token) {
+          console.error("Token not found in AsyncStorage");
+          return;
+        }
+        const response = await axios.get(
+          "https://dictionarybackendapp-production.up.railway.app/v1/wordifyme/leader-board",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const newData = response.data.data;
+        setData(newData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
-      <View style={styles.curvecontainer}>
-          <ScrollView 
-          showsVerticalScrollIndicator={false}
-          nestedScrollEnabled={true}
-          horizontal={false}
-          >
-            <View style={{marginBottom:210}}>
-            {Feed.slice(3,12).map((item) => (
-              <View key={item.id} style={styles.listcard}>
+    <View style={styles.curvecontainer}>  
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        nestedScrollEnabled={true}
+        horizontal={false}
+      >
+          <View style={{ marginBottom: 210 }}> 
+            {data.slice(3, 12).map((item) => (
+              <View key={item._id} style={styles.listcard}> 
                 <View
                   style={{
                     alignItems: "flex-start",
@@ -28,57 +58,59 @@ export default function CurveContainer() {
                       fontWeight: "bold",
                     }}
                   >
-                    {item.id}
+                    {item.userId}
                   </Text>
                   <Image
                     style={styles.cardimage}
-                    source={{ uri: item.imageSource }}
+                    source={{
+                      uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEyq_jXOpPcM7SXHtyI8E8sa8HDZX358Sgxw&usqp=CAU",
+                    }}
                   />
 
                   <Text
                     style={{
-                      left: 250,
+                      left: 230,
                       top: 25,
                       color: "#966DDA",
                       fontSize: 12,
                       fontWeight: "bold",
                     }}
                   >
-                    {item.complete}
+                    {item.score}
                   </Text>
                   <Text
                     style={{
-                      left: 20,
+                      left: 40,
                       top: 25,
                       fontSize: 15,
                       fontWeight: "900",
                     }}
                   >
-                    {item.firstname}
+                    {item.name}
                   </Text>
                 </View>
               </View>
             ))}
-            </View>
-          </ScrollView>
-      </View>
+          </View>
+      </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   curvecontainer: {
-    width:'200%',
-    flex:1,
-    top:140,
-    alignItems:'center',
-    justifyContent:'center',
-    backgroundColor:'white',
-    borderTopLeftRadius:450,
-    borderTopRightRadius:450,
-    opacity:0.99,
+    width: "200%",
+    flex: 1,
+    top: 140,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "white",
+    borderTopLeftRadius: 450,
+    borderTopRightRadius: 450,
+    opacity: 0.99,
   },
   listcard: {
-    top:60,
+    top: 60,
     backgroundColor: "white",
     width: 360,
     height: 64,

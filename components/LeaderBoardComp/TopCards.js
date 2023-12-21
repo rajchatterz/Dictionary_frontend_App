@@ -1,8 +1,42 @@
 import { StyleSheet, Text, View,Image} from "react-native";
-import React from "react";
+import React,{useState,useEffect} from "react";
 import { LinearGradient } from "expo-linear-gradient";
+import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function TopCards() {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = await AsyncStorage.getItem("token");
+
+        if (!token) {
+          console.error("Token not found in AsyncStorage");
+          return;
+        }
+        const response = await axios.get(
+          "https://dictionarybackendapp-production.up.railway.app/v1/wordifyme/leader-board",
+          {
+            headers: {
+              Authorization:  `Bearer ${token}`,
+            },
+          }
+        );
+        const newData = response.data.data;
+        setData(newData);
+        setLoading(false)
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setLoading(false)
+      }
+    };
+
+    fetchData();
+  }, []);
+  
   return (
         <View
         style={{
@@ -14,9 +48,11 @@ export default function TopCards() {
           left:5,
         }}
       >
+        {data.slice(1,2).map((item1) => (
         <LinearGradient
           colors={["rgba(217, 217, 217, 0.2)", "rgba(217, 217, 217, 0)"]}
           style={styles.topcard1}
+          key={item1._id}
         >
           <View
             style={{
@@ -34,13 +70,16 @@ export default function TopCards() {
               source={require("../../assets/profile.png")}
             />
             <Text style={styles.badge1}>2</Text>
-            <Text style={{fontSize:10,fontWeight:"900",color:'white',left:4,bottom:3}}>Arjun kumar</Text>
-            <Text style={{fontSize:10,fontWeight:"900",color:'#48D5A6',left:20,bottom:2}}>98.31%</Text>
+            <Text style={{fontSize:10,fontWeight:"900",color:'white',left:4,bottom:3}}>{item1.name}</Text>
+            <Text style={{fontSize:10,fontWeight:"900",color:'#48D5A6',left:25,bottom:2}}>{item1.score}</Text>
           </View>
         </LinearGradient>
+        ))}
+        {data.slice(0,1).map((item2) => (
         <LinearGradient
           colors={["rgba(217, 217, 217, 0.5)", "rgba(217, 217, 217, 0)"]}
           style={styles.topcard2}
+          key={item2._id}
         >
           <View
             style={{
@@ -60,13 +99,16 @@ export default function TopCards() {
               source={require("../../assets/profile.png")}
             />
              <Text style={styles.badge3}>1</Text>
-             <Text style={{fontSize:13,fontWeight:"900",color:'white',left:4,bottom:30}}>Sonam Powar</Text>
-            <Text style={{fontSize:13,fontWeight:"900",color:'#FED003',left:30,bottom:27}}>99.01%</Text>
+             <Text style={{fontSize:13,fontWeight:"900",color:'white',left:15,bottom:30}}>{item2.name}</Text>
+            <Text style={{fontSize:13,fontWeight:"900",color:'#FED003',left:38,bottom:27}}>{item2.score}</Text>
           </View>
         </LinearGradient>
+        ))}
+        {data.slice(2,3).map((item3)=>(
         <LinearGradient
           colors={["rgba(217, 217, 217, 0.2)", "rgba(217, 217, 217, 0)"]}
           style={styles.topcard3}
+          key={item3._id}
         >
           <View
             style={{
@@ -86,10 +128,11 @@ export default function TopCards() {
               source={require("../../assets/profile.png")}
             />
             <Text style={styles.badge2}>3</Text>
-            <Text style={{fontSize:10,fontWeight:"900",color:'white',left:4,bottom:3}}>Ram Jadhav</Text>
-            <Text style={{fontSize:10,fontWeight:"900",color:'#F6A14A',left:20,bottom:2}}>97.01%</Text>
+            <Text style={{fontSize:10,fontWeight:"900",color:'white',left:10,bottom:3}}>{item3.name}</Text>
+            <Text style={{fontSize:10,fontWeight:"900",color:'#F6A14A',left:26,bottom:2}}>{item3.score}</Text>
           </View>
         </LinearGradient>
+        ))}
       </View> 
   );
 }

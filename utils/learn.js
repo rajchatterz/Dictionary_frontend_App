@@ -2,6 +2,7 @@
 //"getWordCategories - GET word categories related to users."
 import axios from 'axios';
 import { base_url } from '../utils/constants'
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 async function word_categories(){
     const url = base_url + `/v1/wordifyme/user-word-category/65798b945026a7002a24e194`
