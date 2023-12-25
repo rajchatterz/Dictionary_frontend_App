@@ -7,19 +7,23 @@ import {
 import React from "react";
 import CompeteAndWin from "./CompeteAndWin/CompeteAndWin";
 import PlayAndProg from "./PlayAndProgress/PlayAndProg";
+import CompeteAndWin1 from "../../AmitModule/CompeteAndWin1";
 
 export default function CardComp2() {
   const color = ["rgba(166, 120, 242, 0.2)", "rgba(79, 79, 79, 0.1)"];
   return (
     <View style={styles.container}>
-      <View style={styles.container2}>
-        <Text style={styles.headtext1}>Compete and Win</Text>
+      {/* <View style={styles.container2}>
+        <Text style={styles.headtext1}>Compete and Win</Text> */}
         {/* Continue your Learning */}
-        <ScrollView horizontal contentContainerStyle={{ margin: 9 }}>
-           <CompeteAndWin/>
+        {/* <ScrollView horizontal contentContainerStyle={{ margin: 9 }}>
+           <CompeteAndWin/>   // Compete and Win Old
         </ScrollView>
-      </View>
+      </View> */}
       {/* Continue your Learning End... */}
+
+      {/* Compete and Win Section */}
+      <CompeteAndWin1/>       
       
       {/* Play annd Progress Card */}
       <View style={styles.container3}>
