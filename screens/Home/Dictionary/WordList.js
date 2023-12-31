@@ -23,7 +23,7 @@ export default function WordList() {
   const [loading, setLoading] = useState(false);
 
   const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NThmZDMzMWFhYzNjMjAwMmExZTc2YzkiLCJpYXQiOjE3MDM5MjQ1MjksImV4cCI6MTcwMzkzODkyOSwidHlwZSI6ImFjY2VzcyJ9.h0IACsPJbUbgWmePk7BrYAPfRDuAef0LwRKx8ukA4jI";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NTkwMjI3N2FhYzNjMjAwMmExZTc2Y2EiLCJpYXQiOjE3MDM5NDQ4MjMsImV4cCI6MTcwMzk1OTIyMywidHlwZSI6ImFjY2VzcyJ9.1jmsgbtpvx7JTt9goRmpDf7ucF_6E21wYS-Qu6D8yic";
 
   useEffect(() => {
     const fetchData = async () => {
