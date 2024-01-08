@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
+import { BackHandler } from "react-native";
 import { GlobalStyles } from "../constants/style";
 import Help from "../screens/Help";
 import Favorite from "../screens/FavoriteScreen";
@@ -39,6 +39,7 @@ import { LeadBoard, TopTabNavigation } from "./topTab";
 const Stack = createNativeStackNavigator();
 
 function AuthStack() {
+  
   return (
     <Stack.Navigator
       initialRouteName="LoginOptions"
@@ -360,7 +361,9 @@ function AuthenticatedStack() {
         <Stack.Screen
           name="Instructions"
           component={Instructions}
-          options={{ headerShown: false }}
+
+          options={{
+            headerShown: false}}
         />
 
         <Stack.Screen
