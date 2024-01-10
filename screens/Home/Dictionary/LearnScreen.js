@@ -127,12 +127,21 @@ const LearnScreen = () => {
               backgroundColor: '#A780E8',
               
             },
-            tabBarStyle:{width:220}
+            tabBarStyle:{width:240}
           }} name='General' component={Home} />
           <Tab.Screen
             options={{
-              
-              tabBarLabelStyle: { fontSize: 22,textTransform:'none', color:'#6829ce',fontWeight:'700'  },
+              tabBarIcon: ({ color, size }) => (
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <Image
+          source={require('../../../assets/coin/icon.png')}
+          style={{ width: 30, height: 30,left:45  }}
+        />
+
+      </View>
+
+              ),
+              tabBarLabelStyle: { fontSize: 22,textTransform:'none', color:'#6829ce',fontWeight:'700',position:'absolute',top:-34,left:-42 },
               tabBarIndicatorStyle: {
                 height: 3,
                 bottom:6,
@@ -140,7 +149,7 @@ const LearnScreen = () => {
                 left: 22,
                 backgroundColor:'#A780E8'
               },
-              tabBarStyle:{width:220}
+              tabBarStyle:{width:240}
             }}
             name='Exams' component={Setting} />
           </Tab.Navigator>

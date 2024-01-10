@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import {v4 as uuidv4 } from 'uuid'
 import { createContext, useEffect, useState } from 'react';
 
 export const AuthContext = createContext({
@@ -18,6 +18,17 @@ function AuthContextProvider({ children }) {
   const [authContact, setContact] = useState();
   const [authUserID, setUserID] = useState();
 
+  useEffect(() => {
+    AsyncStorage.getItem('userid').then((storedUserId) => {
+      if (storedUserId) {
+        setUserID(storedUserId)
+      } else {
+        const generatedUserId = uuidv4()
+        setUserID(generatedUserId)
+        AsyncStorage.setItem('userid',generatedUserId)
+      }
+    })
+  },[])
   function authenticate(token) {
     setAuthToken(token);
     AsyncStorage.setItem('token', token);
