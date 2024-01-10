@@ -18,17 +18,7 @@ function AuthContextProvider({ children }) {
   const [authContact, setContact] = useState();
   const [authUserID, setUserID] = useState();
 
-  useEffect(() => {
-    AsyncStorage.getItem('userid').then((storedUserId) => {
-      if (storedUserId) {
-        setUserID(storedUserId)
-      } else {
-        const generatedUserId = uuidv4()
-        setUserID(generatedUserId)
-        AsyncStorage.setItem('userid',generatedUserId)
-      }
-    })
-  },[])
+  
   function authenticate(token) {
     setAuthToken(token);
     AsyncStorage.setItem('token', token);
@@ -41,6 +31,7 @@ function AuthContextProvider({ children }) {
 
   function authenticateUserId (userid) {
     setUserID(userid)
+    console.log('auth id data',userid)
     AsyncStorage.setItem('userid',userid);
   }
 
