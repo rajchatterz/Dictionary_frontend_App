@@ -52,7 +52,7 @@ const LoginOptions = () => {
 
         try {
             const response = await fetch(
-                "https://www.googleapis.com/userinfo/v2/me",
+                "https://dictionarybackendapp-production.up.railway.app/v1/auth/login/email",
                 {
                     headers: { Authorization: `Bearer ${token}` },
                 }
