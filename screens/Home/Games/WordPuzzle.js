@@ -16,7 +16,8 @@ const WordPuzzle = () => {
       // Correct guess, show animation, update feedback, and increment the correct guess counter
       setFeedbackMessage('Correct!');
       playAnimation();
-      setCorrectGuessCount(correctGuessCount + 1);
+      setCorrectGuessCount((prevCount) => (prevCount + 1) % 11); // Reset to 0 after reaching 10
+
     } else {
       // Incorrect guess, update feedback message
       setFeedbackMessage('Incorrect. Try again!');
@@ -60,7 +61,7 @@ const WordPuzzle = () => {
   };
 
   const renderButtons = () => {
-    const letters = ['a', 'r', 'g', 'k', 'e', 'o', 'n', 'l'];
+    const letters = ['a', 'r', 'g', 'm', 'e', 'o', 'n', 'l'];
     return letters.map((letter, index) => (
       <TouchableOpacity
         key={index}
