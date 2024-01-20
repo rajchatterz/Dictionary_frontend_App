@@ -4,6 +4,7 @@ import { BackHandler, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { GlobalStyles } from "../constants/style";
 import Help from "../screens/Help";
+import WordPuzzle from "../screens/Home/Games/WordPuzzle";
 import Favorite from "../screens/FavoriteScreen";
 import AboutUs from "../screens/Profile/AboutUs";
 import Profile from "../screens/ProfileScreen";
@@ -362,7 +363,7 @@ function AuthenticatedStack() {
         {/* new added screen (Quiz) */}
         <Stack.Screen
           name="Instructions"
-          component={Instructions}
+          component={WordPuzzle}
           
           options={{
             headerShown: false,

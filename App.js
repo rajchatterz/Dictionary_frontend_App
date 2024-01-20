@@ -4,18 +4,16 @@ import React from "react";
 import { useEffect, useState, useContext } from "react";
 import { StatusBar } from "expo-status-bar";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import AppLoading from "expo-app-loading";
+import AppLoading from "expo-app-loading"; // Fixed the import
 import Navigation1 from "./navigations/navigation";
 import AuthContextProvider, { AuthContext } from "./store/auth-context";
-import Toast, { BaseToast, ErrorToast } from "react-native-toast-message"; //Toast Notification
+import Toast, { BaseToast, ErrorToast } from "react-native-toast-message";
 import { NativeBaseProvider } from "native-base";
-
 import { usePushNotifications } from "./pushNotification";
 
-//Root function
+// Root function
 function Root() {
   const [isTryingLogin, setIsTryingLogin] = useState(true);
-
   const authCtx = useContext(AuthContext);
 
   useEffect(() => {
@@ -44,10 +42,6 @@ export default function App() {
   console.log(expoPushToken);
 
   const toastConfig = {
-    /*
-      Overwrite 'success' type,
-      by modifying the existing `BaseToast` component
-    */
     success: (props) => (
       <BaseToast
         {...props}
@@ -70,10 +64,8 @@ export default function App() {
           <Root />
         </NativeBaseProvider>
 
-        <>
-          {/* this is an Toast message*/}
-          <Toast config={toastConfig} />
-        </>
+        {/* Removed the unnecessary empty fragment */}
+        <Toast config={toastConfig} />
       </AuthContextProvider>
     </>
   );
