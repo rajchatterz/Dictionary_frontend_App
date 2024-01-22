@@ -1,12 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Animated } from 'react-native';
-import { Circle } from 'react-native-progress';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Animated,
+} from "react-native";
+import { Circle } from "react-native-progress";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Ionicons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 
 const WordPuzzle = () => {
-  const words = ['apple', 'banana', 'orange', 'grape', 'kiwi', 'mango', 'pear', 'melon'];
-  const [selectedWord, setSelectedWord] = useState('');
-  const [feedbackMessage, setFeedbackMessage] = useState('');
+  const words = [
+    "apple",
+    "banana",
+    "orange",
+    "grape",
+    "kiwi",
+    "mango",
+    "pear",
+    "melon",
+  ];
+  const [selectedWord, setSelectedWord] = useState("");
+  const [feedbackMessage, setFeedbackMessage] = useState("");
   const [correctGuessCount, setCorrectGuessCount] = useState(0);
   const [animation] = useState(new Animated.Value(0));
 
@@ -14,21 +31,20 @@ const WordPuzzle = () => {
     // Check if the selected word forms a valid word
     if (words.includes(selectedWord)) {
       // Correct guess, show animation, update feedback, and increment the correct guess counter
-      setFeedbackMessage('Correct!');
+      setFeedbackMessage("Correct!");
       playAnimation();
       setCorrectGuessCount((prevCount) => (prevCount + 1) % 11); // Reset to 0 after reaching 10
-
     } else {
       // Incorrect guess, update feedback message
-      setFeedbackMessage('Incorrect. Try again!');
+      setFeedbackMessage("Incorrect. Try again!");
     }
 
     // Reset selected word after a guess
-    setSelectedWord('');
+    setSelectedWord("");
 
     // Reset feedback message after a short duration
     const timer = setTimeout(() => {
-      setFeedbackMessage('');
+      setFeedbackMessage("");
     }, 1500);
 
     return () => clearTimeout(timer);
@@ -57,11 +73,11 @@ const WordPuzzle = () => {
 
   const handleSubmitButtonPress = () => {
     // Handle the submission of the word (you can implement your logic here)
-    console.log('Submitted word:', selectedWord);
+    console.log("Submitted word:", selectedWord);
   };
 
   const renderButtons = () => {
-    const letters = ['a', 'r', 'g', 'm', 'e', 'o', 'n', 'l'];
+    const letters = ["a", "r", "g", "m", "e", "o", "n", "l"];
     return letters.map((letter, index) => (
       <TouchableOpacity
         key={index}
@@ -76,39 +92,42 @@ const WordPuzzle = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topView}>
-  
-              <Circle
+        <Circle
           size={200}
           progress={correctGuessCount / 10}
           showsText
           formatText={() => `${correctGuessCount}/10`}
-                  thickness={3}
+          thickness={3}
           color="#03041a"
         />
-
       </View>
       <View style={styles.bottomView}>
         <View style={styles.bottomTopView}>
-                  <Text style={{textAlign:'center',fontSize:20,fontWeight:'800'}}>{ selectedWord}</Text>
+          <Text
+            style={{ textAlign: "center", fontSize: 20, fontWeight: "800" }}
+          >
+            {selectedWord}
+          </Text>
         </View>
         <View style={styles.buttonView}>
           {/* Wrap buttons using flexWrap */}
-          <View style={styles.buttonContainer}>
-            {renderButtons()}
-          </View>
+          <View style={styles.buttonContainer}>{renderButtons()}</View>
           {/* Backspace and Submit buttons */}
           <View style={styles.controlButtonsContainer}>
-            <TouchableOpacity
-              style={styles.controlButton}
-              onPress={handleBackspaceButtonPress}
-            >
-              <Text>Backspace</Text>
+            <TouchableOpacity style={styles.controlButton}>
+              <AntDesign name="arrowsalt" size={24} color="black" />
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.controlButton}
               onPress={handleCheckButtonPress}
             >
               <Text>Submit</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.controlButton}
+              onPress={handleBackspaceButtonPress}
+            >
+              <Ionicons name="arrow-back-outline" size={24} color="black" />
             </TouchableOpacity>
           </View>
         </View>
@@ -120,41 +139,41 @@ const WordPuzzle = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#6A0DAD',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#6A0DAD",
   },
   buttonContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
+    flexDirection: "row",
+    flexWrap: "wrap",
+    // justifyContent: "center",
   },
   button: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     borderWidth: 1,
-    borderColor: '#000',
-    margin: 5,
-    padding: 10,
+    borderColor: "#000",
+    // margin: 5,
+    // padding: 10,
     width: 70,
     height: 70,
     borderRadius: 10,
-    backgroundColor: 'white',
+    backgroundColor: "white",
   },
   controlButtonsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    // justifyContent: "space-between",
     marginTop: 10,
   },
   controlButton: {
-    backgroundColor: 'lightblue',
+    backgroundColor: "lightblue",
     padding: 10,
     borderRadius: 5,
   },
   checkButton: {
     marginTop: 20,
     padding: 10,
-    backgroundColor: 'lightblue',
+    backgroundColor: "lightblue",
     borderRadius: 5,
   },
   feedbackContainer: {
@@ -162,35 +181,37 @@ const styles = StyleSheet.create({
   },
   feedbackText: {
     fontSize: 18,
-    color: 'green',
+    color: "green",
   },
   animationContainer: {
-    position: 'absolute',
+    position: "absolute",
     top: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   animationText: {
     fontSize: 20,
-    color: 'green',
+    color: "green",
   },
   topView: {
     flex: 1,
   },
   bottomView: {
     flex: 1.1,
-    width: '87%',
+    width: "87%",
     borderRadius: 20,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     marginVertical: 100,
   },
   bottomTopView: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   buttonView: {
     flex: 3,
     padding: 10,
+    borderWidth: 2,
+    borderColor: "black",
   },
 });
 
